@@ -16,7 +16,6 @@ int main()
     }
 
     average = total / 5;
-    printf("平均身高：%.2f\n", average);
-    
+    printf("平均身高：%.2f\n", average);  
     return 0;
 }

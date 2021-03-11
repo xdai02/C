@@ -11,6 +11,5 @@ int main()
 
     area = PI * r * r;
     printf("面积 = %f\n", area);
-
     return 0;
 }

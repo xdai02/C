@@ -7,6 +7,5 @@ int main()
 
     printf("%d\n", n);
     printf("%.2f\n", wage);
-
     return 0;
 }

@@ -12,6 +12,5 @@ int main()
 
     area = length * width;
     printf("面积 = %.2f\n", area);
-
     return 0;
 }

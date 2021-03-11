@@ -8,6 +8,5 @@ int main()
 
     average = (double)sum / num;
     printf("%.2f\n", average);
-    
     return 0;
 }
