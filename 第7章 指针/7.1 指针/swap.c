@@ -12,6 +12,6 @@ int main() {
 
     printf("交换前：a = %d, b = %d\n", a, b);
     swap(&a, &b);
-    printf("交换前：a = %d, b = %d\n", a, b);
+    printf("交换后：a = %d, b = %d\n", a, b);
     return 0;
 }
