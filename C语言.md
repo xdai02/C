@@ -42,7 +42,7 @@ C语言是一个结构化的编程语言，因此它层次清晰便于按模块�
 
 **Hello World!**
 
-【程序】Hello World!
+【代码】Hello World!
 
 ```c
 #include <stdio.h>
@@ -105,7 +105,7 @@ C语言中注释分为两类：
 
 ---
 
-【程序】注释
+【代码】注释
 
 ```c
 /*
@@ -132,7 +132,7 @@ Hello World!
 
 **编程语言对比**
 
-【程序】C++
+【代码】C++
 
 ```c++
 #include <iostream>
@@ -146,7 +146,7 @@ int main() {
 
 
 
-【程序】Java
+【代码】Java
 
 ```java
 public class HelloWorld {
@@ -158,7 +158,7 @@ public class HelloWorld {
 
 
 
-【程序】Python
+【代码】Python
 
 ```python
 print("Hello World")
@@ -243,7 +243,7 @@ double wage = 8232.56;
 
 ---
 
-【程序】常量
+【代码】常量
 
 ```c
 #include <stdio.h>
@@ -329,7 +329,7 @@ C语言中除法`/`的意义与数学中不同：
 |    \f    | 换页                       |
 |    \b    | 退格                       |
 
-【程序】转义字符
+【代码】转义字符
 
 ```c
 #include <stdio.h>
@@ -357,7 +357,7 @@ int main()
 
 <img src="./img/C2/2-4/1.png" style="zoom:80%;" />
 
-【程序】计算长方形面积
+【代码】计算长方形面积
 
 ```c
 #include <stdio.h>
@@ -388,7 +388,7 @@ int main()
 
 
 
-【程序】计算圆面积
+【代码】计算圆面积
 
 ```c
 #include <stdio.h>
@@ -417,7 +417,7 @@ int main()
 
 
 
-【程序】逆序三位数
+【代码】逆序三位数
 
 ```c
 #include <stdio.h>
@@ -456,7 +456,7 @@ int main()
 
 ---
 
-【程序】隐式类型转换
+【代码】隐式类型转换
 
 ```c
 #include <stdio.h>
@@ -478,7 +478,7 @@ b = 2
 
 
 
-【程序】显式类型转换
+【代码】显式类型转换
 
 ```c
 #include <stdio.h>
@@ -598,7 +598,7 @@ else
 
 <img src="./img/C3/3-2/1.png" style="zoom: 67%;" />
 
-【程序】if
+【代码】if
 
 ```c
 #include <stdio.h>
@@ -622,7 +622,7 @@ int main()
 
 
 
-【程序】if-else
+【代码】if-else
 
 ```c
 #include <stdio.h>
@@ -650,7 +650,7 @@ int main()
 
 
 
-【程序】if-else_if-else
+【代码】if-else_if-else
 
 ```c
 #include <stdio.h>
@@ -700,7 +700,7 @@ if(条件1)
 
 ---
 
-【程序】判断整数奇偶
+【代码】判断整数奇偶
 
 ```c
 #include <stdio.h>
@@ -761,7 +761,7 @@ switch(表达式)
 
 ---
 
-【程序】根据月份输出对应的英语简写
+【代码】根据月份输出对应的英语简写
 
 ```c
 #include <stdio.h>
@@ -868,7 +868,7 @@ while(条件)
 
 ---
 
-【程序】计算5个人的平均身高
+【代码】计算5个人的平均身高
 
 ```c
 #include <stdio.h>
@@ -924,7 +924,7 @@ do
 
 ---
 
-【程序】计算整数位数
+【代码】计算整数位数
 
 ```c
 #include <stdio.h>
@@ -967,7 +967,7 @@ int main()
 
 <img src="./img/C4/4-3/1.png" style="zoom: 33%;" />
 
-【程序】计算元音、辅音个数
+【代码】计算元音、辅音个数
 
 ```c
 #include <stdio.h>
@@ -1013,7 +1013,7 @@ int main()
 
 
 
-【程序】猜数字
+【代码】猜数字
 
 ```c
 #include <stdio.h>
@@ -1088,7 +1088,7 @@ for(表达式1; 表达式2; 表达式3)
 
 ---
 
-【程序】计算1-100的累加和
+【代码】计算1-100的累加和
 
 ```c
 #include <stdio.h>
@@ -1113,7 +1113,7 @@ int main()
 
 
 
-【程序】计算$ 1 + {1 \over 2} + {1 \over 3} + ... + {1 \over n} $
+【代码】计算$ 1 + {1 \over 2} + {1 \over 3} + ... + {1 \over n} $
 
 ```c
 #include <stdio.h>
@@ -1145,7 +1145,7 @@ int main()
 
 
 
-【程序】斐波那契数列（兔子数列）
+【代码】斐波那契数列（兔子数列）
 
 ![](./img/C4/4-4/1.png)
 
@@ -1201,7 +1201,7 @@ int main()
 
 ---
 
-【程序】九九乘法表
+【代码】九九乘法表
 
 ![](./img/C4/4-4/2.png)
 
@@ -1224,7 +1224,7 @@ int main()
 
 
 
-【程序】输出图案
+【代码】输出图案
 
 ```
 *
@@ -1263,7 +1263,7 @@ int main()
 
 `continue`的作用是跳过本轮循环，开始下一轮循环的条件判断。`continue`终止当前轮的循环过程，但它并不跳出循环。
 
-【程序】break
+【代码】break
 
 ```c
 #include <stdio.h>
@@ -1290,7 +1290,7 @@ int main()
 
 
 
-【程序】continue
+【代码】continue
 
 ```c
 #include <stdio.h>
@@ -1360,7 +1360,7 @@ for(int i = 0; i < 100; i++)
 
 ---
 
-【程序】数组最大值和最小值
+【代码】数组最大值和最小值
 
 ```c
 #include <stdio.h>
@@ -1419,7 +1419,7 @@ int arr[2][2] = {{1, 2}, {3, 4}};
 
 ---
 
-【程序】初始化二维数组
+【代码】初始化二维数组
 
 ```c
 #include <stdio.h>
@@ -1440,7 +1440,7 @@ int main()
 
 
 
-【程序】矩阵运算
+【代码】矩阵运算
 
 > 矩阵的加法/减法是指两个矩阵把其相对应元素进行加减的运算。
 >
@@ -1580,7 +1580,7 @@ gets(str);
 
 ---
 
-【程序】字符串输入输出
+【代码】字符串输入输出
 
 ```c
 #include <stdio.h>
@@ -1603,7 +1603,7 @@ hello world
 
 
 
-【程序】统计字符串中某个字符出现的次数
+【代码】统计字符串中某个字符出现的次数
 
 ```c
 #include <stdio.h>
@@ -1647,7 +1647,7 @@ t在this is a test中出现了3次
 
 ![](./img/C5/5-3/1.png)
 
-【程序】ASCII码
+【代码】ASCII码
 
 ```c
 #include <stdio.h>
@@ -1670,7 +1670,7 @@ C语言的系统库中提供了一些对字符串的常用操作函数，这些�
 
 1. `strlen()`：计算字符串的长度（不包括`\0`结束符）。
 
-【程序】strlen()计算字符串长度
+【代码】strlen()计算字符串长度
 
 ```c
 #include <stdio.h>
@@ -1693,7 +1693,7 @@ int main() {
 
 2. `strcpy()`：将一个字符串复制到另一个字符串中，须确保第一个字符串有足够大的长度。
 
-【程序】strcpy()字符串复制
+【代码】strcpy()字符串复制
 
 ```c
 #include <stdio.h>
@@ -1721,7 +1721,7 @@ s2 = program
 
 3. `strcat()`：将第二个字符串拼接到第一个字符串尾部，须确保第一个字符串有足够大的长度。
 
-【程序】strcat()字符串拼接
+【代码】strcat()字符串拼接
 
 ```c
 #include <stdio.h>
@@ -1754,7 +1754,7 @@ s2 = world
 
 ---
 
-【程序】strcmp()字符串比较
+【代码】strcmp()字符串比较
 
 ```c
 #include <stdio.h>
@@ -1776,7 +1776,7 @@ strcmp()比较结果：-1
 
 
 
-【程序】实现一个简单的登录功能
+【代码】实现一个简单的登录功能
 
 ```c
 /**
@@ -1849,7 +1849,7 @@ char str[4][12] = {"C++", "Java", "Python", "JavaScript"};
 
 ---
 
-【程序】遍历字符串数组
+【代码】遍历字符串数组
 
 ```c
 #include <stdio.h>
@@ -1946,7 +1946,7 @@ data_type function_name(parameter_list) {
 
 ---
 
-【程序】函数实现返回最大值
+【代码】函数实现返回最大值
 
 ```c
 #include <stdio.h>
@@ -1984,7 +1984,7 @@ int max(int num1, int num2) {
 
 
 
-【程序】函数实现累加和
+【代码】函数实现累加和
 
 ```c
 #include <stdio.h>
@@ -2013,7 +2013,7 @@ int main() {
 
 
 
-【程序】函数实现输出i行j列由自定义字符组成的图案
+【代码】函数实现输出i行j列由自定义字符组成的图案
 
 ```c
 #include <stdio.h>
@@ -2045,7 +2045,7 @@ int main() {
 
 
 
-【程序】自定义函数实现strlen()
+【代码】自定义函数实现strlen()
 
 ```c
 #include <stdio.h>
@@ -2078,7 +2078,7 @@ int main() {
 
 
 
-【程序】自定义函数实现strcpy()
+【代码】自定义函数实现strcpy()
 
 ```c
 #include <stdio.h>
@@ -2116,7 +2116,7 @@ s2 = program
 
 
 
-【程序】自定义函数实现strcat()
+【代码】自定义函数实现strcat()
 
 ```c
 #include <stdio.h>
@@ -2172,7 +2172,7 @@ s2 = world
 
 ---
 
-【程序】局部变量
+【代码】局部变量
 
 ```c
 #include <stdio.h>
@@ -2215,7 +2215,7 @@ graph TB
 	end
 ```
 
-【程序】全局变量
+【代码】全局变量
 
 ```c
 #include <stdio.h>
@@ -2267,7 +2267,7 @@ a = 2
 
 ![](./img/C6/6-3/5.png)
 
-【程序】无限递归
+【代码】无限递归
 
 ```c
 #include <stdio.h>
@@ -2309,7 +2309,7 @@ int main() {
 
 ---
 
-【程序】阶乘
+【代码】阶乘
 
 ```c
 #include <stdio.h>
@@ -2337,7 +2337,7 @@ int main() {
 
 
 
-【程序】斐波那契数列（递归）
+【代码】斐波那契数列（递归）
 
 ```c
 #include <stdio.h>
@@ -2366,7 +2366,7 @@ int main() {
 
 
 
-【程序】斐波那契数列（迭代）
+【代码】斐波那契数列（迭代）
 
 ```c
 #include <stdio.h>
@@ -2395,7 +2395,7 @@ int main() {
 
 
 
-【程序】阿克曼函数
+【代码】阿克曼函数
 $$
 A(m, n) =
 \begin{cases}
@@ -2444,7 +2444,7 @@ int main() {
 
 
 
-【程序】汉诺塔
+【代码】汉诺塔
 
 <img src="./img/C6/6-3/9.png" style="zoom:40%;" />
 
@@ -2522,7 +2522,7 @@ data_type *pointer_name;
 
 ---
 
-【程序】指针
+【代码】指针
 
 ```c
 #include <stdio.h>
@@ -2569,7 +2569,7 @@ stateDiagram
 
 ---
 
-【程序】通过指针修改变量的值
+【代码】通过指针修改变量的值
 
 ```c
 #include <stdio.h>
@@ -2609,7 +2609,7 @@ int main() {
 
 ---
 
-【程序】交换两个变量的值（Bug版本）
+【代码】交换两个变量的值（Bug版本）
 
 ```c
 #include <stdio.h>
@@ -2640,7 +2640,7 @@ int main() {
 
 
 
-【程序】交换两个变量的值（正确版本）
+【代码】交换两个变量的值（正确版本）
 
 ```c
 #include <stdio.h>
@@ -2677,7 +2677,7 @@ int main() {
 
 ---
 
-【程序】野指针
+【代码】野指针
 
 ```c
 #include <stdio.h>
@@ -2705,7 +2705,7 @@ warning: 'p' is used uninitialized in this function [-Wuninitialized]
 
 ---
 
-【程序】空指针NULL
+【代码】空指针NULL
 
 ```c
 #include <stdio.h>
@@ -2745,7 +2745,7 @@ int *p = &arr[0];
 
 ---
 
-【程序】指针遍历数组
+【代码】指针遍历数组
 
 ```c
 #include <stdio.h>
@@ -2785,7 +2785,7 @@ int func(int arr[]);
 
 ---
 
-【程序】查找数组最大值
+【代码】查找数组最大值
 
 ```c
 #include <stdio.h>
@@ -2825,7 +2825,7 @@ max = 98
 
 ---
 
-【程序】修改字符串常量
+【代码】修改字符串常量
 
 ```c
 #include <stdio.h>
@@ -2850,7 +2850,7 @@ int main() {
 
 ---
 
-【程序】修改字符串
+【代码】修改字符串
 
 ```c
 #include <stdio.h>
@@ -2875,7 +2875,7 @@ Hello
 
 ---
 
-【程序】指向字符串的指针
+【代码】指向字符串的指针
 
 ```c
 #include <stdio.h>
@@ -2952,7 +2952,7 @@ data_type *ptr = (data_type *)malloc(sizeof(data_type) * size);
 
 ---
 
-【程序】耗尽所有可申请到的内存空间
+【代码】耗尽所有可申请到的内存空间
 
 ```c
 #include <stdio.h>
@@ -2988,7 +2988,7 @@ int main() {
 
 <img src="./img/C7/7-4/1.png" style="zoom:50%;" />
 
-【程序】动态申请内存空间
+【代码】动态申请内存空间
 
 ```c
 #include <stdio.h>
@@ -3036,7 +3036,7 @@ int main() {
 
 ---
 
-【程序】函数返回字符串（Bug版本）
+【代码】函数返回字符串（Bug版本）
 
 ```c
 #include <stdio.h>
@@ -3075,7 +3075,7 @@ warning: function returns address of local variable [-Wreturn-local-addr]
 
 
 
-【程序】函数返回字符串（正确版本）
+【代码】函数返回字符串（正确版本）
 
 ```c
 #include <stdio.h>
@@ -3178,7 +3178,7 @@ fclose(fp);
 
 ---
 
-【程序】文件
+【代码】文件
 
 ```c
 #include <stdio.h>
@@ -3211,7 +3211,7 @@ int fgetc(FILE *stream);
 
 ---
 
-【程序】读取并输出指定文件内容
+【代码】读取并输出指定文件内容
 
 ```c
 #include <stdio.h>
@@ -3236,7 +3236,7 @@ int main() {
 
 
 
-【程序】统计程序源代码的字符数和行数
+【代码】统计程序源代码的字符数和行数
 
 ```c
 #include <stdio.h>
@@ -3290,7 +3290,7 @@ int fputc(int ch, FILE *stream);
 
 ---
 
-【程序】将程序源代码输出到指定文件
+【代码】将程序源代码输出到指定文件
 
 ```c
 #include <stdio.h>
@@ -3332,7 +3332,7 @@ char *fgets(char *str, int num, FILE *stream);
 
 ---
 
-【程序】读取并输出程序源代码内容
+【代码】读取并输出程序源代码内容
 
 ```c
 #include <stdio.h>
@@ -3369,7 +3369,7 @@ int fputs(const char *str, FILE *stream);
 
 ---
 
-【程序】将程序源代码输出到指定文件
+【代码】将程序源代码输出到指定文件
 
 ```c
 #include <stdio.h>
@@ -3408,7 +3408,7 @@ int fprintf(FILE *stream, const char *format, ...);
 
 ---
 
-【程序】将数据格式化输出到指定文件
+【代码】将数据格式化输出到指定文件
 
 ```c
 #include <stdio.h>
@@ -3450,7 +3450,7 @@ int fscanf(FILE *stream, const char *format, ...);
 
 ---
 
-【程序】从指定文件读取指定格式数据
+【代码】从指定文件读取指定格式数据
 
 ```c
 #include <stdio.h>
@@ -3497,7 +3497,7 @@ int feof(FILE *stream);
 
 ---
 
-【程序】从通讯录文件中查找指定人名
+【代码】从通讯录文件中查找指定人名
 
 ```c
 #include <stdio.h>
@@ -3588,7 +3588,7 @@ graph TB
 
 ---
 
-【程序】结构体变量
+【代码】结构体变量
 
 ```c
 #include <stdio.h>
@@ -3634,7 +3634,7 @@ typedef struct [struct_name] {
 
 ---
 
-【程序】typedef定义别名
+【代码】typedef定义别名
 
 ```c
 #include <stdio.h>
@@ -3693,7 +3693,7 @@ C语言提供了一个间接引用运算符`->`，可以直接访问结构体指
 
 ---
 
-【程序】倒数
+【代码】倒数
 
 ```c
 #include <stdio.h>
