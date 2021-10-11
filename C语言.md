@@ -24,9 +24,24 @@
 - 菱形：分支判断条件
 - 流程线：步骤
 
-<img src="./img/C1/1-1/1.png" style="zoom:67%;" />
-
-
+```mermaid
+graph TB
+	start(开始)
+	declare[/i, sum/]
+	init[i = 1, sum = 0]
+	condition{i <= 100?}
+	update[sum += i, i++]
+	output[/输出sum/]
+	over(结束)
+	
+	start --> declare
+	declare --> init
+	init --> condition
+	condition -- 是 --> update
+	condition -- 否 --> output
+	update --> condition
+	output --> over
+```
 
 **编程语言（Programming Language）**
 
@@ -34,7 +49,7 @@
 
 C语言是一个结构化的编程语言，因此它层次清晰便于按模块化方式组织程序，易于调试和维护。然而结构化的缺点也很明显，比如程序的可重用性差。
 
-![](./img/C1/1-1/2.png)
+![](./img/C1/1-1/1.png)
 
 <div style="page-break-after: always;"></div>
 
