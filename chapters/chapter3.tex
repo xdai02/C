@@ -1,0 +1,302 @@
+\chapter{判断}
+
+\section{逻辑运算符}
+
+\subsection{关系运算符}
+
+\begin{table}[H]
+	\centering
+	\setlength{\tabcolsep}{5mm}{
+		\begin{tabular}{|c|c|}
+			\hline
+			\textbf{数学符号} & \textbf{关系运算符} \\
+			\hline
+			$ < $             & <                   \\
+			\hline
+			$ > $             & >                   \\
+			\hline
+			$ \le $           & <=                  \\
+			\hline
+			$ \ge $           & >=                  \\
+			\hline
+			$ \ne $           & !=                  \\
+			\hline
+			$ = $             & ==                  \\
+			\hline
+		\end{tabular}
+	}
+	\caption{关系运算符}
+\end{table}
+
+\vspace{0.5cm}
+
+\subsection{逻辑运算符}
+
+Java中逻辑运算符有三种：
+
+\begin{enumerate}
+	\item 逻辑与\&\&（logical AND）：当多个条件同时为真，结果为真。
+	      \begin{table}[H]
+		      \centering
+		      \setlength{\tabcolsep}{5mm}{
+			      \begin{tabular}{|c|c|c|}
+				      \hline
+				      \textbf{条件1} & \textbf{条件2} & \textbf{条件1 \&\& 条件2} \\
+				      \hline
+				      T              & T              & T                         \\
+				      \hline
+				      T              & F              & F                         \\
+				      \hline
+				      F              & T              & F                         \\
+				      \hline
+				      F              & F              & F                         \\
+				      \hline
+			      \end{tabular}
+		      }
+		      \caption{逻辑与}
+	      \end{table}
+
+	\item 逻辑或||（logical OR）：多个条件有一个为真时，结果为真。
+	      \begin{table}[H]
+		      \centering
+		      \setlength{\tabcolsep}{5mm}{
+			      \begin{tabular}{|c|c|c|}
+				      \hline
+				      \textbf{条件1} & \textbf{条件2} & \textbf{条件1 || 条件2} \\
+				      \hline
+				      T              & T              & T                       \\
+				      \hline
+				      T              & F              & T                       \\
+				      \hline
+				      F              & T              & T                       \\
+				      \hline
+				      F              & F              & F                       \\
+				      \hline
+			      \end{tabular}
+		      }
+		      \caption{逻辑或}
+	      \end{table}
+
+	\item 逻辑非!（logical NOT）：条件为真时，结果为假；条件为假时，结果为真。
+	      \begin{table}[H]
+		      \centering
+		      \setlength{\tabcolsep}{5mm}{
+			      \begin{tabular}{|c|c|}
+				      \hline
+				      \textbf{条件} & \textbf{!条件} \\
+				      \hline
+				      T             & F              \\
+				      \hline
+				      F             & T              \\
+				      \hline
+			      \end{tabular}
+		      }
+		      \caption{逻辑非}
+	      \end{table}
+\end{enumerate}
+
+\newpage
+
+\section{if}
+
+\subsection{if}
+
+当if语句的条件为真时，进入花括号执行内部的代码；若条件为假，则跳过花括号执行后面的代码。\\
+
+if语句主要有以下几种形式：
+
+\subsubsection{单分支}
+
+\vspace{-1cm}
+
+\begin{lstlisting}[language=Java]
+public class IfStmt {
+	public static void main(String[] args) {
+		int age = 15;
+		if(age > 0 && age < 18) {
+			System.out.println("未成年");
+		}
+	}
+}
+\end{lstlisting}
+
+\subsubsection{双分支}
+
+\vspace{-1cm}
+
+\begin{lstlisting}[language=Java]
+public class IfElse {
+	public static void main(String[] args) {
+		int age = 30;
+		if(age > 0 && age < 18) {
+			System.out.println("未成年人");
+		} else {
+			System.out.println("成年人");
+		}
+	}
+}
+\end{lstlisting}
+
+\subsubsection{多分支}
+
+\vspace{-1cm}
+
+\begin{lstlisting}[language=Java]
+public class IfElseifElse {
+	public static void main(String[] args) {
+		int score = 76;
+			
+		if(score >= 90 && score <= 100) {
+			System.out.println("优秀");
+		} else if(score >= 60) {
+			System.out.println("合格");
+		} else {
+			System.out.println("不合格");
+		}
+	}
+}
+\end{lstlisting}
+
+\vspace{0.5cm}
+
+\subsection{嵌套结构}
+
+if语句也可以嵌套使用：
+
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=Java]
+if(条件1) {
+	if(条件2) {
+		// code
+	}
+}
+\end{lstlisting}
+
+\vspace{0.5cm}
+
+\mybox{判断整数奇偶}
+
+\begin{lstlisting}[language=Java]
+import java.util.Scanner;
+
+public class OddEven {
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		int num;
+		
+		System.out.print("输入一个正整数：");
+		num = scanner.nextInt();
+		
+		if(num > 0) {
+			if(num % 2 == 0) {
+				System.out.println(num + "是偶数");
+			} else {
+				System.out.println(num + "是奇数");
+			}
+		}
+		
+		scanner.close();
+	}
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+输入一个正整数：66
+66是偶数
+	\end{verbatim}
+\end{tcolorbox}
+
+\newpage
+
+\section{switch}
+
+\subsection{switch}
+
+switch-case结构可以对整数值的表达式进行判断。
+
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=Java]
+switch(表达式) {
+    case label:
+        //code
+        break;
+    // ...
+    default:
+        //code
+        break;
+}
+\end{lstlisting}
+
+根据表达式的值，跳转到对应的case处进行执行。需要注意的是，当对应的case中的代码被执行完后，并不会跳出switch，而是会继续执行后面的代码，所以需要使用break跳出switch结构。当所有case都不满足表达式的值时，会执行default语句中的代码，相当于if-else结构中的else。\\
+
+\mybox{根据月份输出对应的英语简写}
+
+\begin{lstlisting}[language=Java]
+import java.util.Scanner;
+
+public class Month {
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		int month;
+		System.out.print("输入月份：");
+		month = scanner.nextInt();
+		
+		switch(month) {
+			case 1:
+				System.out.println("Jan.");
+				break;
+			case 2:
+				System.out.println("Feb.");
+				break;
+			case 3:
+				System.out.println("Mar.");
+				break;
+			case 4:
+				System.out.println("Apr.");
+				break;
+			case 5:
+				System.out.println("May");
+				break;
+			case 6:
+				System.out.println("Jun.");
+				break;
+			case 7:
+				System.out.println("Jul.");
+				break;
+			case 8:
+				System.out.println("Aug.");
+				break;
+			case 9:
+				System.out.println("Sep.");
+				break;
+			case 10:
+				System.out.println("Oct.");
+				break;
+			case 11:
+				System.out.println("Nov.");
+				break;
+			case 12:
+				System.out.println("Dec.");
+				break;
+			default:
+				System.out.println("输入有误");
+				break;
+		}
+		scanner.close();
+	}
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+输入月份：5
+May
+	\end{verbatim}
+\end{tcolorbox}
+
+\newpage

@@ -1,0 +1,758 @@
+\chapter{数组}
+
+\section{一维数组}
+
+\subsection{数组（Array）}
+
+一个变量只能存储一个内容，如果需要存储更多数据，就需要使用数组解决问题。一个数组变量可以存放多个数据，数组是一个值的集合，它们共享同一个名字，数组中的每个变量都能被其下标所访问。
+
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=Java]
+int[] number = new int[10];
+float[] grade = new float[50];
+\end{lstlisting}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[scale=0.5]
+		\draw[-] (0,0) -- (5,0) -- (10,0) -- (15,0) -- (20,0) -- (25,0) -- (25,3) -- (20,3) -- (15,3) -- (10,3) -- (5,3) -- (0,3) -- (0,0);
+		\draw[-] (5,0) -- (5,3);
+		\draw[-] (10,0) -- (10,3);
+		\draw[-] (15,0) -- (15,3);
+		\draw[-] (20,0) -- (20,3);
+
+		\draw (2.5,1.5) node {a[0]};
+		\draw (7.5,1.5) node {a[1]};
+		\draw (12.5,1.5) node {a[2]};
+		\draw (17.5,1.5) node {a[3]};
+		\draw (22.5,1.5) node {a[4]};
+	\end{tikzpicture}
+\end{figure}
+
+\begin{itemize}
+	\item 元素：数组中的每个变量
+	\item 大小：数组的容量
+	\item 下标 / 索引（index）：元素的位置，下标从0开始，必须为非负整数
+\end{itemize}
+
+\vspace{0.5cm}
+
+\subsection{数组初始化}
+
+一维数组可以在声明时进行初始化：
+
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=Java]
+int[] arr = {3, 6, 8, 2, 4, 0, 9, 7, 1, 5};
+int[] arr = new int[] {3, 6, 8, 2, 4, 0, 9, 7, 1, 5};
+\end{lstlisting}
+
+很多时候在使用数组之前需要将数组的内容全部清空，这可以利用循环来实现。\\
+
+\mybox{一维数组初始化}
+
+\begin{lstlisting}[language=Java]
+public class InitArr {
+    public static void main(String[] args) {
+        int[] arr = new int[100];
+        for(int i = 0; i < arr.length; i++) {
+            arr[i] = 0;
+        }
+    }
+}
+\end{lstlisting}
+
+\vspace{0.5cm}
+
+\mybox{数组最大值和最小值}
+
+\begin{lstlisting}[language=Java]
+public class MaxMin {
+    public static void main(String[] args) {
+        int[] num = {7, 6, 2, 9, 3, 1, 4, 0, 5, 8};
+        int max = num[0];
+        int min = num[0];
+
+        for(int i = 1; i < num.length; i++) {
+            if(num[i] > max) {
+                max = num[i];
+            } else if(num[i] < min) {
+                min = num[i];
+            }
+        }
+
+        System.out.println("max = " + max);
+        System.out.println("min = " + min);
+    }
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+max = 9
+min = 0
+	\end{verbatim}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\subsection{for-each}
+
+for-each环是for循环的特殊简化版。
+
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=Java]
+for(dataType var : set) {
+    // code
+}
+\end{lstlisting}
+
+\vspace{0.5cm}
+
+\mybox{遍历数组}
+
+\begin{lstlisting}[language=Java]
+public class ForEach {
+    public static void main(String[] args) {
+        int[] arr = {7, 6, 2, 9, 3, 1, 4, 0, 5, 8};
+        for(int elem : arr) {
+            System.out.print(elem + " ");
+        }
+    }
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+7 6 2 9 3 1 4 0 5 8
+	\end{verbatim}
+\end{tcolorbox}
+
+\newpage
+
+\section{二维数组}
+
+\subsection{二维数组（2D Array）}
+
+二维数组包括行和列两个维度，可以看成是由多个一维数组组成。
+
+\begin{table}[H]
+	\centering
+	\setlength{\tabcolsep}{5mm}{
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			a[0][0] & a[0][1] & a[0][2] & a[0][3] \\
+			\hline
+			a[1][0] & a[1][1] & a[1][2] & a[1][3] \\
+			\hline
+			a[2][0] & a[2][1] & a[2][2] & a[2][3] \\
+			\hline
+		\end{tabular}
+	}
+\end{table}
+
+二维数组可以在声明时进行初始化：
+
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=Java]
+int[][] arr = new int[2][3];
+int[][] arr = {{1, 2, 3}, {4, 5, 6}};
+\end{lstlisting}
+
+\vspace{0.5cm}
+
+\mybox{初始化二维数组}
+
+\begin{lstlisting}[language=Java]
+public class Init2dArr {
+    public static void main(String[] args) {
+        int[][] arr = new int[3][4];
+        for(int i = 0; i < arr.length; i++) {
+            for(int j = 0; j < arr[i].length; j++) {
+                arr[i][j] = 0;
+            }
+        }
+    }
+}
+\end{lstlisting}
+
+\vspace{0.5cm}
+
+\mybox{矩阵运算}
+
+\vspace{0.5cm}
+
+矩阵的加法/减法是指两个矩阵把其相对应元素进行加减的运算。\\
+
+矩阵加法：两个$ m \times n $矩阵A和B的和，标记为$ A + B $，结果为一个$ m \times n $的矩阵，其内的各元素为其相对应元素相加后的值。\\
+
+矩阵减法：两个$ m \times n $矩阵A和B的差，标记为$ A - B $，结果为一个$ m \times n $的矩阵，其内的各元素为其相对应元素相减后的值。
+
+\begin{align}\nonumber
+	\left[\begin{matrix}
+			1 & 3 \\
+			1 & 0 \\
+			1 & 2 \\
+		\end{matrix} \right]
+	+
+	\left[\begin{matrix}
+			0 & 0 \\
+			7 & 5 \\
+			2 & 1 \\
+		\end{matrix} \right]
+	=
+	\left[\begin{matrix}
+			1+0 & 3+0 \\
+			1+7 & 0+5 \\
+			1+2 & 2+1 \\
+		\end{matrix} \right]
+	=
+	\left[\begin{matrix}
+			1 & 3 \\
+			8 & 5 \\
+			3 & 3 \\
+		\end{matrix} \right]
+\end{align}
+
+\begin{align}\nonumber
+	\left[\begin{matrix}
+			1 & 3 \\
+			1 & 0 \\
+			1 & 2 \\
+		\end{matrix} \right]
+	-
+	\left[\begin{matrix}
+			0 & 0 \\
+			7 & 5 \\
+			2 & 1 \\
+		\end{matrix} \right]
+	=
+	\left[\begin{matrix}
+			1-0 & 3-0 \\
+			1-7 & 0-5 \\
+			1-2 & 2-1 \\
+		\end{matrix} \right]
+	=
+	\left[\begin{matrix}
+			1  & 3  \\
+			-6 & -5 \\
+			-1 & 1  \\
+		\end{matrix} \right]
+\end{align}
+
+\begin{lstlisting}[language=Java]
+public class Matrix {
+    public static void main(String[] args) {
+        int[][] A = {
+            {1, 3},
+            {1, 0},
+            {1, 2}
+        };
+        int[][] B = {
+            {0, 0},
+            {7, 5},
+            {2, 1}
+        };
+        int[][] C = new int[3][2];
+
+        System.out.println("矩阵加法");
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 2; j++) {
+                C[i][j] = A[i][j] + B[i][j];
+                System.out.print(String.format("%3d", C[i][j]));
+            }
+            System.out.println();
+        }
+
+        System.out.println("矩阵减法");
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 2; j++) {
+                C[i][j] = A[i][j] - B[i][j];
+                System.out.print(String.format("%3d", C[i][j]));
+            }
+            System.out.println();
+        }
+    }
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+矩阵加法
+1  3
+8  5
+3  3
+矩阵减法
+1  3
+-6 -5
+-1  1
+	\end{verbatim}
+\end{tcolorbox}
+
+\newpage
+
+\section{字符}
+
+\subsection{字符（Character）}
+
+单个的字符是一种特殊的类型，是用单引号表示字符字面量。每一个字符都有其对应的码值。\\
+
+ASCII全称American Standard Code for Information Interchange（美国信息交换标准代码），一共定义了128个字符。
+
+\begin{longtable}{|c|c|c|c|c|c|c|c|}
+	\hline
+	\textbf{ASCII} & \textbf{字符} & \textbf{ASCII} & \textbf{字符} & \textbf{ASCII} & \textbf{字符}          & \textbf{ASCII} & \textbf{字符}          \\
+	\hline
+	0              & NUT           & 32             & (space)       & 64             & @                      & 96             & \lstinline|`| \\
+	\hline
+	1              & SOH           & 33             & !             & 65             & A                      & 97             & a                      \\
+	\hline
+	2              & STX           & 34             & \text{"}      & 66             & B                      & 98             & b                      \\
+	\hline
+	3              & ETX           & 35             & \#            & 67             & C                      & 99             & c                      \\
+	\hline
+	4              & EOT           & 36             & \$            & 68             & D                      & 100            & d                      \\
+	\hline
+	5              & ENQ           & 37             & \%            & 69             & E                      & 101            & e                      \\
+	\hline
+	6              & ACK           & 38             & \&            & 70             & F                      & 102            & f                      \\
+	\hline
+	7              & BEL           & 39             & \text{'}      & 71             & G                      & 103            & g                      \\
+	\hline
+	8              & BS            & 40             & (             & 72             & H                      & 104            & h                      \\
+	\hline
+	9              & HT            & 41             & )             & 73             & I                      & 105            & i                      \\
+	\hline
+	10             & LF            & 42             & *             & 74             & J                      & 106            & j                      \\
+	\hline
+	11             & VT            & 43             & +             & 75             & K                      & 107            & k                      \\
+	\hline
+	12             & FF            & 44             & ,             & 76             & L                      & 108            & l                      \\
+	\hline
+	13             & CR            & 45             & -             & 77             & M                      & 109            & m                      \\
+	\hline
+	14             & SO            & 46             & .             & 78             & N                      & 110            & n                      \\
+	\hline
+	15             & SI            & 47             & /             & 79             & O                      & 111            & o                      \\
+	\hline
+	16             & DLE           & 48             & 0             & 80             & P                      & 112            & p                      \\
+	\hline
+	17             & DC1           & 49             & 1             & 81             & Q                      & 113            & q                      \\
+	\hline
+	18             & DC2           & 50             & 2             & 82             & R                      & 114            & r                      \\
+	\hline
+	19             & DC3           & 51             & 3             & 83             & S                      & 115            & s                      \\
+	\hline
+	20             & DC4           & 52             & 4             & 84             & T                      & 116            & t                      \\
+	\hline
+	21             & NAK           & 53             & 5             & 85             & U                      & 117            & u                      \\
+	\hline
+	22             & SYN           & 54             & 6             & 86             & V                      & 118            & v                      \\
+	\hline
+	23             & TB            & 55             & 7             & 87             & W                      & 119            & w                      \\
+	\hline
+	24             & CAN           & 56             & 8             & 88             & X                      & 120            & x                      \\
+	\hline
+	25             & EM            & 57             & 9             & 89             & Y                      & 121            & y                      \\
+	\hline
+	26             & SUB           & 58             & :             & 90             & Z                      & 122            & z                      \\
+	\hline
+	27             & ESC           & 59             & ;             & 91             & [                      & 123            & \{                     \\
+			\hline
+	28             & FS            & 60             & <             & 92             & /                      & 124            & |                      \\
+			\hline
+	29             & GS            & 61             & =             & 93             & ]                      & 125            & \}                     \\
+	\hline
+	30             & RS            & 62             & >             & 94             & \lstinline|^| & 126            & \lstinline|~| \\
+	\hline
+	31             & US            & 63             & ?             & 95             & \_                     & 127            & DEL                    \\
+	\hline
+	\caption{ASCII码表}
+\end{longtable}
+
+\mybox{ASCII码}
+
+\begin{lstlisting}[language=Java]
+public class ASCII {
+	public static void main(String[] args) {
+		for(int i = 0; i < 128; i++) {
+			System.out.println(String.format("%c = %d", i, i));
+		}
+	}
+}
+\end{lstlisting}
+
+\newpage
+
+\section{字符串}
+
+\subsection{字符串（String）}
+
+字符串是用双引号所表示的0个或多个字符的组合。字符串变量使用String表示，String是一个类，String的变量是对象的管理者而非所有者。
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\draw[-] (-5,0) -- (-1,0);
+		\draw[-] (1,0) -- (5,0);
+		\draw (0,0) node {b = a};
+
+		\draw (-4,-2.5) rectangle (-2,-1.5);
+		\draw (2,-2.5) rectangle (4,-1.5);
+		\draw (-3,-1) node {int a;};
+		\draw (3,-1) node {int b;};
+		\draw (-3,-2) node {32};
+		\draw (3,-2) node {32};
+
+		\draw (-4,-5.5) rectangle (-2,-4.5);
+		\draw (2,-5.5) rectangle (4,-4.5);
+		\draw (-3,-4) node {String a;};
+		\draw (3,-4) node {String b;};
+
+		\draw (-1,-7) rectangle (1,-6);
+		\draw[->] (-2,-5) -- (-1,-6.5);
+		\draw[->] (2,-5) -- (1,-6.5);
+	\end{tikzpicture}
+	\caption{字符串引用}
+\end{figure}
+
+通过调用Scanner类中的nextLine()可以获取用户输入的字符串。\\
+
+\mybox{创建字符串对象}
+
+\begin{lstlisting}[language=Java]
+import java.util.Scanner;
+
+public class StringObj {
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("输入字符串：");
+		String str = scanner.nextLine();
+		System.out.println(str);
+		scanner.close();
+	}
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+输入字符串：Hello World!
+Hello World!
+	\end{verbatim}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\subsection{字符串比较}
+
+字符串的比较分为两种：
+
+\begin{enumerate}
+	\item 【==】运算符用于比较是否是同一个对象。
+	\item equals()用于比较字符串的内容是否相同。
+\end{enumerate}
+
+\mybox{字符串比较}
+
+\begin{lstlisting}[language=Java]
+public class StringEqual {
+	public static void main(String[] args) {
+		String s1 = new String("hello");
+		String s2 = new String("hello");
+
+		if(s1 == s2) {
+			System.out.println("s1和s2是同一个对象");
+		}
+
+		if(s1.equals(s2)) {
+			System.out.println("s1与s2内容相同");
+		}
+
+		if(s1.equalsIgnoreCase(s2)) {
+			System.out.println("s1与s2忽略大小写内容相同");
+		}
+	}
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+s1与s2内容相同
+s1与s2忽略大小写内容相同
+	\end{verbatim}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\subsection{字符串操作}
+
+字符串是对象，它包含了一系列的常用操作，对它的所有操作都是通过【.】运算符进行的。
+
+\subsubsection{length()：计算字符串长度}
+
+\vspace{0.5cm}
+
+\mybox{计算字符串长度}
+
+\begin{lstlisting}[language=Java]
+public class StringLength {
+	public static void main(String[] args) {
+		String str = "Hello World!";
+		System.out.println(str.length());
+	}
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+12
+	\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{charAt()：访问字符串中的字符}
+
+字符串中的每一个下标位置都是一个单个的字符，下标的范围从0到length() - 1。
+
+\vspace{0.5cm}
+
+\mybox{访问字符串中的字符}
+
+\begin{lstlisting}[language=Java]
+public class CharAt {
+	public static void main(String[] args) {
+		String str = "Hello World!";
+		System.out.println(str.charAt(4));
+	}
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+o
+	\end{verbatim}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\mybox{计算字符串中某个字符出现的次数}
+
+\begin{lstlisting}[language=Java]
+import java.util.Scanner;
+
+public class CountOccurence {
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		int cnt = 0;		// 出现次数
+
+		System.out.print("输入字符串：");
+		String str = scanner.nextLine();
+		System.out.print("输入待统计字符：");
+		char c = scanner.nextLine().charAt(0);
+
+		int n = str.length();
+		for(int i = 0; i < n; i++) {
+			if(str.charAt(i) == c) {
+				cnt++;
+			}
+		}
+
+		System.out.println(c + "在" + str + "中出现了" + cnt + "次");
+		scanner.close();
+	}
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+输入字符串：Hello World
+输入待统计字符：l
+l在Hello World中出现了3次
+	\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{substring()：获取子串}
+
+\begin{itemize}
+	\item substring(n)：获取第n个位置到末尾的全部内容。
+	\item substring(begin, end)：获取从begin到end位置之前的内容。
+\end{itemize}
+
+\mybox{获取子串}
+
+\begin{lstlisting}[language=Java]
+public class Substring {
+	public static void main(String[] args) {
+		String str = "Hello World!";
+		System.out.println(str.substring(6));
+		System.out.println(str.substring(3, 10));
+	}
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+World!
+lo Worl
+	\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{indexOf()：查找}
+
+\begin{itemize}
+	\item indexOf(c)：获取字符c所在的位置，返回-1表示不存在。
+	\item indexOf(c, n)：从第n个位置开始查找字符c。
+	\item indexOf(t)：获取字符串t所在的位置。
+\end{itemize}
+
+\mybox{查找}
+
+\begin{lstlisting}[language=Java]
+public class IndexOf {
+	public static void main(String[] args) {
+		String str = "Hello World!";
+		System.out.println(str.indexOf('o'));
+		System.out.println(str.indexOf('l', 4));
+		System.out.println(str.indexOf("llo"));
+	}
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+4
+9
+2
+	\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{大小写转换}
+
+\begin{itemize}
+	\item toLowerCase()：将字符串转换为小写。
+	\item toUpperCase()：将字符串转换为大写。
+\end{itemize}
+
+\mybox{大小写转换}
+
+\begin{lstlisting}[language=Java]
+public class UpperLowerCase {
+	public static void main(String[] args) {
+		String str = "Hello World!";
+		System.out.println(str.toLowerCase());
+		System.out.println(str.toUpperCase());
+	}
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+hello world
+HELLO WORLD
+	\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{替换}
+
+\begin{itemize}
+	\item replace(c1, c2)：将所有字符c1替换为字符c2，返回新字符串。
+	\item replace(s1, s2)：将所有子串s1替换为子串s2，返回新字符串。
+\end{itemize}
+
+\mybox{字符串替换}
+
+\begin{lstlisting}[language=Java]
+public class Replace {
+	public static void main(String[] args) {
+		String str = "Hello World!";
+		System.out.println(str.replace('l', '*'));
+		System.out.println(str.replace("ll", "##"));
+	}
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+He**o Wor*d!
+He##o World!
+	\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{split(regex)：字符串分割}
+
+根据匹配给定的正则表达式拆分字符串，返回拆分后的字符串数组。\\
+
+\mybox{字符串替换}
+
+\begin{lstlisting}[language=Java]
+public class Split {
+	public static void main(String[] args) {
+		String str = "This is a string.";
+		String[] s = str.split(" ");
+		for(String item : s) {
+			System.out.println(item);
+		}
+	}
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+This
+is
+a
+string.
+	\end{verbatim}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\mybox{统计单词个数}
+
+\begin{lstlisting}[language=Java]
+import java.util.Scanner;
+public class CountWord {
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("输入英语句子：");
+		String str = scanner.nextLine();
+		// "\\s+"表示一个或多个空格、回车、制表符等空白符
+		String[] words = str.split("\\s+");
+		System.out.println("单词个数：" + words.length);
+        for(String word : words) {
+			System.out.println("\t" + word);
+		}
+		scanner.close();
+	}
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+输入英语句子：This is a string.
+单词个数：4
+    This
+    is
+    a
+    string.
+	\end{verbatim}
+\end{tcolorbox}
+
+\newpage
