@@ -32,7 +32,7 @@
 
 \subsection{逻辑运算符}
 
-Java中逻辑运算符有三种：
+C中逻辑运算符有三种：
 
 \begin{enumerate}
 	\item 逻辑与\&\&（logical AND）：当多个条件同时为真，结果为真。
@@ -109,14 +109,17 @@ if语句主要有以下几种形式：
 
 \vspace{-1cm}
 
-\begin{lstlisting}[language=Java]
-public class IfStmt {
-	public static void main(String[] args) {
-		int age = 15;
-		if(age > 0 && age < 18) {
-			System.out.println("未成年");
-		}
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main()
+{
+	int age = 15;
+	if(age > 0 && age < 18)
+	{
+		printf("未成年\n");
 	}
+	return 0;
 }
 \end{lstlisting}
 
@@ -124,16 +127,21 @@ public class IfStmt {
 
 \vspace{-1cm}
 
-\begin{lstlisting}[language=Java]
-public class IfElse {
-	public static void main(String[] args) {
-		int age = 30;
-		if(age > 0 && age < 18) {
-			System.out.println("未成年人");
-		} else {
-			System.out.println("成年人");
-		}
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main()
+{
+	int age = 30;
+	if(age > 0 && age < 18)
+	{
+		printf("未成年人\n");
 	}
+	else
+	{
+		printf("成年人\n");
+	}
+	return 0;
 }
 \end{lstlisting}
 
@@ -141,19 +149,26 @@ public class IfElse {
 
 \vspace{-1cm}
 
-\begin{lstlisting}[language=Java]
-public class IfElseifElse {
-	public static void main(String[] args) {
-		int score = 76;
-			
-		if(score >= 90 && score <= 100) {
-			System.out.println("优秀");
-		} else if(score >= 60) {
-			System.out.println("合格");
-		} else {
-			System.out.println("不合格");
-		}
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main()
+{
+	int score = 76;
+
+	if(score >= 90 && score <= 100)
+	{
+		printf("优秀\n");
 	}
+	else if(score >= 60)
+	{
+		printf("合格\n");
+	}
+	else
+	{
+		printf("不合格\n");
+	}
+	return 0;
 }
 \end{lstlisting}
 
@@ -165,9 +180,11 @@ if语句也可以嵌套使用：
 
 \vspace{-0.5cm}
 
-\begin{lstlisting}[language=Java]
-if(条件1) {
-	if(条件2) {
+\begin{lstlisting}[language=C]
+if(条件1)
+{
+	if(条件2)
+	{
 		// code
 	}
 }
@@ -177,27 +194,29 @@ if(条件1) {
 
 \mybox{判断整数奇偶}
 
-\begin{lstlisting}[language=Java]
-import java.util.Scanner;
+\begin{lstlisting}[language=C]
+#include <stdio.h>
 
-public class OddEven {
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		int num;
-		
-		System.out.print("输入一个正整数：");
-		num = scanner.nextInt();
-		
-		if(num > 0) {
-			if(num % 2 == 0) {
-				System.out.println(num + "是偶数");
-			} else {
-				System.out.println(num + "是奇数");
-			}
+int main()
+{
+	int num;
+	
+	printf("输入一个正整数：");
+	scanf("%d", &num);
+
+	if(num > 0)
+	{
+		if(num % 2 == 0)
+		{
+			printf("%d是偶数\n", num);
 		}
-		
-		scanner.close();
+		else
+		{
+			printf("%d是奇数\n", num);
+		}
 	}
+
+	return 0;
 }
 \end{lstlisting}
 
@@ -219,8 +238,9 @@ switch-case结构可以对整数值的表达式进行判断。
 
 \vspace{-0.5cm}
 
-\begin{lstlisting}[language=Java]
-switch(表达式) {
+\begin{lstlisting}[language=C]
+switch(表达式)
+{
     case label:
         //code
         break;
@@ -235,59 +255,58 @@ switch(表达式) {
 
 \mybox{根据月份输出对应的英语简写}
 
-\begin{lstlisting}[language=Java]
-import java.util.Scanner;
+\begin{lstlisting}[language=C]
+#include <stdio.h>
 
-public class Month {
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		int month;
-		System.out.print("输入月份：");
-		month = scanner.nextInt();
-		
-		switch(month) {
-			case 1:
-				System.out.println("Jan.");
-				break;
-			case 2:
-				System.out.println("Feb.");
-				break;
-			case 3:
-				System.out.println("Mar.");
-				break;
-			case 4:
-				System.out.println("Apr.");
-				break;
-			case 5:
-				System.out.println("May");
-				break;
-			case 6:
-				System.out.println("Jun.");
-				break;
-			case 7:
-				System.out.println("Jul.");
-				break;
-			case 8:
-				System.out.println("Aug.");
-				break;
-			case 9:
-				System.out.println("Sep.");
-				break;
-			case 10:
-				System.out.println("Oct.");
-				break;
-			case 11:
-				System.out.println("Nov.");
-				break;
-			case 12:
-				System.out.println("Dec.");
-				break;
-			default:
-				System.out.println("输入有误");
-				break;
-		}
-		scanner.close();
+int main()
+{
+	int month;
+	printf("输入月份：");
+	scanf("%d", &month);
+
+	switch(month)
+	{
+		case 1:
+			printf("Jan.\n");
+			break;
+		case 2:
+			printf("Feb.\n");
+			break;
+		case 3:
+			printf("Mar.\n");
+			break;
+		case 4:
+			printf("Apr.\n");
+			break;
+		case 5:
+			printf("May\n");
+			break;
+		case 6:
+			printf("Jun.\n");
+			break;
+		case 7:
+			printf("Jul.\n");
+			break;
+		case 8:
+			printf("Aug.\n");
+			break;
+		case 9:
+			printf("Sep.\n");
+			break;
+		case 10:
+			printf("Oct.\n");
+			break;
+		case 11:
+			printf("Nov.\n");
+			break;
+		case 12:
+			printf("Dec.\n");
+			break;
+		default:
+			printf("输入有误\n");
+			break;
 	}
+	return 0;
 }
 \end{lstlisting}
 

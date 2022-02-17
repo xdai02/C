@@ -8,9 +8,9 @@
 
 \vspace{-0.5cm}
 
-\begin{lstlisting}[language=Java]
-int[] number = new int[10];
-float[] grade = new float[50];
+\begin{lstlisting}[language=C]
+int number[10];
+float grade[50];
 \end{lstlisting}
 
 \begin{figure}[H]
@@ -44,23 +44,19 @@ float[] grade = new float[50];
 
 \vspace{-0.5cm}
 
-\begin{lstlisting}[language=Java]
-int[] arr = {3, 6, 8, 2, 4, 0, 9, 7, 1, 5};
-int[] arr = new int[] {3, 6, 8, 2, 4, 0, 9, 7, 1, 5};
+\begin{lstlisting}[language=C]
+int arr[] = {3, 6, 8, 2, 4, 0, 9, 7, 1, 5};
 \end{lstlisting}
 
 很多时候在使用数组之前需要将数组的内容全部清空，这可以利用循环来实现。\\
 
 \mybox{一维数组初始化}
 
-\begin{lstlisting}[language=Java]
-public class InitArr {
-    public static void main(String[] args) {
-        int[] arr = new int[100];
-        for(int i = 0; i < arr.length; i++) {
-            arr[i] = 0;
-        }
-    }
+\begin{lstlisting}[language=C]
+int arr[100];
+for(int i = 0; i < 100; i++)
+{
+	arr[i] = 0;
 }
 \end{lstlisting}
 
@@ -68,24 +64,26 @@ public class InitArr {
 
 \mybox{数组最大值和最小值}
 
-\begin{lstlisting}[language=Java]
-public class MaxMin {
-    public static void main(String[] args) {
-        int[] num = {7, 6, 2, 9, 3, 1, 4, 0, 5, 8};
-        int max = num[0];
-        int min = num[0];
+\begin{lstlisting}[language=C]
+#include <stdio.h>
 
-        for(int i = 1; i < num.length; i++) {
-            if(num[i] > max) {
-                max = num[i];
-            } else if(num[i] < min) {
-                min = num[i];
-            }
-        }
+int main() {
+	int num[] = {7, 6, 2, 9, 3, 1, 4, 0, 5, 8};
+	int n = sizeof(num) / sizeof(num[0]);
+	int max = num[0];
+	int min = num[0];
 
-        System.out.println("max = " + max);
-        System.out.println("min = " + min);
-    }
+	for(int i = 1; i < n; i++) {
+		if(num[i] > max) {
+			max = num[i];
+		} else if(num[i] < min) {
+			min = num[i];
+		}
+	}
+
+	printf("max = %d\n", max);
+	printf("min = %d\n", min);
+	return 0;
 }
 \end{lstlisting}
 
@@ -94,42 +92,6 @@ public class MaxMin {
 	\begin{verbatim}
 max = 9
 min = 0
-	\end{verbatim}
-\end{tcolorbox}
-
-\vspace{0.5cm}
-
-\subsection{for-each}
-
-for-each环是for循环的特殊简化版。
-
-\vspace{-0.5cm}
-
-\begin{lstlisting}[language=Java]
-for(dataType var : set) {
-    // code
-}
-\end{lstlisting}
-
-\vspace{0.5cm}
-
-\mybox{遍历数组}
-
-\begin{lstlisting}[language=Java]
-public class ForEach {
-    public static void main(String[] args) {
-        int[] arr = {7, 6, 2, 9, 3, 1, 4, 0, 5, 8};
-        for(int elem : arr) {
-            System.out.print(elem + " ");
-        }
-    }
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-7 6 2 9 3 1 4 0 5 8
 	\end{verbatim}
 \end{tcolorbox}
 
@@ -160,25 +122,28 @@ public class ForEach {
 
 \vspace{-0.5cm}
 
-\begin{lstlisting}[language=Java]
-int[][] arr = new int[2][3];
-int[][] arr = {{1, 2, 3}, {4, 5, 6}};
+\begin{lstlisting}[language=C]
+int arr[2][2] = {{1, 2}, {3, 4}};
 \end{lstlisting}
 
 \vspace{0.5cm}
 
 \mybox{初始化二维数组}
 
-\begin{lstlisting}[language=Java]
-public class Init2dArr {
-    public static void main(String[] args) {
-        int[][] arr = new int[3][4];
-        for(int i = 0; i < arr.length; i++) {
-            for(int j = 0; j < arr[i].length; j++) {
-                arr[i][j] = 0;
-            }
-        }
-    }
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main()
+{
+	int arr[3][4];
+	for(int i = 0; i < 3; i++)
+	{
+		for(int j = 0; j < 4; j++)
+		{
+			arr[i][j] = 0;
+		}
+	}
+	return 0;
 }
 \end{lstlisting}
 
@@ -246,39 +211,41 @@ public class Init2dArr {
 		\end{matrix} \right]
 \end{align}
 
-\begin{lstlisting}[language=Java]
-public class Matrix {
-    public static void main(String[] args) {
-        int[][] A = {
-            {1, 3},
-            {1, 0},
-            {1, 2}
-        };
-        int[][] B = {
-            {0, 0},
-            {7, 5},
-            {2, 1}
-        };
-        int[][] C = new int[3][2];
+\begin{lstlisting}[language=C]
+#include <stdio.h>
 
-        System.out.println("矩阵加法");
-        for(int i = 0; i < 3; i++) {
-            for(int j = 0; j < 2; j++) {
-                C[i][j] = A[i][j] + B[i][j];
-                System.out.print(String.format("%3d", C[i][j]));
-            }
-            System.out.println();
-        }
+int main() {
+	int A[3][2] = {
+		{1, 3},
+		{1, 0},
+		{1, 2}
+	};
+	int B[3][2] = {
+		{0, 0},
+		{7, 5},
+		{2, 1}
+	};
+	int C[3][2];
 
-        System.out.println("矩阵减法");
-        for(int i = 0; i < 3; i++) {
-            for(int j = 0; j < 2; j++) {
-                C[i][j] = A[i][j] - B[i][j];
-                System.out.print(String.format("%3d", C[i][j]));
-            }
-            System.out.println();
-        }
-    }
+	printf("矩阵加法\n");
+	for(int i = 0; i < 3; i++) {
+		for(int j = 0; j < 2; j++) {
+			C[i][j] = A[i][j] + B[i][j];
+			printf("%3d", C[i][j]);
+		}
+		printf("\n");
+	}
+
+	printf("矩阵减法\n");
+	for(int i = 0; i < 3; i++) {
+		for(int j = 0; j < 2; j++) {
+			C[i][j] = A[i][j] - B[i][j];
+			printf("%3d", C[i][j]);
+		}
+		printf("\n");
+	}
+	
+	return 0;
 }
 \end{lstlisting}
 
@@ -298,11 +265,99 @@ public class Matrix {
 
 \newpage
 
-\section{字符}
+\section{字符串}
 
-\subsection{字符（Character）}
+\subsection{字符串（String）}
 
-单个的字符是一种特殊的类型，是用单引号表示字符字面量。每一个字符都有其对应的码值。\\
+由字符组成的数组成为字符串。字符串有两种初始化的方式。第一种就是普通的数组初始化形式，另一种是直接使用双引号。
+
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=C]
+char str[8] = {'p', 'r', 'o', 'g', 'r', 'a', 'm', '\0'};
+char str[8] = "program";
+\end{lstlisting}
+
+字符串结尾需要添加一个字符$ \backslash $0表示结束符，字符串遇到$ \backslash $0结束。$ \backslash $0占一个字符的大小，记入字符数组的大小。\\
+
+通过占位符\%s可以对字符串进行输入输出操作：
+
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=C]
+printf("%s", str);
+puts(str);
+
+scanf("%s", str);
+gets(str);
+\end{lstlisting}
+
+使用scanf()读取字符串的时候，字符串会读到空格为止，空格后的内容不会被保存到字符串中。如果需要能够读取字符串直到回车键为止，可以使用gets()。\\
+
+\mybox{字符串输入输出}
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main() {
+	char str[32];
+	printf("输入字符串：");
+	gets(str);
+	printf("%s\n", str);
+	return 0;
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+输入字符串：hello world
+hello world
+	\end{verbatim}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\mybox{统计字符串中某个字符出现的次数}
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main() {
+	char str[32];       // 字符串
+	char c;             // 待统计字符
+	int cnt = 0;        // 出现次数
+	int i = 0;
+
+	printf("输入字符串：");
+	gets(str);
+	printf("输入待统计字符：");
+	c = getchar();
+
+	while(str[i] != '\0') {
+		if(str[i] == c) {
+			cnt++;
+		}
+		i++;
+	}
+
+	printf("%c在%s中出现了%d次\n", c, str, cnt);
+	return 0;
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+输入字符串：this is a test
+输入待统计字符：t
+t在this is a test中出现了3次
+	\end{verbatim}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\subsection{ASCII码}
 
 ASCII全称American Standard Code for Information Interchange（美国信息交换标准代码），一共定义了128个字符。
 
@@ -379,379 +434,249 @@ ASCII全称American Standard Code for Information Interchange（美国信息交�
 
 \mybox{ASCII码}
 
-\begin{lstlisting}[language=Java]
-public class ASCII {
-	public static void main(String[] args) {
-		for(int i = 0; i < 128; i++) {
-			System.out.println(String.format("%c = %d", i, i));
-		}
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main() {
+	for(int i = 0; i < 128; i++) {
+		printf("%d - %c\n", i, i);
 	}
+	return 0;
 }
 \end{lstlisting}
+
+\vspace{0.5cm}
+
+\subsection{字符串操作函数}
+
+C的系统库中提供了一些对字符串的常用操作函数，这些函数都定义在string.h头文件中。
+
+\subsubsection{strlen()}
+
+计算字符串的长度，不包括$ \backslash $0结束符。\\
+
+\mybox{strlen()}
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+	char s[32] = "hello world";
+	printf("字符串长度 = %d\n", strlen(s));
+	return 0;
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+字符串长度 = 11
+	\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{strcpy()}
+
+将一个字符串复制到另一个字符串中，须确保第一个字符串有足够大的长度。\\
+
+\mybox{strcpy()}
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+	char s1[32] = "hello world";
+	char s2[32] = "program";
+
+	strcpy(s1, s2);
+	printf("s1 = %s\n", s1);
+	printf("s2 = %s\n", s2);
+	return 0;
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+s1 = program
+s2 = program
+	\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{strcat()}
+
+将第二个字符串拼接到第一个字符串尾部，须确保第一个字符串有足够大的长度。\\
+
+\mybox{strcat()}
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+	char s1[32] = "hello";
+	char s2[32] = "world";
+
+	strcat(s1, s2);     // 把s2拼接到s1后面，s2不发生改变
+	printf("s1 = %s\n", s1);
+	printf("s2 = %s\n", s2);
+	return 0;
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+s1 = helloworld
+s2 = world
+	\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection{strcmp()}
+
+比较两个字符串的大小，依次比较字符串中每一个字符的ASCII码。
+
+\begin{itemize}
+	\item 返回负数：字符串1小于字符串2。
+	\item 返回正数：字符串1大于字符串2。
+	\item 返回0：字符串1等于字符串2。
+\end{itemize}
+
+\mybox{strcmp()}
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+	char s1[32] = "communication";
+	char s2[32] = "compare";
+	printf("strcmp()比较结果：%d\n", strcmp(s1, s2));
+	return 0;
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+strcmp()比较结果：-1
+	\end{verbatim}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\mybox{登录}
+
+\begin{lstlisting}[language=C]
+/**
+* 缓冲区溢出
+* 用户名输入：[32个任意字符] + [新用户名]
+* 密  码输入：[32个任意字符] + [新密  码]
+* 产生缓冲区溢出，密码被篡改
+* 下一次登录输入新用户名和密码就能实现成功登录
+*/
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+	char username[16] = "admin";
+	char password[16] = "qwerty";
+	char input_username[16];
+	char input_password[16];
+
+	while(1) {
+		printf("用户名：");
+		gets(input_username);
+		printf("密  码：");
+		gets(input_password);
+
+		if(strcmp(input_username, username) == 0
+			&& strcmp(input_password, password) == 0) {
+			printf("登录成功！\n");
+			break;
+		} else {
+			printf("用户名或密码错误！\n");
+		}
+	}
+
+	return 0;
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+用户名：admin
+密  码：qwerty
+登录成功！
+	\end{verbatim}
+\end{tcolorbox}
 
 \newpage
 
-\section{字符串}
+\section{字符串数组}
 
-\subsection{字符串（String）}
+\subsection{字符串数组}
 
-字符串是用双引号所表示的0个或多个字符的组合。字符串变量使用String表示，String是一个类，String的变量是对象的管理者而非所有者。
+字符串数组就是由多个字符串组成的数组，可以看作是一个二维的字符数组，其中第一维表示字符串数组的大小，第二维表示每个字符串的最大长度。
 
-\begin{figure}[H]
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=C]
+char str[4][12] = {"C++", "Java", "Python", "JavaScript"};
+\end{lstlisting}
+
+\begin{table}[H]
 	\centering
-	\begin{tikzpicture}
-		\draw[-] (-5,0) -- (-1,0);
-		\draw[-] (1,0) -- (5,0);
-		\draw (0,0) node {b = a};
-
-		\draw (-4,-2.5) rectangle (-2,-1.5);
-		\draw (2,-2.5) rectangle (4,-1.5);
-		\draw (-3,-1) node {int a;};
-		\draw (3,-1) node {int b;};
-		\draw (-3,-2) node {32};
-		\draw (3,-2) node {32};
-
-		\draw (-4,-5.5) rectangle (-2,-4.5);
-		\draw (2,-5.5) rectangle (4,-4.5);
-		\draw (-3,-4) node {String a;};
-		\draw (3,-4) node {String b;};
-
-		\draw (-1,-7) rectangle (1,-6);
-		\draw[->] (-2,-5) -- (-1,-6.5);
-		\draw[->] (2,-5) -- (1,-6.5);
-	\end{tikzpicture}
-	\caption{字符串引用}
-\end{figure}
-
-通过调用Scanner类中的nextLine()可以获取用户输入的字符串。\\
-
-\mybox{创建字符串对象}
-
-\begin{lstlisting}[language=Java]
-import java.util.Scanner;
-
-public class StringObj {
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		System.out.print("输入字符串：");
-		String str = scanner.nextLine();
-		System.out.println(str);
-		scanner.close();
+	\setlength{\tabcolsep}{4mm}{
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			\textbf{0} & \textbf{1} & \textbf{2} & \textbf{3}      & \textbf{4}      & \textbf{5} & \textbf{6}      & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10}     & \textbf{11} \\
+			\hline
+			C          & +          & +          & $ \backslash $0 &                 &            &                 &            &            &            &                 &             \\
+			\hline
+			J          & a          & v          & a               & $ \backslash $0 &            &                 &            &            &            &                 &             \\
+			\hline
+			P          & y          & t          & h               & o               & n          & $ \backslash $0 &            &            &            &                 &             \\
+			\hline
+			J          & a          & v          & a               & S               & c          & r               & i          & p          & t          & $ \backslash $0 &             \\
+			\hline
+		\end{tabular}
 	}
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-输入字符串：Hello World!
-Hello World!
-	\end{verbatim}
-\end{tcolorbox}
-
-\vspace{0.5cm}
-
-\subsection{字符串比较}
-
-字符串的比较分为两种：
-
-\begin{enumerate}
-	\item 【==】运算符用于比较是否是同一个对象。
-	\item equals()用于比较字符串的内容是否相同。
-\end{enumerate}
-
-\mybox{字符串比较}
-
-\begin{lstlisting}[language=Java]
-public class StringEqual {
-	public static void main(String[] args) {
-		String s1 = new String("hello");
-		String s2 = new String("hello");
-
-		if(s1 == s2) {
-			System.out.println("s1和s2是同一个对象");
-		}
-
-		if(s1.equals(s2)) {
-			System.out.println("s1与s2内容相同");
-		}
-
-		if(s1.equalsIgnoreCase(s2)) {
-			System.out.println("s1与s2忽略大小写内容相同");
-		}
-	}
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-s1与s2内容相同
-s1与s2忽略大小写内容相同
-	\end{verbatim}
-\end{tcolorbox}
-
-\vspace{0.5cm}
-
-\subsection{字符串操作}
-
-字符串是对象，它包含了一系列的常用操作，对它的所有操作都是通过【.】运算符进行的。
-
-\subsubsection{length()：计算字符串长度}
-
-\vspace{0.5cm}
-
-\mybox{计算字符串长度}
-
-\begin{lstlisting}[language=Java]
-public class StringLength {
-	public static void main(String[] args) {
-		String str = "Hello World!";
-		System.out.println(str.length());
-	}
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-12
-	\end{verbatim}
-\end{tcolorbox}
-
-\subsubsection{charAt()：访问字符串中的字符}
-
-字符串中的每一个下标位置都是一个单个的字符，下标的范围从0到length() - 1。
-
-\vspace{0.5cm}
-
-\mybox{访问字符串中的字符}
-
-\begin{lstlisting}[language=Java]
-public class CharAt {
-	public static void main(String[] args) {
-		String str = "Hello World!";
-		System.out.println(str.charAt(4));
-	}
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-o
-	\end{verbatim}
-\end{tcolorbox}
-
-\vspace{0.5cm}
-
-\mybox{计算字符串中某个字符出现的次数}
-
-\begin{lstlisting}[language=Java]
-import java.util.Scanner;
-
-public class CountOccurence {
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		int cnt = 0;		// 出现次数
-
-		System.out.print("输入字符串：");
-		String str = scanner.nextLine();
-		System.out.print("输入待统计字符：");
-		char c = scanner.nextLine().charAt(0);
-
-		int n = str.length();
-		for(int i = 0; i < n; i++) {
-			if(str.charAt(i) == c) {
-				cnt++;
-			}
-		}
-
-		System.out.println(c + "在" + str + "中出现了" + cnt + "次");
-		scanner.close();
-	}
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-输入字符串：Hello World
-输入待统计字符：l
-l在Hello World中出现了3次
-	\end{verbatim}
-\end{tcolorbox}
-
-\subsubsection{substring()：获取子串}
+\end{table}
 
 \begin{itemize}
-	\item substring(n)：获取第n个位置到末尾的全部内容。
-	\item substring(begin, end)：获取从begin到end位置之前的内容。
+	\item \lstinline|str[0]: "C++"|
+	\item \lstinline|str[1]: "Java"|
+	\item \lstinline|str[0][0]: 'C'|
+	\item \lstinline|str[0][1]: '+'|
+	\item \lstinline|str[0][2]: '+'|
 \end{itemize}
-
-\mybox{获取子串}
-
-\begin{lstlisting}[language=Java]
-public class Substring {
-	public static void main(String[] args) {
-		String str = "Hello World!";
-		System.out.println(str.substring(6));
-		System.out.println(str.substring(3, 10));
-	}
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-World!
-lo Worl
-	\end{verbatim}
-\end{tcolorbox}
-
-\subsubsection{indexOf()：查找}
-
-\begin{itemize}
-	\item indexOf(c)：获取字符c所在的位置，返回-1表示不存在。
-	\item indexOf(c, n)：从第n个位置开始查找字符c。
-	\item indexOf(t)：获取字符串t所在的位置。
-\end{itemize}
-
-\mybox{查找}
-
-\begin{lstlisting}[language=Java]
-public class IndexOf {
-	public static void main(String[] args) {
-		String str = "Hello World!";
-		System.out.println(str.indexOf('o'));
-		System.out.println(str.indexOf('l', 4));
-		System.out.println(str.indexOf("llo"));
-	}
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-4
-9
-2
-	\end{verbatim}
-\end{tcolorbox}
-
-\subsubsection{大小写转换}
-
-\begin{itemize}
-	\item toLowerCase()：将字符串转换为小写。
-	\item toUpperCase()：将字符串转换为大写。
-\end{itemize}
-
-\mybox{大小写转换}
-
-\begin{lstlisting}[language=Java]
-public class UpperLowerCase {
-	public static void main(String[] args) {
-		String str = "Hello World!";
-		System.out.println(str.toLowerCase());
-		System.out.println(str.toUpperCase());
-	}
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-hello world
-HELLO WORLD
-	\end{verbatim}
-\end{tcolorbox}
-
-\subsubsection{替换}
-
-\begin{itemize}
-	\item replace(c1, c2)：将所有字符c1替换为字符c2，返回新字符串。
-	\item replace(s1, s2)：将所有子串s1替换为子串s2，返回新字符串。
-\end{itemize}
-
-\mybox{字符串替换}
-
-\begin{lstlisting}[language=Java]
-public class Replace {
-	public static void main(String[] args) {
-		String str = "Hello World!";
-		System.out.println(str.replace('l', '*'));
-		System.out.println(str.replace("ll", "##"));
-	}
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-He**o Wor*d!
-He##o World!
-	\end{verbatim}
-\end{tcolorbox}
-
-\subsubsection{split(regex)：字符串分割}
-
-根据匹配给定的正则表达式拆分字符串，返回拆分后的字符串数组。\\
-
-\mybox{字符串替换}
-
-\begin{lstlisting}[language=Java]
-public class Split {
-	public static void main(String[] args) {
-		String str = "This is a string.";
-		String[] s = str.split(" ");
-		for(String item : s) {
-			System.out.println(item);
-		}
-	}
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-This
-is
-a
-string.
-	\end{verbatim}
-\end{tcolorbox}
 
 \vspace{0.5cm}
 
-\mybox{统计单词个数}
+\mybox{遍历字符串数组}
 
-\begin{lstlisting}[language=Java]
-import java.util.Scanner;
-public class CountWord {
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		System.out.print("输入英语句子：");
-		String str = scanner.nextLine();
-		// "\\s+"表示一个或多个空格、回车、制表符等空白符
-		String[] words = str.split("\\s+");
-		System.out.println("单词个数：" + words.length);
-        for(String word : words) {
-			System.out.println("\t" + word);
-		}
-		scanner.close();
-	}
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main() {
+    char str[4][12] = {"C++", "Java", "Python", "JavaScript"};
+    for(int i = 0; i < 4; i++) {
+        printf("%s\n", str[i]);
+    }
+    return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
 	\mybox{运行结果}
 	\begin{verbatim}
-输入英语句子：This is a string.
-单词个数：4
-    This
-    is
-    a
-    string.
+C++
+Java
+Python
+JavaScript
 	\end{verbatim}
 \end{tcolorbox}
 

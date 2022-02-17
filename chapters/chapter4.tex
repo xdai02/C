@@ -47,8 +47,9 @@ while循环的特点是先判断、再执行，所以循环体有可能会进入
 
 \vspace{-0.5cm}
 
-\begin{lstlisting}[language=Java]
-while(条件) {
+\begin{lstlisting}[language=C]
+while(条件)
+{
     // code
 }
 \end{lstlisting}
@@ -57,40 +58,82 @@ while(条件) {
 
 \mybox{计算5个人的平均身高}
 
-\begin{lstlisting}[language=Java]
-import java.util.Scanner;
+\begin{lstlisting}[language=C]
+#include <stdio.h>
 
-public class Height {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        double height;
-        double total = 0;
-        double average;
-        int i = 1;
-        
-        while(i <= 5) {
-            System.out.print("输入第" + i + "个人的身高：");
-            height = scanner.nextDouble();
-            total += height;
-            i++;
-        }
-        
-        average = total / 5;
-        System.out.println(String.format("平均身高：%.2f", average));
-        scanner.close();
+int main()
+{
+    double height;
+    double total = 0;
+    double average;
+    int i = 1;
+
+    while(i <= 5)
+    {
+        printf("输入第%d个人的身高：", i);
+        scanf("%lf", &height);
+        total += height;
+        i++;
     }
+
+    average = total / 5;
+    printf("平均身高：%.2f\n", average);  
+    return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
 	\mybox{运行结果}
-\begin{verbatim}
+	\begin{verbatim}
 输入第1个人的身高：160.8
 输入第2个人的身高：175.2
 输入第3个人的身高：171.2
 输入第4个人的身高：181.3
 输入第5个人的身高：164
 平均身高：170.5
+\end{verbatim}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\mybox{计算元音、辅音个数}
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main()
+{
+    char c;
+    int vowel = 0;
+    int consonant = 0;
+
+    printf("输入一句英语句子：");
+
+    while((c = getchar()) != '\n')
+    {
+        if(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' 
+        || c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U')
+        {
+            vowel++;
+        }
+        else if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+        {
+            consonant++;
+        }
+    }
+
+    printf("元音 = %d\n", vowel);
+    printf("辅音 = %d\n", consonant);
+    return 0;
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+输入一句英语句子：Hello World
+元音 = 3
+辅音 = 7
 \end{verbatim}
 \end{tcolorbox}
 
@@ -106,7 +149,7 @@ do-while循环的主要特点是先执行、再判断。
 
 \vspace{-0.5cm}
 
-\begin{lstlisting}[language=Java]
+\begin{lstlisting}[language=C]
 do {
     // code
 } while(条件);
@@ -116,32 +159,29 @@ do {
 
 \mybox{计算整数位数}
 
-\begin{lstlisting}[language=Java]
-import java.util.Scanner;
+\begin{lstlisting}[language=C]
+#include <stdio.h>
 
-public class Digits {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int num;
-        int n = 0;      // 位数
-        
-        System.out.print("输入整数：");
-        num = scanner.nextInt();
-        
-        do {
-            num /= 10;
-            n++;
-        } while(num != 0);
-        
-        System.out.println("位数：" + n);
-        scanner.close();
-    }
+int main() {
+    int num;
+    int n = 0;
+
+    printf("输入整数：");
+    scanf("%d", &num);
+
+    do {
+        num /= 10;
+        n++;
+    } while(num != 0);
+
+    printf("位数：%d\n", n);
+    return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
 	\mybox{运行结果}
-\begin{verbatim}
+	\begin{verbatim}
 输入整数：123
 位数：3
 \end{verbatim}
@@ -166,38 +206,41 @@ while循环与do-while循环有以下区别：
 	\includegraphics[scale=0.15]{img/C4/4-3/1.png}
 \end{figure}
 
+\vspace{0.5cm}
+
 \mybox{猜数字}
 
-\begin{lstlisting}[language=Java]
-import java.util.Scanner;
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#include <stdlib.h>     // 标准库
+#include <time.h>
 
-public class GuessNumber {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int answer = (int)(Math.random() * 100) + 1;    // [1, 100]
-        int guess;
-        int cnt = 0;        // 猜测次数
+int main() {
+    srand(time(NULL));          // 时间种子
+    int answer = rand() % 100 + 1;  // 产生1-100之前的随机数
+    int num = 0;
+    int cnt = 0;
+
+    do {
+        printf("猜一个1-100之间的数字：");
+        scanf("%d", &num);
+        cnt++;
         
-        do {
-            System.out.print("猜一个1-100之间的数：");
-            guess = scanner.nextInt();
-            cnt++;
-            if(guess < answer) {
-                System.out.println("猜小啦！");
-            } else if(guess > answer) {
-                System.out.println("猜大啦！");
-            }
-        } while(guess != answer);
-        
-        System.out.println("猜对啦！一共猜了" + cnt + "次！");
-        scanner.close();
-    }
+        if(num > answer) {
+            printf("猜大了\n");
+        } else if(num < answer) {
+            printf("猜小了\n");
+        }
+    } while(num != answer);
+    
+    printf("猜对了！你一共用了%d次猜对！\n", cnt);
+    return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
 	\mybox{运行结果}
-\begin{verbatim}
+	\begin{verbatim}
 猜一个1-100之间的数字：50
 猜大了！
 猜一个1-100之间的数字：25
@@ -225,8 +268,9 @@ for循环有三个表达式，中间用【;】分隔，【;】不可省略。
 
 \vspace{-0.5cm}
 
-\begin{lstlisting}[language=Java]
-for(表达式1; 表达式2; 表达式3) {
+\begin{lstlisting}[language=C]
+for(表达式1; 表达式2; 表达式3)
+{
     //code
 }
 \end{lstlisting}
@@ -241,21 +285,24 @@ for(表达式1; 表达式2; 表达式3) {
 
 \mybox{计算1-100的累加和}
 
-\begin{lstlisting}[language=Java]
-public class Sum {
-    public static void main(String[] args) {
-        int sum = 0;
-        for(int i = 1; i <= 100; i++) {
-            sum += i;
-        }
-        System.out.println(sum);
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main()
+{
+    int sum = 0;
+    for(int i = 1; i <= 100; i++)
+    {
+        sum += i;
     }
+    printf("%d\n", sum);
+    return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
 	\mybox{运行结果}
-\begin{verbatim}
+	\begin{verbatim}
 5050
 \end{verbatim}
 \end{tcolorbox}
@@ -264,31 +311,28 @@ public class Sum {
 
 \mybox{计算$ 1 + {1 \over 2} + {1 \over 3} + ... + {1 \over n} $}
 
-\begin{lstlisting}[language=Java]
-import java.util.Scanner;
+\begin{lstlisting}[language=C]
+#include <stdio.h>
 
-public class InverseSum {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n;
-        double sum = 0.0;
-        
-        System.out.print("输入n：");
-        n = scanner.nextInt();
-        
-        for(int i = 1; i <= n; i++) {
-            sum += 1.0 / i;
-        }
-        
-        System.out.println(sum);
-        scanner.close();
+int main()
+{
+    int n;
+    double sum = 0.0;
+    printf("输入n：");
+    scanf("%d", &n);
+
+    for(int i = 1; i <= n; i++)
+    {
+        sum += 1.0 / i;
     }
+    printf("%f\n", sum);
+    return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
 	\mybox{运行结果}
-\begin{verbatim}
+	\begin{verbatim}
 输入n：10
 2.928968
 \end{verbatim}
@@ -300,45 +344,49 @@ public class InverseSum {
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.45]{img/C4/4-4/1.png}
+	\includegraphics[scale=0.3]{img/C4/4-4/1.png}
 \end{figure}
 
-\begin{lstlisting}[language=Java]
-import java.util.Scanner;
+\begin{lstlisting}[language=C]
+#include <stdio.h>
 
-public class Fibonacci {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n;
-        int num1, num2, val;
-        
-        System.out.print("输入斐波那契数列长度：");
-        n = scanner.nextInt();
-        
-        if(n == 1) {
-            System.out.println("1");
-        } else if(n == 2) {
-            System.out.println("1, 1");
-        } else {
-            num1 = 1;
-            num2 = 1;
-            System.out.print("1, 1");
-            for(int i = 3; i <= n; i++) {
-                val = num1 + num2;
-                System.out.print(", " + val);
-                num1 = num2;
-                num2 = val;
-            }
-            System.out.println();
-        }
-        scanner.close();
+int main()
+{
+    int n;
+    int num1, num2, val;
+
+    printf("输入斐波那契数列长度：");
+    scanf("%d", &n);
+
+    if(n == 1)
+    {
+        printf("1\n");
     }
+    else if(n == 2)
+    {
+        printf("1, 1\n");
+    }
+    else
+    {
+        num1 = 1;
+        num2 = 1;
+        printf("1, 1");
+        for(int i = 3; i <= n; i++)
+        {
+            val = num1 + num2;
+            printf(", %d", val);
+            num1 = num2;
+            num2 = val;
+        }
+        printf("\n");
+    }
+    return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
 	\mybox{运行结果}
-\begin{verbatim}
+	\begin{verbatim}
 输入斐波那契数列长度：10
 1, 1, 2, 3, 5, 8, 13, 21, 34, 55
 \end{verbatim}
@@ -380,18 +428,20 @@ public class Fibonacci {
 	\caption{九九乘法表}
 \end{table}
 
-\begin{lstlisting}[language=Java]
-public class MultiplicationTable {
-    public static void main(String[] args) {
-        for(int i = 1; i <= 9; i++) {
-            for(int j = 1; j <= 9; j++) {
-                System.out.print(
-                    String.format("%d*%d=%d\t", i, j, i*j)
-                );
-            }
-            System.out.println();
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main()
+{
+    for(int i = 1; i <= 9; i++)
+    {
+        for(int j = 1; j <= 9; j++)
+        {
+            printf("%d*%d=%d\t", i, j, i*j);
         }
+        printf("\n");
     }
+    return 0;
 }
 \end{lstlisting}
 
@@ -407,16 +457,20 @@ public class MultiplicationTable {
 *****
 \end{lstlisting}
 
-\begin{lstlisting}[language=Java]
-public class Stars {
-    public static void main(String[] args) {
-        for(int i = 1; i <= 5; i++) {
-            for(int j = 1; j <= i; j++) {
-                System.out.print("*");
-            }
-            System.out.println();
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main()
+{
+    for(int i = 1; i <= 5; i++)
+    {
+        for(int j = 1; j <= i; j++)
+        {
+            printf("*");
         }
+        printf("\n");
     }
+    return 0;
 }
 \end{lstlisting}
 
@@ -434,23 +488,27 @@ continue的作用是跳过本轮循环，开始下一轮循环的条件判断。
 
 \mybox{break}
 
-\begin{lstlisting}[language=Java]
-public class Break {
-    public static void main(String[] args) {
-        for(int i = 1; i <= 10; i++) {
-            if(i == 5) {
-                break;
-            }
-            System.out.print(i + " ");
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main()
+{
+    for(int i = 1; i <= 10; i++)
+    {
+        if(i == 5)
+        {
+            break;
         }
+        printf("%d ", i);
     }
+    return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
 	\mybox{运行结果}
-\begin{verbatim}
-1 2 3 4
+	\begin{verbatim}
+1 2 3 4 
 \end{verbatim}
 \end{tcolorbox}
 
@@ -458,23 +516,27 @@ public class Break {
 
 \mybox{continue}
 
-\begin{lstlisting}[language=Java]
-public class Continue {
-    public static void main(String[] args) {
-        for(int i = 1; i <= 10; i++) {
-            if(i == 5) {
-                continue;
-            }
-            System.out.print(i + " ");
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main()
+{
+    for(int i = 1; i <= 10; i++)
+    {
+        if(i == 5)
+        {
+            continue;
         }
+        printf("%d ", i);
     }
+    return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
 	\mybox{运行结果}
-\begin{verbatim}
-1 2 3 4 6 7 8 9 10
+	\begin{verbatim}
+1 2 3 4 6 7 8 9 10 
 \end{verbatim}
 \end{tcolorbox}
 

@@ -4,7 +4,7 @@
 
 \subsection{函数（Function）}
 
-函数执行一个特定的任务，Java提供了大量内置函数，例如println用来输出字符串、substring()用来截取子字符串等。
+函数执行一个特定的任务，C提供了大量内置函数，例如println用来输出字符串、substring()用来截取子字符串等。
 
 \begin{figure}[H]
 	\centering
@@ -52,7 +52,7 @@
 
 函数可以返回一个值，函数的返回类型为被返回的值的类型。函数也可以不返回任何值，此时函数的返回类型应定义为void。
 
-\begin{lstlisting}[language=Java]
+\begin{lstlisting}[language=C]
 AccessModifier dataType funcName(parameterList) {
 	//code
 }
@@ -93,7 +93,7 @@ AccessModifier dataType funcName(parameterList) {
 
 \mybox{函数实现返回最大值}
 
-\begin{lstlisting}[language=Java]
+\begin{lstlisting}[language=C]
 public class Max {
 	public static void main(String[] args) {
 		System.out.println(max(4, 12));
@@ -127,7 +127,7 @@ public class Max {
 
 \mybox{函数实现累加和}
 
-\begin{lstlisting}[language=Java]
+\begin{lstlisting}[language=C]
 public class Sum {
 	public static void main(String[] args) {
 		System.out.println("1-100的累加和 = " + sum(1, 100));
@@ -156,7 +156,7 @@ public class Sum {
 
 \mybox{函数实现输出i行j列由自定义字符组成的图案}
 
-\begin{lstlisting}[language=Java]
+\begin{lstlisting}[language=C]
 public class PrintChars {
 	public static void main(String[] args) {
 		printChars(5, 10, '?');
@@ -233,7 +233,7 @@ public class PrintChars {
 
 \mybox{无限递归}
 
-\begin{lstlisting}[language=Java]
+\begin{lstlisting}[language=C]
 public class TellStory {
 	public static void main(String[] args) {
 		tellStory();
@@ -271,7 +271,7 @@ public class TellStory {
 
 \mybox{阶乘}
 
-\begin{lstlisting}[language=Java]
+\begin{lstlisting}[language=C]
 public class Factorial {
 	public static void main(String[] args) {
 		System.out.println("5! = " + factorial(5));
@@ -345,7 +345,7 @@ public class Factorial {
 
 \mybox{斐波那契数列（递归）}
 
-\begin{lstlisting}[language=Java]
+\begin{lstlisting}[language=C]
 public class FibonacciRecursive {
 	public static void main(String[] args) {
 		int n = 7;
@@ -411,7 +411,7 @@ public class FibonacciRecursive {
 
 \mybox{斐波那契数列（迭代）}
 
-\begin{lstlisting}[language=Java]
+\begin{lstlisting}[language=C]
 public class FibonacciIterative {
 	public static void main(String[] args) {
 		int n = 7;
@@ -451,7 +451,7 @@ public class FibonacciIterative {
 	\end{cases}
 \end{align}
 
-\begin{lstlisting}[language=Java]
+\begin{lstlisting}[language=C]
 public class Ackermann {
 	public static void main(String[] args) {
 		System.out.println(A(3, 4));
@@ -531,7 +531,7 @@ public class Ackermann {
 	\item 将n-1个圆盘从B柱借助于A柱搬到C柱。
 \end{enumerate}
 
-\begin{lstlisting}[language=Java]
+\begin{lstlisting}[language=C]
 public class Hanoi {
 	public static int move = 0;		 // 移动次数
 	
