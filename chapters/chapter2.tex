@@ -1,398 +1,236 @@
-\chapter{数据类型}
+\chapter{分支}
 
-\section{变量}
+\section{逻辑运算符}
 
-\subsection{变量（Variable）}
+\subsection{关系运算符}
 
-C是一种强类型的语言，任何数据都有一个确定的类型。\\
+编程中经常需要使用关系运算符来比较两个数据的大小，比较的结果是一个布尔值（boolean），即True（非0）或False（0）。\\
 
-变量是计算机中一块特定的内存空间，由一个或多个连续的字节组成，不同数据存入具有不同内存地址的空间，相互独立，通过变量名可以简单快速地找到在内存中存储的数据。\\
-
-变量名需要符合以下的要求：
-
-\begin{enumerate}
-	\item 由字母、数字和下划线组成，第一个字符必须为字母或下划线。
-	\item 不能包含除【\_】以外的任何特殊字符，如【\%】、【\#】等。
-	\item 不可以使用保留字或关键字。
-	\item 准确、顾名思义，不要使用汉语拼音。
-\end{enumerate}
-
-关键字是编程语言内置的一些名称，具有特殊的用处和意义。
-
-\begin{table}[H]
-	\centering
-	\setlength{\tabcolsep}{5mm}{
-		\begin{tabular}{|c|c|c|c|c|}
-			\hline
-			auto     & break   & case   & char     & const  \\
-			\hline
-			continue & default & do     & double   & else   \\
-			\hline
-			enum     & extern  & float  & for      & goto   \\
-			\hline
-			if       & int     & long   & register & return \\
-			\hline
-			short    & signed  & sizeof & static   & struct \\
-			\hline
-			switch   & typedef & union  & unsigned & void   \\
-			\hline
-			volatile & while   & inline & restrict &        \\
-			\hline
-		\end{tabular}
-	}
-	\caption{关键字}
-\end{table}
-
-\vspace{0.5cm}
-
-\subsection{数据类型}
-
-C中变量主要有三大类型：
-
-\begin{enumerate}
-	\item 整型
-	      \begin{itemize}
-		      \item 短整型short
-		      \item 整型int
-		      \item 长整型long
-		      \item 长长整型long long
-	      \end{itemize}
-
-	\item 浮点型
-	      \begin{itemize}
-		      \item 单精度浮点型float
-		      \item 双精度浮点型double
-	      \end{itemize}
-
-	\item 字符型char
-\end{enumerate}
-
-\begin{table}[H]
-	\centering
-	\setlength{\tabcolsep}{5mm}{
-		\begin{tabular}{|c|c|c|}
-			\hline
-			\textbf{数据类型} & \textbf{位数} & \textbf{取值范围}           \\
-			\hline
-			short             & 16            & $ -2^{15} \sim 2^{15} - 1 $ \\
-			\hline
-			int               & 32            & $ -2^{31} \sim 2^{31} - 1 $ \\
-			\hline
-			long              & 32            & $ -2^{31} \sim 2^{31} - 1 $ \\
-			\hline
-			long long         & 64            & $ -2^{63} \sim 2^{63} - 1 $ \\
-			\hline
-			float             & 32            & $ -3.4E38 \sim 3.4E38 $     \\
-			\hline
-			double            & 64            & $ -1.7E308 \sim 1.7E308 $   \\
-			\hline
-			char              & 8             & $ -128 ~ 127 $              \\
-			\hline
-		\end{tabular}
-	}
-	\caption{不同数据类型的取值范围}
-\end{table}
-
-\newpage
-
-\section{初始化}
-
-\subsection{初始化（Initialization）}
-
-变量可以在定义时初始化，也可以在定义后初始化。\\
-
-在编程中，【=】不是数学中的“等于”符号，而是表示“赋值”，即将【=】右边的值赋给左边的变量。
-
-\vspace{-0.5cm}
-
-\begin{lstlisting}[language=C]
-int n = 10;
-double wage = 8232.56;
-\end{lstlisting}
-
-\vspace{0.5cm}
-
-\subsection{常量（Constant）}
-
-常量是一个固定值，在程序执行期间不会改变，即在定义后不可修改。常量可以是任何的基本数据类型，比如整数常量、浮点常量、字符常量。\\
-
-\mybox{常量}
-
-\begin{lstlisting}[language=C]
-#include <stdio.h>
-
-int main()
-{
-	const double PI = 3.1415;
-	PI = 4;
-	return 0;
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-error: assignment of read-only variable 'PI'
-	\end{verbatim}
-\end{tcolorbox}
-
-\newpage
-
-\section{算术运算符}
-
-\subsection{四则运算}
-
-\begin{table}[H]
-	\centering
-	\setlength{\tabcolsep}{5mm}{
-		\begin{tabular}{|c|c|c|}
-			\hline
-			\textbf{数学符号} & \textbf{C符号} & \textbf{含义} \\
-			\hline
-			$ + $             & +              & 加法          \\
-			\hline
-			$ - $             & -              & 减法          \\
-			\hline
-			$ \times $        & *              & 乘法          \\
-			\hline
-			$ \div $          & /              & 除法          \\
-			\hline
-			$ \dots\dots $    & \%             & 取模          \\
-			\hline
-		\end{tabular}
-	}
-	\caption{四则运算}
-\end{table}
-
-C中除法【/】的意义与数学中不同：
-
-\begin{enumerate}
-	\item 当相除的两个运算数都为整型，则运算结果为两个数进行除法运算后的整数部分，例如21 / 5的结果为4。
-
-	\item 如果两个运算数其中至少一个为浮点型，则运算结果为浮点型，如21 / 5.0的结果为4.2。
-\end{enumerate}
-
-取模（modulo）【\%】表示求两个数相除之后的余数，如22 \% 3的结果为1；4 \% 7的结果为4。\\
-
-\subsection{复合赋值运算符}
+在编程中需要注意，一个等号=表示赋值运算，而两个等号==表示比较运算。\\
 
 \begin{table}[H]
 	\centering
 	\setlength{\tabcolsep}{5mm}{
 		\begin{tabular}{|c|c|}
 			\hline
-			\textbf{运算符} & \textbf{描述}           \\
+			\textbf{数学符号} & \textbf{关系运算符} \\
 			\hline
-			+=              & a += b等价于a = a + b   \\
+			$ < $             & <                   \\
 			\hline
-			-=              & a -= b等价于a = a - b   \\
+			$ > $             & >                   \\
 			\hline
-			*=              & a *= b等价于a = a * b   \\
+			$ \le $           & <=                  \\
 			\hline
-			/=              & a /= b等价于a = a / b   \\
+			$ \ge $           & >=                  \\
 			\hline
-			\%=             & a \%= b等价于a = a \% b \\
+			$ = $             & ==                  \\
+			\hline
+			$ \ne $           & !=                  \\
 			\hline
 		\end{tabular}
 	}
-	\caption{复合赋值运算符}
+	\caption{关系运算符}
 \end{table}
+
+\vspace{0.5cm}
+
+\subsection{逻辑运算符}
+
+逻辑运算符用于连接多个关系表达式，其结果也是一个布尔值。\\
+
+\begin{enumerate}
+	\item 逻辑与\&\&：当多个条件全部为True，结果为True。
+	      \begin{table}[H]
+		      \centering
+		      \setlength{\tabcolsep}{5mm}{
+			      \begin{tabular}{|c|c|c|}
+				      \hline
+				      \textbf{条件1} & \textbf{条件2} & \textbf{条件1 \&\& 条件2} \\
+				      \hline
+				      T              & T              & T                         \\
+				      \hline
+				      T              & F              & F                         \\
+				      \hline
+				      F              & T              & F                         \\
+				      \hline
+				      F              & F              & F                         \\
+				      \hline
+			      \end{tabular}
+		      }
+	      \end{table}
+
+	\item 逻辑或||：多个条件至少有一个为True时，结果为True。
+	      \begin{table}[H]
+		      \centering
+		      \setlength{\tabcolsep}{5mm}{
+			      \begin{tabular}{|c|c|c|}
+				      \hline
+				      \textbf{条件1} & \textbf{条件2} & \textbf{条件1 || 条件2} \\
+				      \hline
+				      T              & T              & T                       \\
+				      \hline
+				      T              & F              & T                       \\
+				      \hline
+				      F              & T              & T                       \\
+				      \hline
+				      F              & F              & F                       \\
+				      \hline
+			      \end{tabular}
+		      }
+	      \end{table}
+
+	\item 逻辑非!：条件为True时，结果为False；条件为False时，结果为True。
+	      \begin{table}[H]
+		      \centering
+		      \setlength{\tabcolsep}{5mm}{
+			      \begin{tabular}{|c|c|}
+				      \hline
+				      \textbf{条件} & \textbf{!条件} \\
+				      \hline
+				      T             & F              \\
+				      \hline
+				      F             & T              \\
+				      \hline
+			      \end{tabular}
+		      }
+	      \end{table}
+\end{enumerate}
 
 \newpage
 
-\section{输入输出函数}
+\section{if}
 
-\subsection{printf()}
+\subsection{if}
 
-printf()的功能是向屏幕输出指定格式的字符串内容。在对变量的值进行输出时，需要使用相应数据类型的占位符表示。\\
+if语句用于判断一个条件是否成立，如果成立则执行if语句块中的语句，否则不执行。\\
 
-\begin{table}[H]
-	\centering
-	\setlength{\tabcolsep}{5mm}{
-		\begin{tabular}{|c|c|}
-			\hline
-			\textbf{数据类型} & \textbf{占位符} \\
-			\hline
-			int               & \%d             \\
-			\hline
-			long              & \%ld            \\
-			\hline
-			float             & \%f             \\
-			\hline
-			double            & \%f             \\
-			\hline
-			char              & \%c             \\
-			\hline
-		\end{tabular}
+\vspace{-1cm}
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main()
+{
+	int age;
+	printf("Enter your age: ");
+	scanf("%d", &age);
+
+	if(age > 0 && age < 18)
+	{
+		printf("minor\n");
 	}
-	\caption{占位符}
-\end{table}
+
+	return 0;
+}
+\end{lstlisting}
 
 \vspace{0.5cm}
 
-\subsection{转义字符}
+\subsection{if-else}
 
-在一个字符串描述的过程中，有可能会有一些特殊字符的信息。
+if-else的结构与if类似，只是在if语句块中的条件不成立时，执行else语句块中的语句。
 
-\begin{table}[H]
-	\centering
-	\setlength{\tabcolsep}{5mm}{
-		\begin{tabular}{|c|c|}
-			\hline
-			\textbf{转义字符}      & \textbf{描述}                        \\
-			\hline
-			\lstinline|\\| & 表示一个反斜杠\lstinline|\| \\
-			\hline
-			\lstinline|\'| & 表示一个单引号\lstinline|'| \\
-			\hline
-			\lstinline|\"| & 表示一个双引号\lstinline|"| \\
-			\hline
-			\lstinline|\n| & 换行                                 \\
-			\hline
-			\lstinline|\t| & 横向制表符                           \\
-			\hline
-		\end{tabular}
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main()
+{
+	int age;
+	printf("Enter your age: ");
+	scanf("%d", &age);
+
+	if(age > 0 && age < 18)
+	{
+		printf("minor\n");
 	}
-	\caption{转义字符}
-\end{table}
+	else
+	{
+		printf("adult\n");
+	}
 
-\mybox{转义字符}
-
-\begin{lstlisting}[language=C]
-#include <stdio.h>
-
-int main()
-{
-	printf("全球最大同性交友网站\n");
-	printf("\'https://github.com\'");
 	return 0;
 }
 \end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-全球最大同性交友网站
-'https://github.com'
-	\end{verbatim}
-\end{tcolorbox}
 
 \vspace{0.5cm}
 
-\subsection{scanf()}
+\subsection{if-else if-else}
 
-scanf()的作用是读取用户从键盘上的输入。在将值赋给对应的变量时，需要使用取地址符\&，即将输入的值存放到该变量的内存地址中。\\
-
-\mybox{计算长方形面积}
+当需要对更多的条件进行判断时，可以使用if-else if-else语句。
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
 
 int main()
 {
-	double length, width;
-	double area;
+	int age;
+	printf("Enter your age: ");
+	scanf("%d", &age);
 
-	printf("输入长度：");
-	scanf("%lf", &length);
-	printf("输入宽度：");
-	scanf("%lf", &width);
-
-	area = length * width;
-	printf("面积 = %.2f\n", area);
+	if(age > 0 && age < 18)
+	{
+		printf("minor\n");
+	}
+	else if(age >= 18 && age <= 30)
+	{
+		printf("yound adult\n");
+	}
+	else if(age >= 31 && age <= 60)
+	{
+		printf("middle-aged\n");
+	}
+	else if(age >= 61 && age <= 120)
+	{
+		printf("senior\n");
+	}
+	else
+	{
+		printf("invalid age\n");
+	}
+	
 	return 0;
 }
 \end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-输入长度：20
-输入宽度：30
-面积 = 600.00
-	\end{verbatim}
-\end{tcolorbox}
-
-\vspace{0.5cm}
-
-\mybox{计算圆面积}
-
-\begin{lstlisting}[language=C]
-#include <stdio.h>
-
-int main()
-{
-	double r;       // 半径
-	double area;
-	const double PI = 3.14159;
-
-	printf("输入半径：");
-	scanf("%lf", &r);
-
-	area = PI * r * r;
-	printf("面积 = %f\n", area);
-	return 0;
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-输入半径：5
-面积 = 78.539750
-	\end{verbatim}
-\end{tcolorbox}
-
-\vspace{0.5cm}
-
-\mybox{逆序三位数}
-
-\begin{lstlisting}[language=C]
-#include <stdio.h>
-
-int main()
-{
-	int num;
-	int a, b, c;
-
-	printf("输入一个正三位数：");
-	scanf("%d", &num);
-
-	a = num / 100;
-	b = num / 10 % 10;
-	c = num % 10;
-
-	printf("逆序：%d\n", c*100 + b*10 + a);
-	return 0;
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-输入一个正三位数：520
-逆序：25
-	\end{verbatim}
-\end{tcolorbox}
 
 \newpage
 
-\section{类型转换}
+\section{switch}
 
-\subsection{类型转换}
+\subsection{switch}
 
-类型转换是把变量从一种类型转换为另一种数据类型。类型转换可以是隐式的，由编译器自动执行，也可以是显式的，通过使用强制类型转换运算符来指定。在有需要类型转换时都用上强制类型转换运算符是一种良好的编程习惯。\\
+switch结构用于根据一个整数值，选择对应的case执行。需要注意的是，当对应的case中的代码被执行完后，并不会像if语句一样跳出switch结构，而是会继续向后执行，直到遇到break。\\
 
-\mybox{隐式类型转换}
+\mybox{计算器}
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
 
-int main()
-{
-	double a = 2.717;
-	int b = a;
-	printf("b = %d\n", b);
+int main() {
+	int num1, num2;
+	char operator;
+
+	printf("Enter an expression: ");
+	scanf("%d %c %d", &num1, &operator, & num2);
+
+	switch (operator)
+	{
+	case '+':
+		printf("%d + %d = %d\n", num1, num2, num1 + num2);
+		break;
+	case '-':
+		printf("%d - %d = %d\n", num1, num2, num1 - num2);
+		break;
+	case '*':
+		printf("%d * %d = %d\n", num1, num2, num1 * num2);
+		break;
+	case '/':
+		printf("%d / %d = %d\n", num1, num2, num1 / num2);
+		break;
+	default:
+		printf("Error! Operator is not supported\n");
+		break;
+	}
+
 	return 0;
 }
 \end{lstlisting}
@@ -400,31 +238,8 @@ int main()
 \begin{tcolorbox}
 	\mybox{运行结果}
 	\begin{verbatim}
-b = 2
-	\end{verbatim}
-\end{tcolorbox}
-
-\vspace{0.5cm}
-
-\mybox{显式类型转换}
-
-\begin{lstlisting}[language=C]
-#include <stdio.h>
-
-int main()
-{
-	int sum = 821;
-	int num = 10;
-	double average = (double)sum / num;
-	printf("average = %.2f\n", average);
-	return 0;
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-82.10
+Enter an expression: 5 * 8
+5 * 8 = 40
 	\end{verbatim}
 \end{tcolorbox}
 
