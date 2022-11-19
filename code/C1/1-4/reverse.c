@@ -12,6 +12,6 @@ int main()
     b = num / 10 % 10;
     c = num % 10;
 
-    printf("reversed: %d\n", c*100 + b*10 + a);
+    printf("Reversed: %d\n", c*100 + b*10 + a);
     return 0;
 }

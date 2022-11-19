@@ -7,6 +7,6 @@ int main()
     double area;
 
     area = length * width;
-    printf("area = %d * %d = %.2f\n", length, width, area);
+    printf("Area = %d * %d = %.2f\n", length, width, area);
     return 0;
 }

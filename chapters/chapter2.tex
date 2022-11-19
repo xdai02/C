@@ -102,9 +102,9 @@
 
 \subsection{if}
 
-if语句用于判断一个条件是否成立，如果成立则执行if语句块中的语句，否则不执行。\\
+if语句用于判断一个条件是否成立，如果成立则进入语句块，否则不执行。\\
 
-\vspace{-1cm}
+\mybox{年龄}
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
@@ -114,83 +114,109 @@ int main()
 	int age;
 	printf("Enter your age: ");
 	scanf("%d", &age);
-
 	if(age > 0 && age < 18)
 	{
-		printf("minor\n");
+		printf("Minor\n");
 	}
-
 	return 0;
 }
 \end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+Enter your age: 17
+Minor
+\end{verbatim}
+\end{tcolorbox}
 
 \vspace{0.5cm}
 
 \subsection{if-else}
 
-if-else的结构与if类似，只是在if语句块中的条件不成立时，执行else语句块中的语句。
+if-else的结构与if类似，只是在if语句块中的条件不成立时，执行else语句块中的语句。\\
+
+\mybox{闰年}
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
 
 int main()
 {
-	int age;
-	printf("Enter your age: ");
-	scanf("%d", &age);
+	int year;
+	printf("Enter a year: ");
+	scanf("%d", &year);
 
-	if(age > 0 && age < 18)
+	/*
+	 * A year is a leap year if it is
+	 * 1. exactly divisible by 4, and not divisible by 100;
+	 * 2. or is exactly divisible by 400
+	 */
+	if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
 	{
-		printf("minor\n");
+		printf("Leap year\n");
 	}
 	else
 	{
-		printf("adult\n");
+		printf("Common year\n");
 	}
 
 	return 0;
 }
 \end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+Enter a year: 2020
+Leap year
+\end{verbatim}
+\end{tcolorbox}
 
 \vspace{0.5cm}
 
 \subsection{if-else if-else}
 
-当需要对更多的条件进行判断时，可以使用if-else if-else语句。
+当需要对更多的条件进行判断时，可以使用if-else if-else语句。\\
+
+\mybox{字符}
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
 
 int main()
 {
-	int age;
-	printf("Enter your age: ");
-	scanf("%d", &age);
+	printf("Enter a character: ");
+	char c = getchar();
 
-	if(age > 0 && age < 18)
+	if(c >= 'a' && c <= 'z')
 	{
-		printf("minor\n");
+		printf("Lowercase\n");
 	}
-	else if(age >= 18 && age <= 30)
+	else if(c >= 'A' && c <= 'Z')
 	{
-		printf("yound adult\n");
+		printf("Uppercase\n");
 	}
-	else if(age >= 31 && age <= 60)
+	else if(c >= '0' && c <= '9')
 	{
-		printf("middle-aged\n");
-	}
-	else if(age >= 61 && age <= 120)
-	{
-		printf("senior\n");
+		printf("Digit\n");
 	}
 	else
 	{
-		printf("invalid age\n");
+		printf("Special character\n");
 	}
 	
 	return 0;
 }
 \end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+Enter a character: T
+Uppercase
+\end{verbatim}
+\end{tcolorbox}
 
 \newpage
 
@@ -240,7 +266,7 @@ int main() {
 	\begin{verbatim}
 Enter an expression: 5 * 8
 5 * 8 = 40
-	\end{verbatim}
+\end{verbatim}
 \end{tcolorbox}
 
 \newpage

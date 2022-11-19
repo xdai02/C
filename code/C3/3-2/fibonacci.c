@@ -3,9 +3,7 @@
 int main()
 {
     int n;
-    int num1, num2, val;
-
-    printf("输入斐波那契数列长度：");
+    printf("Enter the number of terms: ");
     scanf("%d", &n);
 
     if(n == 1)
@@ -18,9 +16,11 @@ int main()
     }
     else
     {
+        int num1, num2, val;
         num1 = 1;
         num2 = 1;
         printf("1, 1");
+
         for(int i = 3; i <= n; i++)
         {
             val = num1 + num2;
@@ -30,5 +30,6 @@ int main()
         }
         printf("\n");
     }
+    
     return 0;
 }

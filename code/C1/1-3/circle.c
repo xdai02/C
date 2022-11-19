@@ -7,10 +7,10 @@ int main()
     double r;
     double area;
 
-    printf("radius: ");
+    printf("Radius: ");
     scanf("%lf", &r);
 
     area = PI * pow(r, 2);
-    printf("area = %.2f\n", area);
+    printf("Area = %.2f\n", area);
     return 0;
 }

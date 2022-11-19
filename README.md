@@ -10,11 +10,9 @@
     - 2.2 if
     - 2.3 switch
 - 第3章：循环
-    - 3.1 自增/自减运算符
-    - 3.2 while
-    - 3.3 do-while
-    - 3.4 for
-    - 3.5 break or continue?
+    - 3.1 while
+    - 3.2 for
+    - 3.3 break or continue?
 - 第4章：数组
     - 4.1 一维数组
     - 4.2 二维数组

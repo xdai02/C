@@ -4,64 +4,63 @@
 
 \subsection{while}
 
-在while循环中，当条件满足时重复循环体内的语句。如果条件永远为真，循环会永无止境的进行下去（死循环），因此循环体内要有改变条件的机会。\\
+while循环会对条件进行判断，如果条件成立，就会执行循环体，然后再次判断条件，直到条件不成立。\\
 
-控制循环次数的方法就是设置循环变量：初值、判断、更新。\\
-
-while循环的特点是先判断、再执行，所以循环体有可能会进入一次或多次，也有可能一次也不会进入。
-
-\vspace{-0.5cm}
+while循环的次数由循环变量的变化决定，因此while循环一般都包括对循环变量的初值、判断和更新。
 
 \begin{lstlisting}[language=C]
-while(条件)
+int i = 1;          // initial value
+while(i <= 5)       // condition
 {
-    // code
+    printf("In loop: i = %d\n", i);
+    i++;            // update
 }
+printf("After loop: i = %d\n", i);
 \end{lstlisting}
 
-\vspace{0.5cm}
+while循环的特点是先判断、再执行，因此循环体有可能会执行一次或多次，也有可能一次也不会执行。\\
 
-\mybox{计算5个人的平均身高}
+\mybox{平均身高}
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
+#define NUM_PEOPLE 5
 
 int main()
 {
     double height;
     double total = 0;
-    double average;
-    int i = 1;
 
-    while(i <= 5)
+    int i = 1;
+    while (i <= NUM_PEOPLE)
     {
-        printf("输入第%d个人的身高：", i);
+        printf("Enter person %d's height: ", i);
         scanf("%lf", &height);
         total += height;
         i++;
     }
 
-    average = total / 5;
-    printf("平均身高：%.2f\n", average);  
+    double average = total / NUM_PEOPLE;
+    printf("Average height: %.2f\n", average);
     return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-输入第1个人的身高：160.8
-输入第2个人的身高：175.2
-输入第3个人的身高：171.2
-输入第4个人的身高：181.3
-输入第5个人的身高：164
-平均身高：170.5
+    \mybox{运行结果}
+    \begin{verbatim}
+Enter person 1's height: 160.8
+Enter person 2's height: 175.2
+Enter person 3's height: 171.2
+Enter person 4's height: 181.3
+Enter person 5's height: 164
+Average height: 170.50
 \end{verbatim}
 \end{tcolorbox}
 
 \vspace{0.5cm}
 
-\mybox{计算元音、辅音个数}
+\mybox{统计元音、辅音数量}
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
@@ -72,52 +71,53 @@ int main()
     int vowel = 0;
     int consonant = 0;
 
-    printf("输入一句英语句子：");
+    printf("Enter an English sentence: ");
 
-    while((c = getchar()) != '\n')
+    while ((c = getchar()) != '\n')
     {
-        if(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' 
-        || c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U')
+        if (c == 'a' || c == 'A' ||
+            c == 'e' || c == 'E' || 
+            c == 'i' || c == 'I' || 
+            c == 'o' || c == 'O' || 
+            c == 'u' || c == 'U')
         {
             vowel++;
         }
-        else if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+        else if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
         {
             consonant++;
         }
     }
 
-    printf("元音 = %d\n", vowel);
-    printf("辅音 = %d\n", consonant);
+    printf("Vowel = %d\n", vowel);
+    printf("Consonant = %d\n", consonant);
     return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-输入一句英语句子：Hello World
-元音 = 3
-辅音 = 7
+    \mybox{运行结果}
+    \begin{verbatim}
+Enter an English sentence: Hello World!
+Vowel = 3
+Consonant = 7
 \end{verbatim}
 \end{tcolorbox}
 
-\newpage
-
-\section{do-while}
+\vspace{0.5cm}
 
 \subsection{do-while}
 
-do-while循环在进入循环的时候不做检查，而是在执行完一轮循环体的代码之后，再来检查循环的条件是否满足，如果满足则继续下一轮循环，不满足则结束循环，即至少执行一次循环。\\
+do-while循环是先执行一轮循环体内的代码后，再检查循环的条件是否成立。如果成立，则继续下一轮循环；否则循环结束。\\
 
-do-while循环的主要特点是先执行、再判断。
+do-while循环是先执行、再判断，因此它至少会执行一轮循环。do-while一般应用在一些可能会需要重复，但必定会发生一次的情景下。例如登录账户，用户输入账户和密码后，检查是否正确，如果正确，那么就成功登录；否则继续循环让用户重新输入。\\
 
-\vspace{-0.5cm}
+需要注意，do-while循环的最后有一个分号。
 
 \begin{lstlisting}[language=C]
 do {
     // code
-} while(条件);
+} while(condition);
 \end{lstlisting}
 
 \vspace{0.5cm}
@@ -127,49 +127,32 @@ do {
 \begin{lstlisting}[language=C]
 #include <stdio.h>
 
-int main() {
+int main()
+{
     int num;
     int n = 0;
 
-    printf("输入整数：");
+    printf("Enter an integer: ");
     scanf("%d", &num);
 
-    do {
+    do
+    {
         num /= 10;
         n++;
     } while(num != 0);
 
-    printf("位数：%d\n", n);
+    printf("Digits: %d\n", n);
     return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-输入整数：123
-位数：3
+    \mybox{运行结果}
+    \begin{verbatim}
+Enter an integer: 123
+Digits: 3
 \end{verbatim}
 \end{tcolorbox}
-
-\vspace{0.5cm}
-
-\subsection{while与do-while区别}
-
-while循环与do-while循环有以下区别：
-
-\begin{enumerate}
-	\item 执行顺序不同。
-
-	\item 初始情况不满足循环条件时，while循环一次都不会执行，do-while循环不管任何情况都至少执行一次。
-
-	\item do-while循环的while语句后有【;】。
-\end{enumerate}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.15]{img/C4/4-3/1.png}
-\end{figure}
 
 \vspace{0.5cm}
 
@@ -177,49 +160,56 @@ while循环与do-while循环有以下区别：
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
-#include <stdlib.h>     // 标准库
+#include <stdlib.h>
 #include <time.h>
 
-int main() {
-    srand(time(NULL));          // 时间种子
-    int answer = rand() % 100 + 1;  // 产生1-100之前的随机数
+int main()
+{
+    srand(time(NULL));          // set random seed
+
+    // generate random number between 1 and 100
+    int answer = rand() % 100 + 1;
     int num = 0;
     int cnt = 0;
 
-    do {
-        printf("猜一个1-100之间的数字：");
+    do
+    {
+        printf("Guess a number: ");
         scanf("%d", &num);
         cnt++;
         
-        if(num > answer) {
-            printf("猜大了\n");
-        } else if(num < answer) {
-            printf("猜小了\n");
+        if(num > answer)
+        {
+            printf("Too large\n");
+        }
+        else if(num < answer)
+        {
+            printf("Too small\n");
         }
     } while(num != answer);
     
-    printf("猜对了！你一共用了%d次猜对！\n", cnt);
+    printf("Correct! You guessed %d times.\n", cnt);
     return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-猜一个1-100之间的数字：50
-猜大了！
-猜一个1-100之间的数字：25
-猜小了！
-猜一个1-100之间的数字：37
-猜小了！
-猜一个1-100之间的数字：43
-猜小了！
-猜一个1-100之间的数字：46
-猜小了！
-猜一个1-100之间的数字：48
-猜小了！
-猜一个1-100之间的数字：49
-猜对了！你一共用了7次猜对！
+    \mybox{运行结果}
+    \begin{verbatim}
+Guess a number: 50
+Too large
+Guess a number: 25
+Too small
+Guess a number: 37
+Too small
+Guess a number: 43
+Too small
+Guess a number: 46
+Too small
+Guess a number: 48
+Too small
+Guess a number: 49
+Correct! You guessed 7 times.
 \end{verbatim}
 \end{tcolorbox}
 
@@ -229,26 +219,20 @@ int main() {
 
 \subsection{for}
 
-for循环有三个表达式，中间用【;】分隔，【;】不可省略。
+while循环将循环变量的初值、条件和更新写在了三个地方，但是这样不容易明显地看出循环变量的变化。\\
 
-\vspace{-0.5cm}
+for循环将循环变量的初值、条件和更新写在了一行内，中间用分号隔开。对于指定次数的循环一般更多地会采用for循环，而对于不确定次数的一般会采用while循环。
 
 \begin{lstlisting}[language=C]
-for(表达式1; 表达式2; 表达式3)
+for(int i = 0; i < 5; i++)
 {
-    //code
+    printf("i = %d\n", i);
 }
 \end{lstlisting}
 
-\begin{itemize}
-	\item 表达式1通常是为循环变量赋初值，可省略。
-	\item 表达式2是循环条件，判断是否继续执行循环，可省略。
-	\item 表达式3为更新循环变量的值，可省略。
-\end{itemize}
-
 \vspace{0.5cm}
 
-\mybox{计算1-100的累加和}
+\mybox{累加}
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
@@ -260,46 +244,15 @@ int main()
     {
         sum += i;
     }
-    printf("%d\n", sum);
+    printf("Sum = %d\n", sum);
     return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-5050
-\end{verbatim}
-\end{tcolorbox}
-
-\vspace{0.5cm}
-
-\mybox{计算$ 1 + {1 \over 2} + {1 \over 3} + ... + {1 \over n} $}
-
-\begin{lstlisting}[language=C]
-#include <stdio.h>
-
-int main()
-{
-    int n;
-    double sum = 0.0;
-    printf("输入n：");
-    scanf("%d", &n);
-
-    for(int i = 1; i <= n; i++)
-    {
-        sum += 1.0 / i;
-    }
-    printf("%f\n", sum);
-    return 0;
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-输入n：10
-2.928968
+    \mybox{运行结果}
+    \begin{verbatim}
+Sum = 5050
 \end{verbatim}
 \end{tcolorbox}
 
@@ -308,8 +261,8 @@ int main()
 \mybox{斐波那契数列}
 
 \begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.3]{img/C4/4-4/1.png}
+    \centering
+    \includegraphics[scale=0.5]{img/C4/4-4/1.png}
 \end{figure}
 
 \begin{lstlisting}[language=C]
@@ -318,9 +271,7 @@ int main()
 int main()
 {
     int n;
-    int num1, num2, val;
-
-    printf("输入斐波那契数列长度：");
+    printf("Enter the number of terms: ");
     scanf("%d", &n);
 
     if(n == 1)
@@ -333,9 +284,11 @@ int main()
     }
     else
     {
+        int num1, num2, val;
         num1 = 1;
         num2 = 1;
         printf("1, 1");
+
         for(int i = 3; i <= n; i++)
         {
             val = num1 + num2;
@@ -345,14 +298,15 @@ int main()
         }
         printf("\n");
     }
+    
     return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-输入斐波那契数列长度：10
+    \mybox{运行结果}
+    \begin{verbatim}
+Enter the number of terms: 10
 1, 1, 2, 3, 5, 8, 13, 21, 34, 55
 \end{verbatim}
 \end{tcolorbox}
@@ -361,36 +315,59 @@ int main()
 
 \subsection{嵌套循环}
 
-循环也可以进行嵌套使用。\\
+循环也可以嵌套使用，外层循环每执行一次，内层循环就会执行多次。
+
+\begin{lstlisting}[language=C]
+for(int i = 0; i < 2; i++)
+{
+    for(int j = 0; j < 3; j++)
+    {
+        printf("i = %d, j = %d\n", i, j);
+    }
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+    \mybox{运行结果}
+    \begin{verbatim}
+i = 0, j = 0
+i = 0, j = 1
+i = 0, j = 2
+i = 1, j = 0
+i = 1, j = 1
+i = 1, j = 2
+\end{verbatim}
+\end{tcolorbox}
+
+\vspace{0.5cm}
 
 \mybox{九九乘法表}\\
 
 \begin{table}[H]
-	\centering
-	\setlength{\tabcolsep}{1.5mm}{
-		\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
-			\hline
-			1*1=1 & 1*2=2  & 1*3=3  & 1*4=4  & 1*5=5  & 1*6=6  & 1*7=7  & 1*8=8  & 1*9=9  \\
-			\hline
-			2*1=2 & 2*2=4  & 2*3=6  & 2*4=8  & 2*5=10 & 2*6=12 & 2*7=14 & 2*8=16 & 2*9=18 \\
-			\hline
-			3*1=3 & 3*2=6  & 3*3=9  & 3*4=12 & 3*5=15 & 3*6=18 & 3*7=21 & 3*8=24 & 3*9=27 \\
-			\hline
-			4*1=4 & 4*2=8  & 4*3=12 & 4*4=16 & 4*5=20 & 4*6=24 & 4*7=28 & 4*8=32 & 4*9=36 \\
-			\hline
-			5*1=5 & 5*2=10 & 5*3=15 & 5*4=20 & 5*5=25 & 5*6=30 & 5*7=35 & 5*8=40 & 5*9=45 \\
-			\hline
-			6*1=6 & 6*2=12 & 6*3=18 & 6*4=24 & 6*5=30 & 6*6=36 & 6*7=42 & 6*8=48 & 6*9=54 \\
-			\hline
-			7*1=7 & 7*2=14 & 7*3=21 & 7*4=28 & 7*5=35 & 7*6=42 & 7*7=49 & 7*8=56 & 7*9=63 \\
-			\hline
-			8*1=8 & 8*2=16 & 8*3=24 & 8*4=32 & 8*5=40 & 8*6=48 & 8*7=56 & 8*8=64 & 8*9=72 \\
-			\hline
-			9*1=9 & 9*2=18 & 9*3=27 & 9*4=36 & 9*5=45 & 9*6=54 & 9*7=63 & 9*8=72 & 9*9=81 \\
-			\hline
-		\end{tabular}
-	}
-	\caption{九九乘法表}
+    \centering
+    \setlength{\tabcolsep}{1.5mm}{
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+            \hline
+            1*1=1 & 1*2=2  & 1*3=3  & 1*4=4  & 1*5=5  & 1*6=6  & 1*7=7  & 1*8=8  & 1*9=9  \\
+            \hline
+            2*1=2 & 2*2=4  & 2*3=6  & 2*4=8  & 2*5=10 & 2*6=12 & 2*7=14 & 2*8=16 & 2*9=18 \\
+            \hline
+            3*1=3 & 3*2=6  & 3*3=9  & 3*4=12 & 3*5=15 & 3*6=18 & 3*7=21 & 3*8=24 & 3*9=27 \\
+            \hline
+            4*1=4 & 4*2=8  & 4*3=12 & 4*4=16 & 4*5=20 & 4*6=24 & 4*7=28 & 4*8=32 & 4*9=36 \\
+            \hline
+            5*1=5 & 5*2=10 & 5*3=15 & 5*4=20 & 5*5=25 & 5*6=30 & 5*7=35 & 5*8=40 & 5*9=45 \\
+            \hline
+            6*1=6 & 6*2=12 & 6*3=18 & 6*4=24 & 6*5=30 & 6*6=36 & 6*7=42 & 6*8=48 & 6*9=54 \\
+            \hline
+            7*1=7 & 7*2=14 & 7*3=21 & 7*4=28 & 7*5=35 & 7*6=42 & 7*7=49 & 7*8=56 & 7*9=63 \\
+            \hline
+            8*1=8 & 8*2=16 & 8*3=24 & 8*4=32 & 8*5=40 & 8*6=48 & 8*7=56 & 8*8=64 & 8*9=72 \\
+            \hline
+            9*1=9 & 9*2=18 & 9*3=27 & 9*4=36 & 9*5=45 & 9*6=54 & 9*7=63 & 9*8=72 & 9*9=81 \\
+            \hline
+        \end{tabular}
+    }
 \end{table}
 
 \begin{lstlisting}[language=C]
@@ -443,65 +420,96 @@ int main()
 
 \section{break or continue?}
 
-\subsection{循环控制}
+\subsection{break}
 
-循环控制语句的作用是控制当前的循环结构是否继续向下执行，如果不进行控制，那么会根据既定的结构重复执行。如果有一些特殊的情况导致循环的执行中断，就称为循环的控制语句。循环控制语句的关键字有break和continue。\\
+break可用于switch和循环，用于跳出当前的结构。在一些情况下，在循环的中途已经完成了某个目标，没有必要再进行剩余的循环，这时就可以使用break跳出循环。\\
 
-break的作用是跳出当前循环，执行当前循环之后的语句。break只能跳出一层循环，如果是嵌套循环，那么需要按照嵌套的层次，逐步使用break来跳出。break语句只能在循环体内和switch语句内使用。\\
+例如在判断一个数$ n $是否为素数时，利用循环逐个判断$ 2 \sim n - 1 $之间的数是否能整除$ n $。只要发现其中有一个数能整除$ n $，就证明$ n $不是素数，可以跳出循环，不必再进行剩余的循环。\\
 
-continue的作用是跳过本轮循环，开始下一轮循环的条件判断。continue终止当前轮的循环过程，但它并不跳出循环。\\
-
-\mybox{break}
+\mybox{素数}
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
+#include <stdbool.h>
+#include <math.h>
 
 int main()
 {
-    for(int i = 1; i <= 10; i++)
+    int n;
+    printf("Enter an integer: ");
+    scanf("%d", &n);
+
+    bool is_prime = true;
+    for(int i = 2; i <= sqrt(n); i++)
     {
-        if(i == 5)
+        if(n % i == 0)
         {
+            is_prime = false;
             break;
         }
-        printf("%d ", i);
     }
+
+    if(is_prime)
+    {
+        printf("%d is a prime number\n", n);
+    }
+    else
+    {
+        printf("%d is not a prime number\n", n);
+    }
+
     return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-1 2 3 4 
+    \mybox{运行结果}
+    \begin{verbatim}
+Enter an integer: 17
+17 is a prime number
 \end{verbatim}
 \end{tcolorbox}
 
 \vspace{0.5cm}
 
-\mybox{continue}
+\subsection{continue}
+
+continue与break使用方法类似，但是它并不是跳出循环，而是跳过本轮循环，直接开始下一轮循环。\\
+
+\mybox{正数平方和}
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
 
 int main()
 {
-    for(int i = 1; i <= 10; i++)
+    int n = 10;
+    printf("Enter 10 integers: ");
+
+    int sum_square = 0;
+    for(int i = 0; i < n; i++)
     {
-        if(i == 5)
+        int num;
+        scanf("%d", &num);
+        if(num <= 0)
         {
             continue;
         }
-        printf("%d ", i);
+
+        sum_square += num * num;
     }
+
+    printf("Sum of squares of positive integers: %d\n", sum_square);
+
     return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-1 2 3 4 6 7 8 9 10 
+    \mybox{运行结果}
+    \begin{verbatim}
+    Enter 10 integers: 5 7 -2 0 4 -4 -9 3 9 5
+    Sum of squares of positive integers: 205
 \end{verbatim}
 \end{tcolorbox}
 
