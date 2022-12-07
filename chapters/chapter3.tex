@@ -180,11 +180,11 @@ int main()
         
         if(num > answer)
         {
-            printf("Too large\n");
+            printf("Too high\n");
         }
         else if(num < answer)
         {
-            printf("Too small\n");
+            printf("Too low\n");
         }
     } while(num != answer);
     
@@ -197,18 +197,18 @@ int main()
     \mybox{运行结果}
     \begin{verbatim}
 Guess a number: 50
-Too large
+Too high
 Guess a number: 25
-Too small
+Too low
 Guess a number: 37
-Too small
+Too low
 Guess a number: 43
-Too small
-Guess a number: 46
-Too small
-Guess a number: 48
-Too small
-Guess a number: 49
+Too high
+Guess a number: 40
+Too high
+Guess a number: 38
+Too low
+Guess a number: 39
 Correct! You guessed 7 times.
 \end{verbatim}
 \end{tcolorbox}
@@ -389,7 +389,7 @@ int main()
 
 \vspace{0.5cm}
 
-\mybox{输出图案}
+\mybox{打印图案}
 
 \begin{lstlisting}
 *
@@ -422,9 +422,9 @@ int main()
 
 \subsection{break}
 
-break可用于switch和循环，用于跳出当前的结构。在一些情况下，在循环的中途已经完成了某个目标，没有必要再进行剩余的循环，这时就可以使用break跳出循环。\\
+break可用于跳出当前的switch或循环结构。在一些情况下，在循环的中途已经完成了某个目标，没有必要再进行剩余的循环，这时就可以使用break跳出循环。\\
 
-例如在判断一个数$ n $是否为素数时，利用循环逐个判断$ 2 \sim n - 1 $之间的数是否能整除$ n $。只要发现其中有一个数能整除$ n $，就证明$ n $不是素数，可以跳出循环，不必再进行剩余的循环。\\
+例如在判断一个数$ n $是否为素数时，利用循环逐个判断$ 2 \sim n - 1 $之间的数是否能整除$ n $。只要发现其中有一个数能整除$ n $，就证明$ n $不是素数，可以跳出循环，不必再进行剩余的检查。\\
 
 \mybox{素数}
 
@@ -508,8 +508,8 @@ int main()
 \begin{tcolorbox}
     \mybox{运行结果}
     \begin{verbatim}
-    Enter 10 integers: 5 7 -2 0 4 -4 -9 3 9 5
-    Sum of squares of positive integers: 205
+Enter 10 integers: 5 7 -2 0 4 -4 -9 3 9 5
+Sum of squares of positive integers: 205
 \end{verbatim}
 \end{tcolorbox}
 

@@ -19,11 +19,11 @@ int main()
         
         if(num > answer)
         {
-            printf("Too large\n");
+            printf("Too high\n");
         }
         else if(num < answer)
         {
-            printf("Too small\n");
+            printf("Too low\n");
         }
     } while(num != answer);
     
