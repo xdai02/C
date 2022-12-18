@@ -13,7 +13,7 @@ int main() {
     };
     int C[3][2];
 
-    printf("矩阵加法\n");
+    printf("Matrix Addition\n");
     for(int i = 0; i < 3; i++) {
         for(int j = 0; j < 2; j++) {
             C[i][j] = A[i][j] + B[i][j];
@@ -21,8 +21,8 @@ int main() {
         }
         printf("\n");
     }
-
-    printf("矩阵减法\n");
+    
+    printf("Matrix Subtraction\n");
     for(int i = 0; i < 3; i++) {
         for(int j = 0; j < 2; j++) {
             C[i][j] = A[i][j] - B[i][j];
