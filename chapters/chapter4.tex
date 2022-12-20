@@ -53,6 +53,7 @@ printf("%d\n", arr[7]);		// 7
 
 \begin{lstlisting}[language=C]
 int arr[10];
+
 for(int i = 0; i < 10; i++) {
 	arr[i] = i + 1;
 }
@@ -190,6 +191,7 @@ int arr[3][4] = {
 
 \begin{lstlisting}[language=C]
 int arr[3][4];
+
 for(int i = 0; i < 3; i++) {
 	for(int j = 0; j < 4; j++) {
 		arr[i][j] = 0;
@@ -373,7 +375,7 @@ Matrix Subtraction
 	\hline
 	27             & ESC           & 59             & ;             & 91             & [                      & 123            & \{                     \\
 			\hline
-	28             & FS            & 60             & <             & 92             & /                      & 124            & |                      \\
+	28             & FS            & 60             & <             & 92             & $ \backslash $         & 124            & |                      \\
 			\hline
 	29             & GS            & 61             & =             & 93             & ]                      & 125            & \}                     \\
 	\hline
@@ -403,6 +405,7 @@ int main() {
 \subsection{字符串（String）}
 
 字符数组通常被称为字符串，字符串有两种初始化的方式。一种与普通数组的初始化类似，逐个写出每一个字符，最后需要手动添加$ \backslash $0字符，表示字符串的结束符；另一种是直接使用双引号，这种写法无需手动添加$ \backslash $0。
+
 \vspace{-0.5cm}
 
 \begin{lstlisting}[language=C]
@@ -499,7 +502,7 @@ Character to search: t
 
 int main() {
 	char s[] = "hello world";
-	printf("%d\n", strlen(s));
+	printf("Length: %d\n", strlen(s));
 	return 0;
 }
 \end{lstlisting}
@@ -507,7 +510,7 @@ int main() {
 \begin{tcolorbox}
 	\mybox{运行结果}
 	\begin{verbatim}
-11
+Length: 11
 	\end{verbatim}
 \end{tcolorbox}
 

@@ -3,6 +3,6 @@
 
 int main() {
     char s[] = "hello world";
-    printf("%d\n", strlen(s));
+    printf("Length: %d\n", strlen(s));
     return 0;
 }
