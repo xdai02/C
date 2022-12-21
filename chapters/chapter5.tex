@@ -4,7 +4,9 @@
 
 \subsection{函数（Function）}
 
-函数执行一个特定的任务，C提供了大量内置函数，例如printf()用来输出字符串、strlen()用来计算字符串长度等。
+数学中的函数$ y = f(x) $，通过输入$ x $的值，经过计算可以得到$ y $的值。计算机中的函数也是如此，将输入传给函数，经过处理后，会得到输出。\\
+
+函数是一段可重复使用的代码，做了一个特定的任务。例如printf()和strlen()就是函数，其中printf()的功能是输出字符串，strlen()的功能是计算字符串的长度。\\
 
 \begin{figure}[H]
 	\centering
@@ -20,7 +22,109 @@
 	\caption{函数}
 \end{figure}
 
-当调用函数时，程序控制权会转移给被调用的函数，当函数执行结束后，函数会把程序序控制权交还给其调用者。
+除了这些内置的函数以外，开发者还可以自定义函数，将程序中会被多次使用的代码或做了一件特定的任务的代码写成一个函数，这样就能避免重复写相同的代码，提高开发效率，也利于维护。\\
+
+在编写函数时需要：
+
+\begin{enumerate}
+	\item 确定函数的功能
+	      \begin{itemize}
+		      \item 函数名
+		      \item 确保一个函数只做一件事
+	      \end{itemize}
+
+	\item 确定函数的输入（参数）
+	      \begin{itemize}
+		      \item 是否需要参数
+		      \item 参数个数
+		      \item 参数类型
+	      \end{itemize}
+
+	\item 确定函数的输出（返回值）
+	      \begin{itemize}
+		      \item 是否需要返回值
+		      \item 返回值类型
+	      \end{itemize}
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\mybox{最大值}
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int max(int num1, int num2);  // function prototype
+
+int main() {
+	printf("%d\n", max(4, 12));
+	printf("%d\n", max(54, 33));
+	printf("%d\n", max(-999, -774));
+	return 0;
+}
+
+int max(int num1, int num2) {
+	// if(num1 > num2) {
+	//     return num1;
+	// } else {
+	//     return num2;
+	// }
+
+	return num1 > num2 ? num1 : num2;
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+12
+54
+-774
+	\end{verbatim}
+\end{tcolorbox}
+
+函数也可以没有返回值，因为它执行完函数中的代码，并不需要将结果返回给调用者，此时函数的返回值类型为void。\\
+
+\mybox{棋盘}
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+void print_board(int row, int col) {
+	for (int i = 0; i < row; i++) {
+		for (int j = 0; j < col - 1; j++) {
+			printf("   |");
+		}
+		printf("\n");
+
+		if (i < row - 1) {
+			printf("---+---+---\n");
+		}
+	}
+}
+
+int main() {
+	print_board(3, 3);
+	return 0;
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+	\mybox{运行结果}
+	\begin{verbatim}
+   |   |
+---+---+---
+   |   |
+---+---+---
+   |   |
+	\end{verbatim}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\subsection{函数调用}
+
+当调用函数时，程序会记录下当前的执行位置，并跳转到被调用的函数处执行。当被调用的函数执行结束后，程序会回到之前的位置继续执行。\\
 
 \begin{figure}[H]
 	\centering
@@ -46,117 +150,31 @@
 	\caption{函数调用}
 \end{figure}
 
-函数声明时需要指定函数的名称、返回类型和参数。在函数声明时，参数的名称可以省略，但是参数的类型是必须的。\\
-
-函数的参数列表包括参数的类型、顺序、数量等信息，参数列表可以为空。\\
-
-函数可以返回一个值，函数的返回类型为被返回的值的类型。函数也可以不返回任何值，此时函数的返回类型应定义为void。
-
-\vspace{-0.5cm}
-
-\begin{lstlisting}[language=C]
-return_type function_name(parameter_list);
-\end{lstlisting}
-
-\vspace{-0.5cm}
-
-\begin{lstlisting}[language=C]
-data_type function_name(parameter_list) {
-	// code
-}
-\end{lstlisting}
-
 \vspace{0.5cm}
 
-\subsection{函数设计方法}
-
-为什么不把所有的代码全部写在一起，还需要自定义函数呢？\\
-
-使用函数有以下好处：
-
-\begin{enumerate}
-	\item 避免代码复制，代码复制是程序质量不良的表现
-	\item 便于代码维护
-	\item 避免重复造轮子，提高开发效率
-\end{enumerate}
-
-在设计函数的时候需要考虑以下的几点要素：
-
-\begin{enumerate}
-	\item 确定函数的功能
-
-	\item 确定函数的参数
-	      \begin{itemize}
-		      \item 是否需要参数
-		      \item 参数个数
-		      \item 参数类型
-	      \end{itemize}
-
-	\item 确定函数的返回值
-	      \begin{itemize}
-		      \item 是否需要返回值
-		      \item 返回值类型
-	      \end{itemize}
-\end{enumerate}
-
-\vspace{0.5cm}
-
-\mybox{函数实现返回最大值}
+\mybox{两点间距离}
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
+#include <math.h>
 
-// 函数原型
-int max(int num1, int num2);
-
-int main() {
-	printf("%d\n", max(4, 12));
-	printf("%d\n", max(54, 33));
-	printf("%d\n", max(0, -12));
-	printf("%d\n", max(-999, -774));
-	return 0;
+double square(double x) {
+	return x * x;
 }
 
-// 函数实现
-int max(int num1, int num2) {
-	// if(num1 > num2) {
-	//     return num1;
-	// } else {
-	//     return num2;
-	// }
-	
-	return num1 > num2 ? num1 : num2;
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-12
-54
-0
--774
-	\end{verbatim}
-\end{tcolorbox}
-
-\vspace{0.5cm}
-
-\mybox{函数实现累加和}
-
-\begin{lstlisting}[language=C]
-#include <stdio.h>
-
-int sum(int start, int end) {
-	int total = 0;
-	for(int i = start; i <= end; i++) {
-		total += i;
-	}
-	return total;
+double distance(double x1, double y1, double x2, double y2) {
+	return sqrt(square(x1 - x2) + square(y1 - y2));
 }
 
 int main() {
-	printf("1-100的累加和 = %d\n", sum(1, 100));
-	printf("1024-2048的累加和 = %d\n", sum(1024, 2048));
+	double x1, y1, x2, y2;
+	printf("Enter (x1, y1): ");
+	scanf("%lf%lf", &x1, &y1);
+	printf("Enter (x2, y2): ");
+	scanf("%lf%lf", &x2, &y2);
+
+	printf("Distance: %.2f\n", distance(x1, y1, x2, y2));
+
 	return 0;
 }
 \end{lstlisting}
@@ -164,191 +182,54 @@ int main() {
 \begin{tcolorbox}
 	\mybox{运行结果}
 	\begin{verbatim}
-1-100的累加和 = 5050
-1024-2048的累加和 = 1574400
-	\end{verbatim}
-\end{tcolorbox}
-
-\vspace{0.5cm}
-
-\mybox{函数实现输出i行j列由自定义字符组成的图案}
-
-\begin{lstlisting}[language=C]
-#include <stdio.h>
-
-void printChars(int row, int col, char c) {
-	for(int i = 0; i < row; i++) {
-		for(int j = 0; j < col; j++) {
-			printf("%c", c);
-		}
-		printf("\n");
-	}
-}
-
-int main() {
-	printChars(5, 10, '?');
-	return 0;
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-??????????
-??????????
-??????????
-??????????
-??????????
-	\end{verbatim}
-\end{tcolorbox}
-
-\vspace{0.5cm}
-
-\mybox{自定义函数实现strlen()}
-
-\begin{lstlisting}[language=C]
-#include <stdio.h>
-
-/**
-	* @brief  自定义计算字符串长度函数
-	* @param  str[]: 待计算字符串
-	* @retval 字符串长度
-	*/
-int myStrlen(char str[]) {
-	int i = 0;
-	while(str[i] != '\0') {
-		i++;
-	}
-	return i;
-}
-
-int main() {
-	char s[32] = "hello world";
-	printf("字符串长度 = %d\n", myStrlen(s));
-	return 0;
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-字符串长度 = 11
-	\end{verbatim}
-\end{tcolorbox}
-
-\vspace{0.5cm}
-
-\mybox{自定义函数实现strcpy()}
-
-\begin{lstlisting}[language=C]
-#include <stdio.h>
-
-/**
-	* @brief  自定义字符串复制函数
-	* @param  dst[]: 目标字符串
-	* @param  src[]: 源字符串
-	* @retval None
-	*/
-void myStrcpy(char dst[], char src[]) {
-	int i = 0;
-	while(src[i] != '\0') {
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-}
-
-int main() {
-	char s1[32] = "hello world";
-	char s2[32] = "program";
-
-	myStrcpy(s1, s2);
-	printf("s1 = %s\n", s1);
-	printf("s2 = %s\n", s2);
-	return 0;
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-s1 = program
-s2 = program
-	\end{verbatim}
-\end{tcolorbox}
-
-\vspace{0.5cm}
-
-\mybox{自定义函数实现strcat()}
-
-\begin{lstlisting}[language=C]
-#include <stdio.h>
-
-/**
-	* @brief  自定义字符串拼接函数
-	* @param  dst[]: 目标字符串
-	* @param  src[]: 源字符串
-	* @retval None
-	*/
-void myStrcat(char dst[], char src[]) {
-	int i = 0;
-	int j = 0;
-
-	// 找到目标字符串尾部
-	while(dst[i] != '\0') {
-		i++;
-	}
-
-	while(src[j] != '\0') {
-		dst[i++] = src[j++];
-	}
-	dst[i] = '\0';
-}
-
-int main() {
-	char s1[32] = "hello";
-	char s2[32] = "world";
-
-	myStrcat(s1, s2);
-	printf("s1 = %s\n", s1);
-	printf("s2 = %s\n", s2);
-	return 0;
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-s1 = helloworld
-s2 = world
+Enter (x1, y1): 0 0
+Enter (x2, y2): 3 4
+Distance: 5.00
 	\end{verbatim}
 \end{tcolorbox}
 
 \newpage
 
-\section{变量作用域}
+\section{作用域}
 
 \subsection{局部变量（Local Variable）}
 
-定义在块内的变量就是本地变量，在进入块之前，其中的变量不存在，离开块，变量则释放。在一个块内不能定义同名的变量，并且本地变量不会被默认初始化。\\
+定义在块中的变量称为局部变量，在进入块时变量才会被创建，当离开块时变量就会被销毁。因此，局部变量的生存周期为从声明时开始到所在块结束。\\
 
-本地变量的生存周期从声明时开始到所在块结束消亡，其作用域为所在的块中。\\
+例如有些变量只在程序的某一段代码中使用，而在其它地方不会被使用。这时就可以将这些变量定义在一个块（if、for、函数等）中，这样可以避免变量名冲突的问题。最典型的一个例子就是在for循环中，循环变量i被定义被块中，因为i的作用仅用于控制循环次数，在离开循环后就没有存在的必要了。
 
-在函数中，函数的每次调用就会产生一个独立的空间，在这个空间中的变量，是函数的这次运行所独有的，函数的参数也是本地变量。\\
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=C]
+for(int i = 0; i < 5; i++)
+\end{lstlisting}
+
+块与块之间的变量是互相独立的，即使变量名相同，它们也不是同一个变量。\\
+
+例如在函数调用中，函数的参数也是局部变量，它们的作用域仅限于函数内。\\
+
+例如一个用于交换两个变量的函数swap()，在main()中的变量a和b与swap()中的a和b并不是同一个变量。在调用swap()时，是将main()中的a和b的值复制给swap()中的a和b。swap()交换的是其内部的局部变量，并不会对main()中的a和b产生任何影响。\\
 
 \mybox{局部变量}
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
 
+void swap(int a, int b) {
+	int temp = a;
+	a = b;
+	b = temp;
+	printf("swap(): a = %d, b = %d\n", a, b);
+}
+
 int main() {
 	int a = 1;
-	printf("a = %d\n", a);
-	{
-		int a = 2;
-		printf("a = %d\n", a);
-	}
-	printf("a = %d\n", a);
+	int b = 2;
+
+	printf("Before: a = %d, b = %d\n", a, b);
+	swap(a, b);
+	printf("After: a = %d, b = %d\n", a, b);
+
 	return 0;
 }
 \end{lstlisting}
@@ -356,9 +237,9 @@ int main() {
 \begin{tcolorbox}
 	\mybox{运行结果}
 	\begin{verbatim}
-a = 1
-a = 2
-a = 1
+Before: a = 1, b = 2
+swap(): a = 2, b = 1
+After: a = 1, b = 2
 	\end{verbatim}
 \end{tcolorbox}
 
@@ -366,38 +247,39 @@ a = 1
 
 \subsection{全局变量（Global Variable）}
 
-全局变量可以在程序任何地方创建，可以被本程序所有对象或函数引用。但是全局变量会占用更多的内存（因为其生命周期长），使用全局变量程序运行时速度更快一些（因为内存不需要再分配）。\\
+全局变量拥有比局部变量更长的生命周期，它的生命周期贯穿整个程序。全局变量可以被程序中所有函数访问。\\
 
-全局变量的优先级低于局部变量，当全局变量与局部变量重名的时候，起作用的是局部变量，全局变量会被暂时屏蔽掉。
+全局变量一般用于：
 
-\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}[]
-		\draw (4,4.5) node {全局};
-		\draw (0,0) rectangle (8,4);
+\begin{itemize}
+	\item 定义在整个程序中都会被使用到的常量（例如数组容量）
+	\item 被函数间共享的变量（例如计数器）
+\end{itemize}
 
-		\draw (2.5,3.5) node {局部};
-		\draw (1,1) rectangle (4,3);
-
-		\draw (2.5,2.5) node {变量A};
-		\draw (2,1.5) rectangle (3,2);
-
-		\draw (6,2.5) node {变量B};
-		\draw (5.5,1.5) rectangle (6.5,2);
-	\end{tikzpicture}
-	\caption{全局变量}
-\end{figure}
+\vspace{0.5cm}
 
 \mybox{全局变量}
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
 
-int a = 1;      // 全局变量
+int a, b;
+
+void swap() {
+	int temp = a;
+	a = b;
+	b = temp;
+	printf("swap(): a = %d, b = %d\n", a, b);
+}
 
 int main() {
-	int a = 2;  // 本地变量
-	printf("a = %d\n", a);
+	a = 1;
+	b = 2;
+
+	printf("Before: a = %d, b = %d\n", a, b);
+	swap(a, b);
+	printf("After: a = %d, b = %d\n", a, b);
+
 	return 0;
 }
 \end{lstlisting}
@@ -405,73 +287,47 @@ int main() {
 \begin{tcolorbox}
 	\mybox{运行结果}
 	\begin{verbatim}
-a = 2
+Before: a = 1, b = 2
+swap(): a = 2, b = 1
+After: a = 2, b = 1
 	\end{verbatim}
 \end{tcolorbox}
 
 \newpage
 
-\section{递归} \label{recursive}
+\section{递归} \label{recursion}
 
 \subsection{递归（Recursion）}
 
-要理解递归，先得理解递归（见\ref{recursive}章节）。\\
+要理解递归，得先理解递归（见\ref{recursion}章节）。\\
 
-在函数的内部，直接或者间接的调用自己的过程就叫作递归。对于一些问题，使用递归可以简洁易懂的解决问题，但是递归的缺点是性能低，占用大量系统栈空间。\\
-
-递归算法很多时候可以处理一些特别复杂、难以直接解决的问题。例如：
-
-\begin{itemize}
-	\item 迷宫
-	\item 汉诺塔
-	\item 八皇后
-	\item 排序
-	\item 搜索
-\end{itemize}
-
-在定义递归函数时，一定要确定一个结束条件，否则会造成无限递归的情况，最终会导致栈溢出。
+一个函数调用自己的过程被称为递归。递归可以轻松地解决一些复杂的问题，很多著名的算法都利用了递归的思想。
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.7]{img/Chapter5/5-3/1.png}
 \end{figure}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.6]{img/Chapter5/5-3/2.png}
-\end{figure}
+\vspace{0.5cm}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.6]{img/Chapter5/5-3/3.png}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=1.3]{img/Chapter5/5-3/4.png}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.6]{img/Chapter5/5-3/5.png}
-\end{figure}
-
-\mybox{无限递归}
+\mybox{讲故事}
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
+#include <string.h>
 
-void tellStory() {
-	printf("从前有座山\n");
-	printf("山里有座庙\n");
-	printf("庙里有个老和尚和小和尚\n");
-	printf("老和尚在对小和尚讲故事\n");
-	printf("他讲的故事是：\n");
-	tellStory();
+void tell_story() {
+	char story[1024] = {0};
+	strcat(story, "从前有座山，山里有座庙\n");
+	strcat(story, "庙里有个老和尚\n");
+	strcat(story, "老和尚在对小和尚讲故事：\n");
+	printf("%s", story);
+
+	tell_story();
 }
 
 int main() {
-	tellStory();
+	tell_story();
 	return 0;
 }
 \end{lstlisting}
@@ -479,21 +335,20 @@ int main() {
 \begin{tcolorbox}
 	\mybox{运行结果}
 	\begin{verbatim}
-从前有座山
-山里有座庙
-庙里有个老和尚和小和尚
-老和尚对小和尚在讲故事
-他讲的故事是：
-从前有座山
-山里有座庙
-庙里有个老和尚和小和尚
-老和尚对小和尚在讲故事
-他讲的故事是：
+从前有座山，山里有座庙
+庙里有个老和尚
+老和尚在对小和尚讲故事：
+从前有座山，山里有座庙
+庙里有个老和尚
+老和尚在对小和尚讲故事：
+从前有座山，山里有座庙
+庙里有个老和尚
+老和尚在对小和尚讲故事：
 ...
 	\end{verbatim}
 \end{tcolorbox}
 
-递归函数一般需要定义递归的出口，即结束条件，确保递归能够在适合的地方退出。\\
+一个永远无法结束的递归函数最终会导致栈溢出。因此递归函数需要确定一个结束条件，确保在递归过程中能在合适的地方停止并返回。\\
 
 \mybox{阶乘}
 
@@ -570,29 +425,31 @@ int main() {
 	\caption{阶乘}
 \end{figure}
 
-\mybox{斐波那契数列（递归）}
+\vspace{0.5cm}
+
+\mybox{斐波那契数列}
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
 
 int fibonacci(int n) {
-    if(n == 1 || n == 2) {
-        return 1;
-    }
-    return fibonacci(n-2) + fibonacci(n-1);
+	if (n == 1 || n == 2) {
+		return 1;
+	}
+	return fibonacci(n - 2) + fibonacci(n - 1);
 }
 
 int main() {
-    int n = 7;
-    printf("斐波那契数列第%d位：%d\n", n, fibonacci(n));
-    return 0;
+	int n = 7;
+	printf("%d\n", fibonacci(n));
+	return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
 	\mybox{运行结果}
 	\begin{verbatim}
-斐波那契数列第7位：13
+13
 	\end{verbatim}
 \end{tcolorbox}
 
@@ -608,62 +465,28 @@ int main() {
 		child {
 				node {$ f(3) $}
 				child {node {$ f(1) $}}
-				child {
-						node {$ f(2) $}
-						child {node {$ f(0) $}}
-						child {node {$ f(1) $}}
-					}
+				child {node {$ f(2) $}}
 			}
 		child {
 				node {$ f(4) $}
-				child {
-						node {$ f(2) $}
-						child {node {$ f(0) $}}
-						child {node {$ f(1) $}}
-					}
+				child {node {$ f(2) $}}
 				child {
 						node {$ f(3) $}
 						child {node {$ f(1) $}}
-						child {
-								node {$ f(2) $}
-								child {node {$ f(0) $}}
-								child {node {$ f(1) $}}
-							}
+						child {node {$ f(2) $}}
 					}
 			};
 	\end{tikzpicture}
 	\caption{递归树}
 \end{figure}
 
-\mybox{斐波那契数列（迭代）}
+递归的特点就是将一个复杂的大问题逐步简化为一个可以解决的小问题，然后再逐步计算出大问题的解。\\
 
-\begin{lstlisting}[language=C]
-#include <stdio.h>
+递归的优点在于代码简洁易懂，但是缺点也很明显，就是效率很低。每次递归都会产生函数调用，而函数调用的开销是很大的，不适合用来解决大规模的问题。\\
 
-int fibonacci(int n) {
-    int f[n];
-    f[0] = f[1] = 1;
-    for(int i = 2; i < n; i++) {
-        f[i] = f[i-2] + f[i-1];
-    }
-    return f[n-1];
-}
+例如在计算斐波那契数列的第40项时，递归需要花费大量时间，因为其中包含了大量的重复计算。相比而言，使用循环的方式能够节省大量的时间。因此像阶乘和斐波那契数列这样的情况，通常会采用循环，而不是递归进行计算。\\
 
-int main() {
-    int n = 7;
-    printf("斐波那契数列第%d位：%d\n", n, fibonacci(n));
-    return 0;
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-斐波那契数列第7位：13
-	\end{verbatim}
-\end{tcolorbox}
-
-\vspace{0.5cm}
+然而还存在很多问题不得不使用递归的思想才能解决。\\
 
 \mybox{阿克曼函数}
 
@@ -680,18 +503,18 @@ int main() {
 #include <stdio.h>
 
 int A(int m, int n) {
-    if(m == 0) {
-        return n + 1;
-    } else if(m > 0 && n == 0) {
-        return A(m-1, 1);
-    } else {
-        return A(m-1, A(m, n-1));
-    }
+	if (m == 0) {
+		return n + 1;
+	} else if (m > 0 && n == 0) {
+		return A(m - 1, 1);
+	} else {
+		return A(m - 1, A(m, n - 1));
+	}
 }
 
 int main() {
-    printf("%d\n", A(3, 4));
-    return 0;
+	printf("%d\n", A(3, 4));
+	return 0;
 }
 \end{lstlisting}
 
@@ -702,36 +525,7 @@ int main() {
 	\end{verbatim}
 \end{tcolorbox}
 
-\begin{table}[H]
-	\centering
-	\setlength{\tabcolsep}{0.5mm}{
-		\begin{tabular}{|c|c|c|c|c|c|c|}
-			\hline
-			\diagbox{$ m $}{$ n $} & \textbf{$ 0 $} & \textbf{$ 1 $}    & \textbf{$ 2 $}    & \textbf{$ 3 $}          & \textbf{$ 4 $}    & \textbf{$ n $}                                         \\
-			\hline
-			\textbf{$ 0 $}         & $ 1 $          & $ 2 $             & $ 3 $             & $ 4 $                   & $ 5 $             & $ n + 1 $                                              \\
-			\hline
-			\textbf{$ 1 $}         & $ 2 $          & $ 3 $             & $ 4 $             & $ 5 $                   & $ 6 $             & $ 2 + (n + 3) - 3 $                                    \\
-			\hline
-			\textbf{$ 2 $}         & $ 3 $          & $ 5 $             & $ 7 $             & $ 9 $                   & $ 11 $            & $ 2(n + 3) - 3 $                                       \\
-			\hline
-			\textbf{$ 3 $}         & $ 5 $          & $ 13 $            & $ 29 $            & $ 61 $                  & $ 125 $           & $ 2^{n + 3} - 3 $                                      \\
-			\hline
-			\textbf{$ 4 $}         & $ 13 $         & $ 65533 $         & $ 2^{65536} - 3 $ & $ A(3, 2^{65536} - 3) $ & $ A(3, A(4, 3)) $ & $ \underbrace{2^{2^{.^{.^{.{^2}}}}}}_{n+3\ twos} - 3 $ \\
-			\hline
-			\textbf{$ 5 $}         & $ 65533 $      & $ A(4, 65533) $   & $ A(4, A(5, 1)) $ & $ A(4, A(5, 2)) $       & $ A(4, A(5, 3)) $ & $ \dots $                                              \\
-			\hline
-			\textbf{$ 6 $}         & $ A(5, 1) $    & $ A(5, A(5, 1)) $ & $ A(5, A(6, 1)) $ & $ A(5, A(6, 2)) $       & $ A(5, A(6, 3)) $ & $ \dots $                                              \\
-			\hline
-		\end{tabular}
-	}
-	\caption{阿克曼函数}
-\end{table}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[]{img/Chapter5/5-3/6.png}
-\end{figure}
+\vspace{0.5cm}
 
 \mybox{汉诺塔}\\
 
@@ -746,7 +540,7 @@ int main() {
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{img/Chapter5/5-3/7.png}
+	\includegraphics[scale=0.4]{img/Chapter5/5-3/3.png}
 \end{figure}
 
 递归算法求解汉诺塔问题：
@@ -760,58 +554,54 @@ int main() {
 \begin{lstlisting}[language=C]
 #include <stdio.h>
 
-int move = 0;       // 移动次数
+int move = 0;
 
-/**
-    * @brief  汉诺塔算法
-    * @note   把 n 个盘子从 src 借助 mid 移到 dst
-    * @param  n: 层数
-    * @param  src: 起点柱子
-    * @param  mid: 临时柱子
-    * @param  dst: 目标柱子
-    */
 void hanoi(int n, char src, char mid, char dst) {
-    if(n == 1) {
-        printf("%d号盘：%c -> %c\n", n, src, dst);
-        move++;
-    } else {
-        // 把前 n-1 个盘子从 src 借助 dst 移到 mid
-        hanoi(n-1, src, dst, mid);
-        // 移动第 n 个盘子
-        printf("%d号盘：%c -> %c\n", n, src, dst);
-        move++;
-        // 把刚才的 n-1 个盘子从 mid 借助 src 移到 dst
-        hanoi(n-1, mid, src, dst);
-    }
+	if (n == 1) {
+		printf("%c -> %c\n", src, dst);
+		move++;
+	} else {
+		// move top n-1 disks from src to mid
+		hanoi(n - 1, src, dst, mid);
+		printf("%c -> %c\n", src, dst);
+		move++;
+		// move top n-1 disks from mid to dst
+		hanoi(n - 1, mid, src, dst);
+	}
 }
 
 int main() {
-    hanoi(4, 'A', 'B', 'C');
-    printf("步数 ==> %d\n", move);
-    return 0;
+	hanoi(4, 'A', 'B', 'C');
+	printf("Moves: %d\n", move);
+	return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
 	\mybox{运行结果}
 	\begin{verbatim}
-1号盘：A -> B
-2号盘：A -> C
-1号盘：B -> C
-3号盘：A -> B
-1号盘：C -> A
-2号盘：C -> B
-1号盘：A -> B
-4号盘：A -> C
-1号盘：B -> C
-2号盘：B -> A
-1号盘：C -> A
-3号盘：B -> C
-1号盘：A -> B
-2号盘：A -> C
-1号盘：B -> C
-步数 ==> 15
+A -> B
+A -> C
+B -> C
+A -> B
+C -> A
+C -> B
+A -> B
+A -> C
+B -> C
+B -> A
+C -> A
+B -> C
+A -> B
+A -> C
+B -> C
+Moves: 15
 	\end{verbatim}
 \end{tcolorbox}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[]{img/Chapter5/5-3/2.png}
+\end{figure}
 
 \newpage
