@@ -17,6 +17,5 @@ int main() {
     scanf("%lf%lf", &x2, &y2);
 
     printf("Distance: %.2f\n", distance(x1, y1, x2, y2));
-
     return 0;
 }

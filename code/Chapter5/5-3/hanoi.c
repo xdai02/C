@@ -17,7 +17,7 @@ void hanoi(int n, char src, char mid, char dst) {
 }
 
 int main() {
-    hanoi(4, 'A', 'B', 'C');
+    hanoi(3, 'A', 'B', 'C');
     printf("Moves: %d\n", move);
     return 0;
 }

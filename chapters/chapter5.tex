@@ -174,7 +174,6 @@ int main() {
 	scanf("%lf%lf", &x2, &y2);
 
 	printf("Distance: %.2f\n", distance(x1, y1, x2, y2));
-
 	return 0;
 }
 \end{lstlisting}
@@ -204,7 +203,7 @@ Distance: 5.00
 for(int i = 0; i < 5; i++)
 \end{lstlisting}
 
-块与块之间的变量是互相独立的，即使变量名相同，它们也不是同一个变量。\\
+块与块之间的局部变量是互相独立的，即使变量名相同，它们也不是同一个变量。\\
 
 例如在函数调用中，函数的参数也是局部变量，它们的作用域仅限于函数内。\\
 
@@ -433,10 +432,10 @@ int main() {
 #include <stdio.h>
 
 int fibonacci(int n) {
-	if (n == 1 || n == 2) {
-		return 1;
-	}
-	return fibonacci(n - 2) + fibonacci(n - 1);
+    if (n == 1 || n == 2) {
+        return n;
+    }
+    return fibonacci(n - 2) + fibonacci(n - 1);
 }
 
 int main() {
@@ -449,7 +448,7 @@ int main() {
 \begin{tcolorbox}
 	\mybox{运行结果}
 	\begin{verbatim}
-13
+21
 	\end{verbatim}
 \end{tcolorbox}
 
@@ -529,27 +528,32 @@ int main() {
 
 \mybox{汉诺塔}\\
 
-给定三根柱子，其中A柱子从大到小套有n个圆盘，问题是如何借助B柱子，将圆盘从A搬到C。\\
-
-规则：
-
-\begin{itemize}
-	\item 一次只能搬动一个圆盘
-	\item 不能将大圆盘放在小圆盘上面
-\end{itemize}
+有三根柱子A、B、C，A柱子上从下到上套有n个圆盘，要求将A柱子上的圆盘移动到C柱子上。每次只能移动一个圆盘，且大圆盘始终不能叠在小圆盘上面。\\
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{img/Chapter5/5-3/3.png}
+	\begin{tikzpicture}[scale=0.5]
+		\draw[-, gray] (0,0) -- (24,0);
+		\draw[-, very thick] (4,0) -- (4,7);
+		\draw[-, very thick] (12,0) -- (12,7);
+		\draw[-, very thick] (20,0) -- (20,7);
+
+		\draw[fill=red] (2.5,3) rectangle (5.5,4);
+		\draw[fill=green] (2,2) rectangle (6,3);
+		\draw[fill=blue] (1.5,1) rectangle (6.5,2);
+		\draw[fill=yellow] (1,0) rectangle (7,1);
+	\end{tikzpicture}
 \end{figure}
 
 递归算法求解汉诺塔问题：
 
 \begin{enumerate}
-	\item 将前n-1个圆盘从A柱借助于C柱搬到B柱。
-	\item 将最后一个圆盘直接从A柱搬到C柱。
-	\item 将n-1个圆盘从B柱借助于A柱搬到C柱。
+	\item 将n-1个圆盘从A借助C移到B。
+	\item 将第n个圆盘从A移到C。
+	\item 将n-1个圆盘从B借助A移到C。
 \end{enumerate}
+
+\vspace{-0.5cm}
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
@@ -571,7 +575,7 @@ void hanoi(int n, char src, char mid, char dst) {
 }
 
 int main() {
-	hanoi(4, 'A', 'B', 'C');
+	hanoi(3, 'A', 'B', 'C');
 	printf("Moves: %d\n", move);
 	return 0;
 }
@@ -580,24 +584,18 @@ int main() {
 \begin{tcolorbox}
 	\mybox{运行结果}
 	\begin{verbatim}
-A -> B
 A -> C
-B -> C
 A -> B
-C -> A
 C -> B
-A -> B
 A -> C
-B -> C
 B -> A
-C -> A
 B -> C
-A -> B
 A -> C
-B -> C
-Moves: 15
+Moves: 7
 	\end{verbatim}
 \end{tcolorbox}
+
+假设每次移动花费1秒，解决一个64层的汉诺塔问题大约需要5800亿年。\\
 
 \begin{figure}[H]
 	\centering
