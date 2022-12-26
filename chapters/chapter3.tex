@@ -8,6 +8,8 @@ while循环会对条件进行判断，如果条件成立，就会执行循环体
 
 while循环的次数由循环变量的变化决定，因此while循环一般都包括对循环变量的初值、判断和更新。
 
+\vspace{-0.5cm}
+
 \begin{lstlisting}[language=C]
 int i = 1;          // initial value
 while(i <= 5)       // condition
@@ -113,6 +115,8 @@ do-while循环是先执行一轮循环体内的代码后，再检查循环的条
 do-while循环是先执行、再判断，因此它至少会执行一轮循环。do-while一般应用在一些可能会需要重复，但必定会发生一次的情景下。例如登录账户，用户输入账户和密码后，检查是否正确，如果正确，那么就成功登录；否则继续循环让用户重新输入。\\
 
 需要注意，do-while循环的最后有一个分号。
+
+\vspace{-0.5cm}
 
 \begin{lstlisting}[language=C]
 do {
@@ -223,6 +227,8 @@ while循环将循环变量的初值、条件和更新写在了三个地方，但
 
 for循环将循环变量的初值、条件和更新写在了一行内，中间用分号隔开。对于指定次数的循环一般更多地会采用for循环，而对于不确定次数的一般会采用while循环。
 
+\vspace{-0.5cm}
+
 \begin{lstlisting}[language=C]
 for(int i = 0; i < 5; i++)
 {
@@ -316,6 +322,8 @@ Enter the number of terms: 10
 \subsection{嵌套循环}
 
 循环也可以嵌套使用，外层循环每执行一次，内层循环就会执行多次。
+
+\vspace{-0.5cm}
 
 \begin{lstlisting}[language=C]
 for(int i = 0; i < 2; i++)
