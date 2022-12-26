@@ -29,7 +29,6 @@ int main() {
     int n;
     printf("Enter n: ");
     scanf("%d", &n);
-
     printf("%d\n", fibonacci(n));
     return 0;
 }
