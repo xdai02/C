@@ -191,41 +191,68 @@ int *p = NULL;
 
 \subsection{指针与数组}
 
-数组变量本身就表达地址，所以无需使用【\&】取地址。
+数组名本质上就是一个指针，它指向数组的首地址。因此在获取数组的地址时，可以不使用\&运算符。\\
 
-\vspace{-0.5cm}
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \draw (0,1) circle (0.5);
+        \draw (-1,1) node{arr};
 
-\begin{lstlisting}[language=C]
-int arr[10];
-int *p = arr;
-\end{lstlisting}
+        \draw (0,-1) circle (0.5);
+        \draw (-1,-1) node{p};
 
-但是数组的每个单元表达的是变量，需要使用【\&】取地址。
+        \draw (3,-0.5) rectangle (7,0.5);
+        \draw (4,-0.5) -- (4,0.5);
+        \draw (5,-0.5) -- (5,0.5);
+        \draw (6,-0.5) -- (6,0.5);
 
-\vspace{-0.5cm}
+        \draw (3.5,0) node {4};
+        \draw (4.5,0) node {1};
+        \draw (5.5,0) node {6};
+        \draw (6.5,0) node {7};
 
-\begin{lstlisting}[language=C]
-int arr[10];
-int *p = &arr[0];
-\end{lstlisting}
+        \draw (3.5,-1) node {0};
+        \draw (4.5,-1) node {1};
+        \draw (5.5,-1) node {2};
+        \draw (6.5,-1) node {3};
 
-\vspace{0.5cm}
+        \draw[->] (0,1) -- (3,0);
+        \draw[->] (0,-1) -- (3,0);
+    \end{tikzpicture}
+\end{figure}
 
-\mybox{指针遍历数组}
+当对一个指向数组的指针进行加减运算时（如p++和p--），并不是将地址加1或减1，而是根据指针的类型加或减对应字节的长度。例如p是一个int型指针，那么p++会将地址加4（int占4个字节）、p -= 2会将地址减8。\\
+
+\mybox{指针与数组}
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
 
 int main() {
-    int arr[] = {44, 12, 64, 78, 16, 72, 13, 98, 84};
+    int arr[] = {4, 1, 6, 7};
     int n = sizeof(arr) / sizeof(arr[0]);
     int *p = arr;
 
-    while(p < arr + n) {
-        printf("%d ", *p);
-        p++;
+    printf("Address of arr: %p\n", arr);
+    for (int i = 0; i < n; i++) {
+        printf("Address of arr[%d]: %p\n", i, &arr[i]);
     }
-    printf("\n");
+
+    printf("Value of p: %p\n", p);
+    for (int i = 1; i < n; i++) {
+        printf("Value of p + %d: %p\n", i, p + i);
+    }
+
+    *p = 9;
+    *(p + 1) = 8;
+    *(p + 2) = 7;
+    *(p + 3) = 6;
+
+    for (int i = 0; i < n; i++) {
+        printf("arr[%d]: %d\n", i, arr[i]);
+    }
+
     return 0;
 }
 \end{lstlisting}
@@ -233,7 +260,19 @@ int main() {
 \begin{tcolorbox}
     \mybox{运行结果}
     \begin{verbatim}
-44 12 64 78 16 72 13 98 84
+Address of arr: 000000000061FDF0
+Address of arr[0]: 000000000061FDF0
+Address of arr[1]: 000000000061FDF4
+Address of arr[2]: 000000000061FDF8
+Address of arr[3]: 000000000061FDFC
+Value of p: 000000000061FDF0
+Value of p + 1: 000000000061FDF4
+Value of p + 2: 000000000061FDF8
+Value of p + 3: 000000000061FDFC
+arr[0]: 9
+arr[1]: 8
+arr[2]: 7
+arr[3]: 6
 	\end{verbatim}
 \end{tcolorbox}
 
@@ -241,39 +280,33 @@ int main() {
 
 \subsection{数组与函数}
 
-在将数组作为函数参数传递的时候，在函数参数列表中的数组实际上是一个指向数组首地址的指针。\\
+数组作为函数参数时，会将数组的地址传递给函数，函数接收到的是一个指向数组首地址的指针。由于在函数中失去了数组长度的信息，并不能通过sizeof()计算出数组的长度（计算得到的是一个指针变量所占的空间），因此将数组传入函数时，还需要将其长度一并作为参数传给函数。\\
 
-以下两种函数声明是等价的：
-
-\vspace{-0.5cm}
-
-\begin{lstlisting}[language=C]
-int func(int arr[]);
-int func(int *arr);
-\end{lstlisting}
-
-\vspace{0.5cm}
-
-\mybox{查找数组最大值}
+\mybox{查找}
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
 
-int getMax(int *arr, int n) {
-    int max = arr[0];
-    for(int i = 1; i < n; i++) {
-        if(arr[i] > max) {
-            max = arr[i];
+int search(int *arr, int n, int key) {
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == key) {
+            return i;
         }
     }
-    return max;
+    return -1;
 }
 
 int main() {
-    int arr[] = {76, 23, 12, 98, 5, 61, 30};
+    int arr[] = {4, 7, 1, 3, 9, 2};
     int n = sizeof(arr) / sizeof(arr[0]);
-    int max = getMax(arr, n);
-    printf("max = %d\n" , max);
+
+    int index = search(arr, n, 3);
+    if (index == -1) {
+        printf("Not found\n");
+    } else {
+        printf("Found at index %d\n", index);
+    }
+
     return 0;
 }
 \end{lstlisting}
@@ -281,7 +314,7 @@ int main() {
 \begin{tcolorbox}
     \mybox{运行结果}
     \begin{verbatim}
-max = 98
+Found at index 3
 	\end{verbatim}
 \end{tcolorbox}
 
@@ -291,44 +324,83 @@ max = 98
 
 \subsection{指针与字符串}
 
-指针还可以指向一个字符串常量，但是试图通过指针所指的字符串做写操作会导致程序崩溃。\\
+数组和指针都可以用于定义一个字符串，但是它们内存分配的方式不同，从而导致它们的使用方式也不同。\\
 
-\mybox{修改字符串常量}
+以数组形式定义的字符串，每个字符保存在一个字符数组中。这样的字符串是可以修改的，与普通的数组类似。\\
+
+但是如果让一个指针指向一个字符串，那么这个字符串会被存储在常量区。常量区中的数据是不可以修改的，因此使用指针去修改字符串会导致程序崩溃。\\
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \draw (0,0) circle (0.5);
+        \draw (-1,0) node{s1};
+
+        \draw (3,-0.5) rectangle (9,0.5);
+        \draw (4,-0.5) -- (4,0.5);
+        \draw (5,-0.5) -- (5,0.5);
+        \draw (6,-0.5) -- (6,0.5);
+        \draw (7,-0.5) -- (7,0.5);
+        \draw (8,-0.5) -- (8,0.5);
+
+        \draw (3.5,0) node {h};
+        \draw (4.5,0) node {e};
+        \draw (5.5,0) node {l};
+        \draw (6.5,0) node {l};
+        \draw (7.5,0) node {o};
+        \draw (8.5,0) node {$ \backslash $0};
+
+        \draw[->] (0,0) -- (3,0);
+
+        \draw (0,-2) circle (0.5);
+        \draw (-1,-2) node{s2};
+        \draw (4,-2) node {"hello"};
+        \draw[->] (0,-2) -- (3,-2);
+    \end{tikzpicture}
+\end{figure}
+
+\vspace{-0.5cm}
 
 \begin{lstlisting}[language=C]
-#include <stdio.h>
+char s1[] = "hello";
+s1[0] = 'H';
+printf("s1 = %s\n", s1);
 
-int main() {
-    char *s = "hello";
-    s[0] = 'H';
-    printf("%s\n", s);
-    return 0;
-}
+char *s2 = "hello";
+s2[0] = 'H';        // error
+printf("s2 = %s\n", s2);
 \end{lstlisting}
 
-因此，如果需要对字符串进行修改，应该用字符数组的形式。\\
+在对指向字符串的指针进行赋值操作的时候，并不会产生新的字符串，只是让两个指针都指向同一个字符串，对任意一个指针做的操作都会影响另一个指针。\\
 
-\mybox{修改字符串}
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \draw (0,1) circle (0.5);
+        \draw (-1,1) node{s};
 
-\begin{lstlisting}[language=C]
-#include <stdio.h>
+        \draw (0,-1) circle (0.5);
+        \draw (-1,-1) node{t};
 
-int main() {
-    char s[] = "hello";
-    s[0] = 'H';
-    printf("%s\n", s);
-    return 0;
-}
-\end{lstlisting}
+        \draw (3,-0.5) rectangle (9,0.5);
+        \draw (4,-0.5) -- (4,0.5);
+        \draw (5,-0.5) -- (5,0.5);
+        \draw (6,-0.5) -- (6,0.5);
+        \draw (7,-0.5) -- (7,0.5);
+        \draw (8,-0.5) -- (8,0.5);
 
-\begin{tcolorbox}
-    \mybox{运行结果}
-    \begin{verbatim}
-Hello
-	\end{verbatim}
-\end{tcolorbox}
+        \draw (3.5,0) node {h};
+        \draw (4.5,0) node {e};
+        \draw (5.5,0) node {l};
+        \draw (6.5,0) node {l};
+        \draw (7.5,0) node {o};
+        \draw (8.5,0) node {$ \backslash $0};
+        \draw (6,1) node {str};
 
-在对一个指向字符串的指针进行赋值操作的时候，并没有产生新的字符串，只是让两个指针都指向该字符串，对其中任意一个指针做的操作都会对另一个指针产生影响。\\
+        \draw[->] (0,1) -- (3,0);
+        \draw[->] (0,-1) -- (3,0);
+    \end{tikzpicture}
+\end{figure}
 
 \mybox{指向字符串的指针}
 
@@ -339,11 +411,11 @@ int main() {
     char str[] = "hello";
     char *s = str;
     char *t = s;
+
     s[0] = 'H';
-    printf("指针s指向的字符串：%s\n", s);
-    printf("指针t指向的字符串：%s\n", t);
-    printf("指针s的地址：%p\n", &s);
-    printf("指针t的地址：%p\n", &t);
+    printf("s = %s\n", s);
+    printf("t = %s\n", t);
+
     return 0;
 }
 \end{lstlisting}
@@ -351,27 +423,14 @@ int main() {
 \begin{tcolorbox}
     \mybox{运行结果}
     \begin{verbatim}
-指针s指向的字符串：Hello
-指针t指向的字符串：Hello
-指针s的地址：0022FE40
-指针t的地址：0022FE38
+s = Hello
+t = Hello
 	\end{verbatim}
 \end{tcolorbox}
 
-\begin{figure}[H]
-    \centering
-    \begin{tikzpicture}
-        \draw (-4,-5.5) rectangle (-2,-4.5);
-        \draw (2,-5.5) rectangle (4,-4.5);
-        \draw (-3,-4) node {s};
-        \draw (3,-4) node {t};
+\vspace{0.5cm}
 
-        \draw (-1,-7) rectangle (1,-6);
-        \draw[->] (-2,-5) -- (-1,-6.5);
-        \draw[->] (2,-5) -- (1,-6.5);
-    \end{tikzpicture}
-    \caption{指向字符串的指针}
-\end{figure}
+\subsection{指针与二维数组}
 
 \newpage
 
