@@ -428,217 +428,201 @@ t = Hello
 	\end{verbatim}
 \end{tcolorbox}
 
+\newpage
+
+\section{二级指针}
+
+\subsection{二级指针（Pointer to pointer）}
+
+既然指针也是一个变量，那么一个指针也可以指向另一个指针，这样的指针称为二级指针。
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \draw (0,0) circle (0.5);
+        \draw (0,1) node{q};
+        \draw (4,0) circle (0.5);
+        \draw (4,1) node{p};
+
+        \draw (7,-0.5) rectangle (8,0.5);
+        \draw (7.5,0) node {5};
+        \draw (7.5,1) node {data};
+
+        \draw[->] (0,0) -- (3.5,0);
+        \draw[->] (4,0) -- (7,0);
+    \end{tikzpicture}
+\end{figure}
+
+其中p是一个int型的指针（int *），指向了data；q是一个指向int型指针的指针（int **），即q指向了一个指向int的指针。\\
+
+\mybox{二级指针}
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main() {
+    int data = 5;
+    int *p = &data;
+    int **q = &p;
+
+    printf("data = %d\n", data);
+    printf("*p = %d\n", *p);
+    printf("**q = %d\n", **q);
+
+    printf("Address of data = %p\n", &data);
+    printf("Address of p = %p\n", &p);
+    printf("Address of q = %p\n", &q);
+
+    printf("Value of p = %p\n", p);
+    printf("Value of q = %p\n", q);
+
+    return 0;
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+    \mybox{运行结果}
+    \begin{verbatim}
+data = 5
+*p = 5
+**q = 5
+Address of data = 000000000061FE1C
+Address of p = 000000000061FE10
+Address of q = 000000000061FE08
+Value of p = 000000000061FE1C
+Value of q = 000000000061FE10
+	\end{verbatim}
+\end{tcolorbox}
+
 \vspace{0.5cm}
 
 \subsection{指针与二维数组}
+
+二级指针还可以用于表示二维数组。与一维数组类似，可以使用下标或*运算符来访问二维数组中的元素。\\
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \draw (0,1.5) circle (0.5);
+        \draw (0,2.5) node{arr};
+        \draw (4,1.5) circle (0.5);
+
+        \draw (7,-2) rectangle (11,2);
+        \draw (8,-2) -- (8,2);
+        \draw (9,-2) -- (9,2);
+        \draw (10,-2) -- (10,2);
+        \draw (7,-1) -- (11,-1);
+        \draw (7,0) -- (11,0);
+        \draw (7,1) -- (11,1);
+
+        \draw[->] (0,1.5) -- (3.5,1.5);
+        \draw[->] (4,1.5) -- (7,1.5);
+    \end{tikzpicture}
+\end{figure}
+
+例如，arr[2][1]也可以写成*(*(arr + 2) + 1)。
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \draw (0,1.5) circle (0.5);
+        \draw (0,2.5) node{arr};
+        \draw (4,1.5) circle (0.5);
+
+        \draw (7,-2) rectangle (11,2);
+        \draw (8,-2) -- (8,2);
+        \draw (9,-2) -- (9,2);
+        \draw (10,-2) -- (10,2);
+        \draw (7,-1) -- (11,-1);
+        \draw (7,0) -- (11,0);
+        \draw (7,1) -- (11,1);
+
+        \draw[->] (0,1.5) -- (3.5,1.5);
+        \draw[->] (4,1.5) -- (8.5,-0.5);
+    \end{tikzpicture}
+\end{figure}
+
+当如果命令函运行时，可以向main()函数传递命令行参数。传递参数的数量和值可以通过argc（argument count）和argv（argument vector）来获取。argv为一个二维数组，每个元素都是一个字符串，其中argv[0]为当前程序的名称。\\
+
+\mybox{命令行参数}
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+char *lower(char *s) {
+    char *p = s;
+    while (*p) {
+        *p = tolower(*p);
+        p++;
+    }
+    return s;
+}
+
+char *upper(char *s) {
+    char *p = s;
+    while (*p) {
+        *p = toupper(*p);
+        p++;
+    }
+    return s;
+}
+
+void usage(const char *program) {
+    printf("Usage: %s [option] [string]\n", program);
+    printf("--lower: convert string to lower case\n");
+    printf("--upper: convert string to upper case\n");
+}
+
+int main(int argc, char **argv) {
+    if (argc != 3) {
+        usage(argv[0]);
+        return 1;
+    }
+
+    char *option = argv[1];
+    char *string = argv[2];
+
+    if (strcmp(option, "--lower") == 0) {
+        printf("Lower: %s\n", lower(string));
+    } else if (strcmp(option, "--upper") == 0) {
+        printf("Upper: %s\n", upper(string));
+    } else {
+        usage(argv[0]);
+        return 1;
+    }
+
+    return 0;
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+gcc -Wall command_line.c -o command_line
+./command_line --upper "Hello World!"
+\end{lstlisting}
+
+\begin{tcolorbox}
+    \mybox{运行结果}
+    \begin{verbatim}
+Upper: HELLO WORLD!
+	\end{verbatim}
+\end{tcolorbox}
 
 \newpage
 
 \section{动态内存申请}
 
-\subsection{malloc()}
-
-C99支持声明数组时使用变量作为数组的大小。
-
-\vspace{-0.5cm}
-
-\begin{lstlisting}[language=C]
-int n = 50;
-int arr[n];
-\end{lstlisting}
-
-但是在C99之前的版本中，需要使用动态内存申请的方式进行数组空间的开辟。malloc()的功能是向系统申请指定的内存空间（以字节为单位），使用该函数需要包含头文件stdlib.h。\\
-
-malloc()函数原型为：
-
-\vspace{-0.5cm}
-
-\begin{lstlisting}[language=C]
-void* malloc(size_t size);
-\end{lstlisting}
-
-malloc()的返回值为void *类型，表示一个指向申请到的空间的首地址，是一个无类型的指针，开发者需要自行转换为自己需要的类型。如果malloc()申请内存失败，则会返回空指针NULL。\\
-
-\mybox{耗尽所有可申请到的内存空间}
-
-\begin{lstlisting}[language=C]
-#include <stdio.h>
-#include <stdlib.h>
-
-int main() {
-    void *p;
-    int cnt = 0;
-
-    // 每次申请100MB的空间
-    while((p = malloc(100 * 1024 * 1024))) {
-        cnt++;
-    }
-    printf("一共分配了%dMB空间\n", cnt*100);
-    return 0;
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-    \mybox{运行结果}
-    \begin{verbatim}
-一共分配了1900MB空间
-	\end{verbatim}
-\end{tcolorbox}
-
-通过malloc()申请来的空间是需要归还给操作系统的，否则程序长时间运行内存会逐渐下降。\\
-
-通过free()可以把申请来的空间释放，但是有两点需要注意：
-
-\begin{enumerate}
-    \item 只能释放通过malloc()申请得到的空间。
-    \item 只能通过空间的首地址进行释放。
-\end{enumerate}
-
-\vspace{0.5cm}
-
-\mybox{动态申请内存空间}
-
-\begin{lstlisting}[language=C]
-#include <stdio.h>
-#include <stdlib.h>
-
-int main() {
-    int n;
-    printf("班级人数：");
-    scanf("%d", &n);
-
-    int *scores = (int *)malloc(sizeof(int) * n);
-    if(!scores) {
-        fprintf(stderr, "内存申请失败\n");
-        exit(1);
-    }
-
-    int total = 0;
-    for(int i = 0; i < n; i++) {
-        printf("第%d个学生成绩：", i+1);
-        scanf("%d", &scores[i]);
-        total += scores[i];
-    }
-
-    printf("平均分：%.2f\n", 1.0 * total / n);
-    free(scores);
-    return 0;
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-    \mybox{运行结果}
-    \begin{verbatim}
-班级人数：5
-第1个学生成绩：67
-第2个学生成绩：98
-第3个学生成绩：100
-第4个学生成绩：53
-第5个学生成绩：65
-平均分：76.60
-	\end{verbatim}
-\end{tcolorbox}
-
-在函数中的定义的字符数组是局部变量，其作用域和生命周期仅在函数内有效，如果将其作为函数返回值返回，在函数外部无法访问到该变量的内容。\\
-
-\mybox{函数返回字符串（Bug版本）}
-
-\begin{lstlisting}[language=C]
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-/**
-    * @brief  生成一段自我介绍
-    * @param  name: 姓名
-    * @param  age: 年龄
-    * @retval 指定格式字符串：大家好，我叫{name}，今年{age}岁。
-    */
-char* generateInfo(char *name, int age) {
-    char info[128] = "大家好，我叫";
-    char age_str[8] = "";
-    strcat(info, name);
-    strcat(info, "，今年");
-    // itoa()函数用于将整数转为字符串
-    // 把age以10进制转换为字符串保存到age_str
-    strcat(info, itoa(age, age_str, 10));
-    strcat(info, "岁。");
-    return info;
-}
-
-int main() {
-    printf("%s\n", generateInfo("极夜酱", 17));
-    return 0;
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-    \mybox{运行结果}
-    \begin{verbatim}
-warning:
-function returns address of local variable [-Wreturn-local-addr]
-	\end{verbatim}
-\end{tcolorbox}
-
-\vspace{0.5cm}
-
-\mybox{函数返回字符串（正确版本）}
-
-\begin{lstlisting}[language=C]
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-/**
-    * @brief  生成一段自我介绍
-    * @param  name: 姓名
-    * @param  age: 年龄
-    * @retval 指定格式字符串：大家好，我叫{name}，今年{age}岁。
-    */
-char* generateInfo(char *name, int age) {
-    char *info = (char *)malloc(sizeof(char) * 128);
-    if(!info) {
-        return NULL;
-    }
-    char age_str[8] = "";
-    strcpy(info, "大家好，我叫");
-    strcat(info, name);
-    strcat(info, "，今年");
-    // itoa()函数用于将整数转为字符串
-    // 把age以10进制转换为字符串保存到age_str
-    strcat(info, itoa(age, age_str, 10));
-    strcat(info, "岁。");
-    return info;
-}
-
-int main() {
-    printf("%s\n", generateInfo("极夜酱", 17));
-    return 0;
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-    \mybox{运行结果}
-    \begin{verbatim}
-大家好，我叫极夜酱，今年17岁。
-	\end{verbatim}
-\end{tcolorbox}
-
-\vspace{0.5cm}
-
 \subsection{内存管理}
 
-内存通常包括了栈区（stack）、堆区（heap）、数据区、程序代码区：
+计算机的内存主要包括：
 
-\begin{itemize}
-    \item 栈区：由编译器自动分配和释放，存放函数的参数值、局部变量的值等。
-
-    \item 堆区：一般由程序员分配和释放，若程序员不释放，程序结束后被OS回收。
-
-    \item 数据区：存放全局变量和静态变量，程序结束后由系统释放。
-
-    \item 程序代码区：存放函数体的二进制代码。
-\end{itemize}
+\begin{enumerate}
+    \item 代码区：存储程序执行时使用的指令。
+    \item 数据区：存储程序运行时使用的全局变量和静态变量。
+    \item 栈区（stack）：存储函数调用时使用的局部变量，栈中的内存由编译器自动分配和释放。
+    \item 堆区（heap）：存储动态分配内存的变量，需要由程序员自己分配和释放。
+\end{enumerate}
 
 \begin{figure}[H]
     \centering
@@ -649,8 +633,8 @@ int main() {
         \draw[-] (0,6) -- (5,6);
         \draw[-] (0,8) -- (5,8);
 
-        \draw (0,0) node[left] {0};
-        \draw (0,10) node[left] {max};
+        \draw (0,0) node[left] {low};
+        \draw (0,10) node[left] {high};
 
         \draw (2.5,1) node {Text};
         \draw (2.5,3) node {Data};
@@ -660,7 +644,196 @@ int main() {
         \draw[->] (2.5,8) -- (2.5,7.5);
         \draw[->] (2.5,6) -- (2.5,6.5);
     \end{tikzpicture}
-    \caption{内存管理}
+    \caption{内存区域}
 \end{figure}
+
+有时候需要在函数中生成一个数组，并且将数组返回给调用者。但是在函数内定义的数组是局部变量，存储于栈区。函数执行完毕后，数组所占用的内存空间会被释放。因此被返回的数组的指针指向的是一个已经被释放的内存空间，这样就会导致程序崩溃。\\
+
+另一种情况是，由于数组一旦声明后，其容量就不能再改变。当需要在运行时动态改变数组容量时，就可以采用动态内存申请的方式。\\
+
+\subsection{malloc()}
+
+malloc()函数定义在<stdlib.h>中，用于在堆区申请一块内存空间，其函数原型为：
+
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=C]
+void* malloc(size_t size);
+\end{lstlisting}
+
+malloc()接受一个参数size，表示申请空间的大小（单位：字节），并返回指向申请到的空间的首地址的指针。如果申请失败，则返回NULL。\\
+
+malloc()返回的是无类型指针void *，这是由于malloc()只负责申请指定大小的空间，并不关心这块空间将会被存放什么类型的数据。因此，开发者需要自行将其转换为对应的类型。\\
+
+\mybox{内存}
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    void *p;
+    int cnt = 0;
+
+    // allocate 100MB memory each time
+    while ((p = malloc(100 * 1024 * 1024))) {
+        cnt++;
+    }
+    printf("Allocated %d MB memory\n", cnt * 100);
+
+    return 0;
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+    \mybox{运行结果}
+    \begin{verbatim}
+Allocated 57700 MB memory
+	\end{verbatim}
+\end{tcolorbox}
+
+通过malloc()申请来的空间需要是需要归还给操作系统，因此需要程序员自行在不需要使用时将其释放。如果不释放内存，这些动态申请的内存空间就会一直占用着，直到程序结束统一被操作系统释放。\\
+
+不释放内存会导致内存泄漏（memory leak），如果一直分配内存而不是释放，最终将会耗尽所有可用的内存，导致程序运行变慢或者崩溃。\\
+
+free()函数用于释放动态申请的内存空间，其接受一个参数ptr，表示要释放的内存空间的首地址。其函数原型为：
+
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=C]
+void free(void *ptr);
+\end{lstlisting}
+
+\vspace{0.5cm}
+
+\mybox{斐波那契数列}
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#include <stdlib.h>
+
+int *generate_fibonacci(int n) {
+    int *arr = (int *)malloc(n * sizeof(int));
+    if (!arr) {
+        return NULL;
+    }
+
+    arr[0] = 1;
+    arr[1] = 1;
+    for (int i = 2; i < n; i++) {
+        arr[i] = arr[i - 1] + arr[i - 2];
+    }
+    return arr;
+}
+
+int main() {
+    int n = 10;
+    int *arr = generate_fibonacci(n);
+
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    free(arr);
+    return 0;
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+    \mybox{运行结果}
+    \begin{verbatim}
+1 1 2 3 5 8 13 21 34 55
+	\end{verbatim}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\subsection{calloc()}
+
+calloc()与malloc功能类似，也是用于动态申请内存空间的。只是malloc()只接受一个参数作为申请空间的大小，申请到的空间并不会进行初始化，。而calloc()接受两个参数，可以申请多个指定大小的空间，并将这些空间初始化为0。calloc()的函数原型为：
+
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=C]
+void *calloc(size_t nitems, size_t size);
+\end{lstlisting}
+
+例如需要申请一个长度为n的int数组，并将其初始化为0：
+
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=C]
+int *arr = (int *)calloc(n, sizeof(int));
+\end{lstlisting}
+
+\vspace{0.5cm}
+
+\subsection{realloc()}
+
+realloc()用于对已经动态申请的内存空间进行重新分配（扩容/缩小），其函数原型为：
+
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=C]
+void *realloc(void *ptr, size_t size);
+\end{lstlisting}
+
+realloc()接受两个参数，第一个参数ptr指向需要重新分配内存空间，第二个参数size表示重新分配空间的大小（单位：字节）。realloc()会将原来内存块中的数据复制到新分配的内存块中，并返回指向新内存块的指针。如果重新分配失败，则返回NULL。\\
+
+\mybox{strip}
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+char *strip(char *str) {
+    int i = 0;
+    int j = strlen(str) - 1;
+
+    while (isspace(str[i]) && str[i] != '\0') {
+        i++;
+    }
+
+    while (isspace(str[j]) && j >= 0) {
+        j--;
+    }
+
+    int k = 0;
+    while (i <= j) {
+        str[k++] = str[i++];
+    }
+    str[k] = '\0';
+
+    str = (char *)realloc(str, (k + 1) * sizeof(char));
+    return str;
+}
+
+int main() {
+    int len = 32;
+    char *str = (char *)calloc(len + 1, sizeof(char));
+
+    strcpy(str, "     Hello World! \n\t ");
+    printf("Before: [%s]\n", str);
+
+    str = strip(str);
+
+    printf("After: [%s]\n", str);
+
+    free(str);
+    return 0;
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+    \mybox{运行结果}
+    \begin{verbatim}
+Before: [     Hello World! 
+     ]
+After: [Hello World!]
+	\end{verbatim}
+\end{tcolorbox}
 
 \newpage
