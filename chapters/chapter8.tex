@@ -2,63 +2,57 @@
 
 \section{文件}
 
-\subsection{文件打开}
+\subsection{fopen()}
 
-C具有操作文件的能力，比如对文件数据的添加、删除、修改等。为了统一对各种硬件的操作，不同的硬件设备也都被看作是文件进行管理。计算机中键盘是标准输入设备stdin，显示器是标准输出设备stdout。\\
+文件是存储数据的一种常用方式，程序可以从文件中读取和写入数据，从而实现对数据的持久化存储。\\
 
-C通过声明一个文件FILE类型的指针，可以对指针所指向的文件进行操作。\\
-
-fopen()用于打开文件，函数原型为：
+在对文件进行操作之前，首先需要使用fopen()函数打开文件，fopen()的函数原型为：
 
 \vspace{-0.5cm}
 
 \begin{lstlisting}[language=C]
-FILE *fopen(const char *fname, const char *mode);
+FILE *fopen(const char *filename, const char *mode);
 \end{lstlisting}
 
+fopen()接受两个参数，第一个参数是要打开的文件名，第二个参数为打开方式。fopen()会返回一个FILE类型的指针，通过该指针可以对文件进行操作；如果文件打开失败，则返回NULL。\\
+
 \begin{table}[H]
-	\centering
-	\setlength{\tabcolsep}{5mm}{
-		\begin{tabular}{|c|l|}
-			\hline
-			\textbf{打开方式} & \textbf{描述}                                         \\
-			\hline
-			r                 & 只读，文件必须存在，否则打开失败                      \\
-			\hline
-			w                 & 只写，创建一个新文件                                  \\
-			\hline
-			a                 & 追加，如果文件不存在则创建；存在则将数据追加到末尾    \\
-			\hline
-			r+                & 读+写，文件必须存在，否则打开失败                     \\
-			\hline
-			w+                & 写+读，创建一个新文件                                 \\
-			\hline
-			a+                & 追加+读，如果文件不存在则创建；存在则将数据追加到末尾 \\
-			\hline
-			rb                & 以只读打开二进制文件                                  \\
-			\hline
-			wb                & 以只写打开二进制文件                                  \\
-			\hline
-			ab                & 以追加打开二进制文件                                  \\
-			\hline
-			rb+               & 以读+写打开二进制文件                                 \\
-			\hline
-			wb+               & 以写+读打开二进制文件                                 \\
-			\hline
-			ab+               & 以追加+读打开二进制文件                               \\
-			\hline
-		\end{tabular}
-	}
-	\caption{文件打开方式}
+    \centering
+    \setlength{\tabcolsep}{5mm}{
+        \begin{tabular}{|c|l|}
+            \hline
+            \textbf{打开方式} & \textbf{描述}                                      \\
+            \hline
+            r                 & 只读，文件必须存在，否则打开失败                   \\
+            \hline
+            w                 & 只写，创建一个新文件                               \\
+            \hline
+            a                 & 追加，如果文件不存在则创建；存在则将数据追加到末尾 \\
+            \hline
+            r+                & 以r模式打开文件，附带写的功能                      \\
+            \hline
+            w+                & 以w模式打开文件，附带读的功能                      \\
+            \hline
+            a+                & 以a模式打开文件，附带读的功能                      \\
+            \hline
+        \end{tabular}
+    }
+    \caption{文件打开方式}
 \end{table}
 
-如果文件打开失败，fopen()则会返回空指针NULL。\\
+\vspace{0.5cm}
 
-\subsection{文件关闭}
+\subsection{fclose()}
 
-在对文件操作结束后，需要使用fclose()将文件关闭。\\
+在对文件操作结束后，需要使用fclose()函数将文件关闭。fclose()函数原型：
 
-fclose()负责清空缓冲区，并释放文件指针。需要特别注意的是，在对文件执行写操作以后，并不会马上写入文件，而只是写入到了这个文件的输出缓冲区中。只有当输出缓冲区满了，或者执行了fflush()，或者执行了fclose()以后，或者程序结束，才会把输出缓冲区中的内容写入文件。\\
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=C]
+int fclose(FILE *stream);
+\end{lstlisting}
+
+\vspace{0.5cm}
 
 \mybox{文件}
 
@@ -66,14 +60,13 @@ fclose()负责清空缓冲区，并释放文件指针。需要特别注意的是
 This is a test.
 \end{lstlisting}
 
-\begin{lstlisting}[language=C, title=file\_open.c]
+\begin{lstlisting}[language=C, title=file.c]
 #include <stdio.h>
 #include <stdlib.h>
 
 int main() {
     FILE *fp = fopen("data.txt", "r");
     if(!fp) {
-        fprintf(stderr, "File Open Failed\n");
         exit(1);
     }
     fclose(fp);
@@ -83,7 +76,7 @@ int main() {
 
 \newpage
 
-\section{文件读写}
+\section{文件I/O}
 
 \subsection{fgetc()读字符}
 
@@ -164,8 +157,8 @@ int main() {
 \end{lstlisting}
 
 \begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
+    \mybox{运行结果}
+    \begin{verbatim}
 字符数：513
 行  数：27
 	\end{verbatim}
@@ -227,8 +220,8 @@ char *fgets(char *str, int num, FILE *stream);
 \end{lstlisting}
 
 \begin{itemize}
-	\item str：用于保存字符串的变量。
-	\item num：最多读取字符数量，由于字符串结尾需要保留$ \backslash $0结束符，因此真正只能最多读取num - 1个字符。
+    \item str：用于保存字符串的变量。
+    \item num：最多读取字符数量，由于字符串结尾需要保留$ \backslash $0结束符，因此真正只能最多读取num - 1个字符。
 \end{itemize}
 
 \vspace{0.5cm}
@@ -301,6 +294,8 @@ int main() {
 
 \subsection{fprintf()格式化输出}
 
+为了统一对各种硬件的操作，不同的硬件设备也都被看作是文件进行管理。计算机中键盘是标准输入设备stdin，显示器是标准输出设备stdout。\\
+
 fprintf()使用方法与printf()类似，只是多增加了一个参数，用于指定输出流。\\
 
 fprintf()函数原型：
@@ -334,9 +329,9 @@ int main() {
 \end{lstlisting}
 
 \begin{tcolorbox}
-	\mybox{运行结果}
-	\textbf{data.txt}
-	\begin{verbatim}
+    \mybox{运行结果}
+    \textbf{data.txt}
+    \begin{verbatim}
 极夜酱	17
 小灰	22
 小白	19
@@ -391,8 +386,8 @@ int main() {
 \end{lstlisting}
 
 \begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
+    \mybox{运行结果}
+    \begin{verbatim}
 极夜酱	17
 小灰	22
 小白	19
@@ -463,8 +458,8 @@ int main() {
 \end{lstlisting}
 
 \begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
+    \mybox{运行结果}
+    \begin{verbatim}
 查找姓名：小灰
 小灰	22
 	\end{verbatim}

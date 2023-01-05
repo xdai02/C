@@ -2,14 +2,18 @@
 #include "mystring.h"
 
 int main() {
-    char s1[] = "Hello";
-    char s2[] = "World!";
+    char s1[16] = "Hello";
+    char s2[16] = "World!";
+    char *result = NULL;
 
-    printf("mystrlen(\"%s\") = %d\n", s1, mystrlen(s1));
+    int s1_len = mystrlen(s1);
+    printf("mystrlen(\"%s\") = %d\n", s1, s1_len);
 
-    printf("mystrcpy(\"%s\", \"%s\") = %s\n", s1, s2, mystrcpy(s1, s2));
+    result = mystrcpy(s1, s2);
+    printf("mystrcpy(\"%s\", \"%s\") = %s\n", s1, s2, result);
 
-    printf("mystrcat(\"%s\", \"%s\") = %s\n", s1, s2, mystrcat(s1, s2));
+    result = mystrcat(s1, s2);
+    printf("mystrcat(\"%s\", \"%s\") = %s\n", s1, s2, result);
 
     printf("mystrcmp(\"%s\", \"%s\") = %d\n", s1, s2, mystrcmp(s1, s2));
 
