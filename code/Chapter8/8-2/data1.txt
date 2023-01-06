@@ -1,0 +1,5 @@
+ID=A001	Score=92.00
+ID=A002	Score=73.00
+ID=A003	Score=89.00
+ID=A004	Score=97.00
+ID=A005	Score=65.00

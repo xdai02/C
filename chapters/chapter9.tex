@@ -1,121 +1,146 @@
 \chapter{结构体}
 
-\section{结构体}
+\section{枚举}
 
-\subsection{结构体（Structure）}
+\subsection{枚举（Enumeration）}
 
-C中，数组是一种允许存储多个相同类型数据项的结构。结构体是另一种用户自定义的数据类型，它允许存储不同类型的数据项。\\
+枚举类型可以将一组相关的常量定义为一个类型，并为这些常量赋予一个可读性较高的名字。枚举类型在定义之后就可以像宏常量一样去使用。\\
 
-结构体的声明可以使用关键字struct，结构体名一般首字母大写。结构体的声明以【;】结束。结构体的声明通常定义为全局变量，这样就可以被多个函数所使用的了。
+例如需要定义一个星期：
 
 \vspace{-0.5cm}
 
 \begin{lstlisting}[language=C]
-struct struct_name {
-    data_type var_name1;
-    data_type var_name2;
-    ...
+enum Weekday {
+    SUN, MON, TUE, WED, THU, FRI, SAT
 };
 \end{lstlisting}
 
-通常会将用于描述同一个事物的变量定义成结构体。例如：
+枚举值默认从0开始，因此SUN的值为0、MON的值为1、TUE的值为2，以此类推。\\
 
-\begin{itemize}
-	\item 日期（年、月、日）
-	\item 坐标（横坐标、纵坐标）
-	\item 学生信息（姓名、年龄、学号、成绩）
-\end{itemize}
+当需要指定枚举值时，可以直接在某个枚举常量后赋值，之后的枚举常量的值会在此基础上依次加1。\\
 
-定义结构体变量时，不能只使用结构体名，需要加上struct关键字。\\
+例如需要定义月份：
 
-通过成员运算符【.】可以访问一个结构体之中的成员变量。\\
+\vspace{-0.5cm}
 
-\mybox{结构体}
+\begin{lstlisting}[language=C]
+enum Month {
+    JAN = 1, FEB, MAR, APR, MAY, JUN,
+    JUL, AUG, SEP, OCT, NOV, DEC,
+};
+\end{lstlisting}
+
+\newpage
+
+\section{联合体}
+
+\subsection{联合体（Union）}
+
+联合体允许在同一个内存位置存储不同类型的数据，联合体中多个变量共享同一块内存空间，因此联合体所占空间取决于占用空间最大的成员。这意味着在任意时刻，联合体的内存只能用于存储单个成员，这样可以有效节省内存。\\
+
+\mybox{联合体}
 
 \begin{lstlisting}[language=C]
 #include <stdio.h>
 
+union Value {
+    int int_data;
+    char char_data;
+};
+
+int main() {
+    union Value val;
+
+    val.char_data = 'A';
+    printf("val.int_data = %d\n", val.int_data);
+
+    val.int_data = 97;
+    printf("val.char_data = %c\n", val.char_data);
+
+    return 0;
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+    \mybox{运行结果}
+    \begin{verbatim}
+val.int_data = 65
+val.char_data = a
+	\end{verbatim}
+\end{tcolorbox}
+
+\newpage
+
+\section{结构体}
+
+\subsection{结构体（Structure）}
+
+与联合体不同，结构体的成员在内存中占用不同的空间，因此结构体所占空间是所有成员占用空间的总和。\\
+
+结构体通常用于存储复杂的数据类型，将一些相关的变量组合在一起。例如：
+
+\begin{itemize}
+    \item 日期（年、月、日）
+          \vspace{-0.5cm}
+          \begin{lstlisting}[language=C]
 struct Date {
     int year;
     int month;
     int day;
 };
+    \end{lstlisting}
 
-int main() {
-    struct Date date;
-    date.year = 2021;
-    date.month = 3;
-    date.day = 12;
+    \item 坐标（横坐标、纵坐标）
+          \vspace{-0.5cm}
+          \begin{lstlisting}[language=C]
+struct Coordinate {
+    double x;
+    double y;
+};
+    \end{lstlisting}
 
-    printf("%d年%d月%d日\n", date.year, date.month, date.day);
-    return 0;
-}
-\end{lstlisting}
+    \item 学生信息（姓名、出生日期、成绩）
+          \vspace{-0.5cm}
+          \begin{lstlisting}[language=C]
+struct Student {
+    char name[32];
+    struct Date date_of_birth;
+    double score;
+};
+    \end{lstlisting}
+\end{itemize}
 
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-2021年3月12日
-	\end{verbatim}
-\end{tcolorbox}
-
-\newpage
-
-\section{typedef}
+\vspace{0.5cm}
 
 \subsection{typedef}
 
-关键字typedef可以用来给数据类型定义别名，通过使用typedef可以简化结构体的声明，不用每次都加上struct关键字了。
+typedef用于给数据类型定义别名，通过使用typedef可以简化结构体的声明，不用每次都加上struct关键字了。
 
 \vspace{-0.5cm}
-
 \begin{lstlisting}[language=C]
-typedef struct [struct_name] {
-    data_type var_name1;
-    data_type var_name2;
-    ...
-} struct_name;
+typedef struct  {
+    int year;
+    int month;
+    int day;
+} Date;
+
+typedef struct {
+    char name[32];
+    Date date_of_birth;
+    double score;
+} Student;
 \end{lstlisting}
 
 \vspace{0.5cm}
 
-\mybox{typedef定义别名}
-
-\begin{lstlisting}[language=C]
-#include <stdio.h>
-
-typedef struct Coordinate {
-    double x;
-    double y;
-} Coordinate;
-
-int main() {
-    Coordinate coor;
-    coor.x = 3.1;
-    coor.y = 2.7;
-    printf("(%.1f, %.1f)\n", coor.x, coor.y);
-    return 0;
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-(3.1, 2.7)
-	\end{verbatim}
-\end{tcolorbox}
-
-\newpage
-
-\section{结构体指针}
-
 \subsection{结构体指针}
 
-与数组不同，结构体变量的名字并不是结构体变量的地址，必须使用取地址运算符【\&】。\\
+当结构体变量作为函数参数传递时，如果结构体变量很大，那么会消耗大量时间将结构体变量复制到函数的参数中。\\
 
-结构体也可以作为函数参数进行传递。如果是按值传递，那么在函数中会新创建一个结构体变量，并复制调用者的结构体的值。如果是按址传递，则需要传递结构体的指针。\\
+为了避免这种情况，可以使用结构体指针作为函数参数，这样只需要将结构体变量的地址传递给函数，函数内部就可以直接访问结构体变量了。\\
 
-C提供了一个间接引用运算符【->】，可以直接访问结构体指针所指的结构变量中的成员。\\
+使用->运算符可以访问结构体指针所指的结构变量中的成员。\\
 
 \mybox{倒数}
 
@@ -123,21 +148,15 @@ C提供了一个间接引用运算符【->】，可以直接访问结构体指�
 #include <stdio.h>
 #include <stdlib.h>
 
-// 分数
-typedef struct Fraction {
-    int numerator;       // 分子
-    int denominator;     // 分母
+typedef struct {
+    int numerator;
+    int denominator;
 } Fraction;
 
-/**
-    * @brief  倒数
-    * @note   分母不能为0
-    * @param  f: 分数结构体
-    * @retval None
-    */
 void reciprocal(Fraction *f) {
-    if(f->numerator == 0) {
-        fprintf(stderr, "无法计算倒数\n");
+    if (f->numerator == 0) {
+        fprintf(stderr, "Error: Denominator cannot be zero.\n");
+        exit(1);
     } else {
         int temp = f->numerator;
         f->numerator = f->denominator;
@@ -146,18 +165,21 @@ void reciprocal(Fraction *f) {
 }
 
 int main() {
-    Fraction fraction = {2, 5};        // 2/5
-    printf("%d/%d的倒数是", fraction.numerator, fraction.denominator);
+    Fraction fraction = {2, 5};  // 2/5
+
+    printf("Reciprocal of ");
+    printf("%d/%d is ", fraction.numerator, fraction.denominator);
     reciprocal(&fraction);
     printf("%d/%d\n", fraction.numerator, fraction.denominator);
+
     return 0;
 }
 \end{lstlisting}
 
 \begin{tcolorbox}
-	\mybox{运行结果}
-	\begin{verbatim}
-2/5的倒数是5/2
+    \mybox{运行结果}
+    \begin{verbatim}
+Reciprocal of 2/5 is 5/2
 	\end{verbatim}
 \end{tcolorbox}
 

@@ -78,227 +78,9 @@ int main() {
 
 \section{文件I/O}
 
-\subsection{fgetc()读字符}
+\subsection{fprintf()}
 
-fgetc()的功能是从文件读取一个字符。成功时，返回读到的字符（int类型）；失败或读到文件尾，返回EOF（-1）。\\
-
-fgetc()函数原型：
-
-\vspace{-0.5cm}
-
-\begin{lstlisting}[language=C]
-int fgetc(FILE *stream);
-\end{lstlisting}
-
-\vspace{0.5cm}
-
-\mybox{读取并输出指定文件内容}
-
-\begin{lstlisting}[title=data.txt]
-极夜酱	17
-小灰	22
-小白	19
-\end{lstlisting}
-
-\begin{lstlisting}[language=C, title=fgetc.c]
-#include <stdio.h>
-#include <stdlib.h>
-
-int main() {
-    FILE *fp = fopen("data.txt", "r");
-    if(!fp) {
-        fprintf(stderr, "File Open Failed\n");
-        exit(1);
-    }
-
-    char c;
-    while((c = fgetc(fp)) != EOF) {
-        printf("%c", c);
-    }
-    
-    fclose(fp);
-    return 0;
-}
-\end{lstlisting}
-
-\vspace{0.5cm}
-
-\mybox{统计程序源代码的字符数和行数}
-
-\begin{lstlisting}[language=C, title=count\_chars\_and\_lines.c]
-#include <stdio.h>
-#include <stdlib.h>
-
-int main() {
-    FILE *fp = fopen("count_chars_and_lines.c", "r");
-    if(!fp) {
-        fprintf(stderr, "File Open Failed\n");
-        exit(1);
-    }
-
-    char c;
-    int charNum = 0;        // 字符数量
-    int lineNum = 0;        // 行数
-
-    while((c = fgetc(fp)) != EOF) {
-        if(c == '\n') {
-            lineNum++;
-        } else {
-            charNum++;
-        }
-    }
-
-    printf("字符数：%d\n", charNum);
-    printf("行  数：%d\n", lineNum);
-
-    fclose(fp);
-    return 0;
-}
-\end{lstlisting}
-
-\begin{tcolorbox}
-    \mybox{运行结果}
-    \begin{verbatim}
-字符数：513
-行  数：27
-	\end{verbatim}
-\end{tcolorbox}
-
-\vspace{0.5cm}
-
-\subsection{fputc()写字符}
-
-fputc()的功能是将一个字符写入文件中。\\
-
-fputc()函数原型：
-
-\vspace{-0.5cm}
-
-\begin{lstlisting}[language=C]
-int fputc(int ch, FILE *stream);
-\end{lstlisting}
-
-\vspace{0.5cm}
-
-\mybox{将程序源代码输出到指定文件}
-
-\begin{lstlisting}[language=C, title=fputc.c]
-#include <stdio.h>
-#include <stdlib.h>
-
-int main() {
-    FILE *fp1 = fopen("fputc.c", "r");
-    FILE *fp2 = fopen("data.txt", "w");
-    if(!fp1) {
-        fprintf(stderr, "File Open Failed\n");
-        exit(1);
-    }
-
-    char c;
-    while((c = fgetc(fp1)) != EOF) {
-        fputc(c, fp2);
-    }
-
-    fclose(fp1);
-    fclose(fp2);
-    return 0;
-}
-\end{lstlisting}
-
-\vspace{0.5cm}
-
-\subsection{fgets()读字符串}
-
-fgets()的功能是从文件读取一个字符串。读取成功时，返回指向字符串的指针；读取失败时，返回NULL。\\
-
-fgets()函数原型：
-
-\vspace{-0.5cm}
-
-\begin{lstlisting}[language=C]
-char *fgets(char *str, int num, FILE *stream);
-\end{lstlisting}
-
-\begin{itemize}
-    \item str：用于保存字符串的变量。
-    \item num：最多读取字符数量，由于字符串结尾需要保留$ \backslash $0结束符，因此真正只能最多读取num - 1个字符。
-\end{itemize}
-
-\vspace{0.5cm}
-
-\mybox{读取并输出程序源代码内容}
-
-\begin{lstlisting}[language=C, title=fgets.c]
-#include <stdio.h>
-#include <stdlib.h>
-
-int main() {
-    FILE *fp = fopen("data.txt", "r");
-    if(!fp) {
-        fprintf(stderr, "File Open Failed\n");
-        exit(1);
-    }
-
-    char c;
-    while((c = fgetc(fp)) != EOF) {
-        printf("%c", c);
-    }
-    
-    fclose(fp);
-    return 0;
-}
-\end{lstlisting}
-
-\vspace{0.5cm}
-
-\subsection{fputs()写字符串}
-
-fputs()的功能是将一个字符串写入文件中。\\
-
-fputs()函数原型：
-
-\vspace{-0.5cm}
-
-\begin{lstlisting}[language=C]
-char *fputs(const char *str, FILE *stream);
-\end{lstlisting}
-
-\vspace{0.5cm}
-
-\mybox{将程序源代码输出到指定文件}
-
-\begin{lstlisting}[language=C, title=fputs.c]
-#include <stdio.h>
-#include <stdlib.h>
-
-int main() {
-    FILE *fp1 = fopen("fputs.c", "r");
-    FILE *fp2 = fopen("data.txt", "w");
-    if(!fp1) {
-        fprintf(stderr, "File Open Failed\n");
-        exit(1);
-    }
-
-    char line[128];
-    while(fgets(line, sizeof(line), fp1)) {
-        fputs(line, fp2);
-    }
-
-    fclose(fp1);
-    fclose(fp2);
-    return 0;
-}
-\end{lstlisting}
-
-\vspace{0.5cm}
-
-\subsection{fprintf()格式化输出}
-
-为了统一对各种硬件的操作，不同的硬件设备也都被看作是文件进行管理。计算机中键盘是标准输入设备stdin，显示器是标准输出设备stdout。\\
-
-fprintf()使用方法与printf()类似，只是多增加了一个参数，用于指定输出流。\\
-
-fprintf()函数原型：
+fprintf()函数用于将数据输出到文件中，使用方法与printf()类似。fprintf()的函数原型为：
 
 \vspace{-0.5cm}
 
@@ -308,21 +90,28 @@ int fprintf(FILE *stream, const char *format, ...);
 
 \vspace{0.5cm}
 
-\mybox{将数据格式化输出到指定文件}
+\mybox{成绩}
 
-\begin{lstlisting}[language=C, title=fprintf.c]
+\begin{lstlisting}[language=C]
 #include <stdio.h>
-#include <stdlib.h>
 
 int main() {
-    FILE *fp = fopen("data.txt", "w");
-    char name[3][12] = {"极夜酱", "小灰", "小白"};
-    int age[3] = {17, 22, 19};
+    FILE *fp = fopen("data1.txt", "w");
 
-    for(int i = 0; i < 3; i++) {
-        fprintf(fp, "%s\t%d\n", name[i], age[i]);
+    int n;
+    printf("Enter number of students: ");
+    scanf("%d", &n);
+
+    char id[8];
+    double score;
+    for (int i = 0; i < n; i++) {
+        printf("Enter student %d's ID: ", i + 1);
+        scanf("%s", id);
+        printf("Enter student %d's score: ", i + 1);
+        scanf("%lf", &score);
+        fprintf(fp, "ID=%s\tScore=%.2f\n", id, score);
     }
-    
+
     fclose(fp);
     return 0;
 }
@@ -330,21 +119,42 @@ int main() {
 
 \begin{tcolorbox}
     \mybox{运行结果}
-    \textbf{data.txt}
     \begin{verbatim}
-极夜酱	17
-小灰	22
-小白	19
+Enter number of students: 5
+Enter student 1's ID: A001
+Enter student 1's score: 92
+Enter student 2's ID: A002
+Enter student 2's score: 73
+Enter student 3's ID: A003
+Enter student 3's score: 89
+Enter student 4's ID: A004
+Enter student 4's score: 97
+Enter student 5's ID: A005
+Enter student 5's score: 65
 	\end{verbatim}
 \end{tcolorbox}
 
-\vspace{0.5cm}
+\begin{tcolorbox}
+    \mybox{运行结果}
+    \textbf{data1.txt}
+    \begin{verbatim}
+ID=A001	Score=92.00
+ID=A002	Score=73.00
+ID=A003	Score=89.00
+ID=A004	Score=97.00
+ID=A005	Score=65.00
+	\end{verbatim}
+\end{tcolorbox}
 
-\subsection{fscanf()格式化输入}
+为了统一对各种硬件的操作，不同的硬件设备也都被看作是文件进行管理。计算机中标准输入（stdin）是键盘、标准输出（stdout）是显示器、标准错误（stderr）是显示器。\\
 
-fscanf()的功能是按照指定格式从文件读取数据。读取成功时返回实际读取的数据个数，失败时返回EOF。\\
+因此，当使用printf()函数时，其实是从将数据输出到显示器上。printf()函数是通过调用fprintf(stdout, ...)来实现的。\\
 
-fscanf()函数原型：
+当需要输出一些错误信息时，可以通过fprintf(stderr, ...)将错误信息输出到标准错误stderr上，这样可以避免将错误信息混入到正常的输出信息中，方便查看和分析。\\
+
+\subsection{fscanf()}
+
+fscanf()函数用于从文件中读取数据，使用方法与scanf()类似。fscanf()的函数原型为：
 
 \vspace{-0.5cm}
 
@@ -352,33 +162,31 @@ fscanf()函数原型：
 int fscanf(FILE *stream, const char *format, ...);
 \end{lstlisting}
 
-\vspace{0.5cm}
+fscanf()函数读取成功时返回实际读取的数据个数，失败时返回文件末尾标志EOF（End of File）。\\
 
-\mybox{从指定文件读取指定格式数据}
+\mybox{平均分}
 
-\begin{lstlisting}[title=data.txt]
-极夜酱	17
-小灰	22
-小白	19
-\end{lstlisting}
-
-\begin{lstlisting}[language=C, title=fscanf.c]
+\begin{lstlisting}[language=C]
 #include <stdio.h>
 #include <stdlib.h>
 
 int main() {
-    FILE *fp = fopen("data.txt", "r");
-    if(!fp) {
-        fprintf(stderr, "File Open Failed\n");
+    FILE *fp = fopen("data1.txt", "r");
+    if (!fp) {
+        fprintf(stderr, "File open failed.\n");
         exit(1);
     }
-    
-    char name[12];
-    int age;
-    
-    while(fscanf(fp, "%s\t%d", name, &age) != EOF) {
-        printf("%s\t%d\n", name, age);
+
+    char id[8];
+    double score;
+    double sum = 0;
+    int n = 0;
+
+    while (fscanf(fp, "ID=%s\tScore=%lf\n", id, &score) != EOF) {
+        sum += score;
+        n++;
     }
+    printf("Average = %.2f\n", sum / n);
 
     fclose(fp);
     return 0;
@@ -388,19 +196,66 @@ int main() {
 \begin{tcolorbox}
     \mybox{运行结果}
     \begin{verbatim}
-极夜酱	17
-小灰	22
-小白	19
+Average = 83.20
+	\end{verbatim}
+\end{tcolorbox}
+
+当使用scanf()函数时，其实是从键盘上读取数据的，scanf()函数是通过调用fscanf(stdin, ...)来实现的。\\
+
+\subsection{fputc()}
+
+fputc()函数用于将一个字符写入文件中，其函数原型为：
+
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=C]
+int fputc(int ch, FILE *stream);
+\end{lstlisting}
+
+fputc()接受两个参数，第一个参数为要写入的字符（ASCII码），第二个参数为文件指针。\\
+
+当向屏幕输出一个字符时，fputc(stdout)等价于putchar()。\\
+
+\mybox{大写字母}
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main() {
+    FILE *fp = fopen("data2.txt", "w");
+
+    for (int i = 0; i < 26; i++) {
+        fputc('A' + i, fp);
+    }
+
+    fclose(fp);
+    return 0;
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+    \mybox{运行结果}
+    \textbf{data2.txt}
+    \begin{verbatim}
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
 	\end{verbatim}
 \end{tcolorbox}
 
 \vspace{0.5cm}
 
-\subsection{feof()检查文件结束}
+\subsection{fgetc()}
 
-feof()的功能是检查文件是否已经达到文件末尾位置，如果是就返回非零值（真）。\\
+fgetc()函数用于从文件中读取一个字符，读取成功返回字符的ASCII码，失败返回EOF。fgetc()的函数原型为：
 
-feof()函数原型：
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=C]
+int fgetc(FILE *stream);
+\end{lstlisting}
+
+当从键盘读取一个字符时，fgetc(stdin)等价于getchar()。\\
+
+在读取文件时，除了可以通过返回值EOF来判断是否读取到文件末尾外，还可以使用feof()函数，当读到文件末尾时返回非0值，否则返回0。feof()的函数原型为：
 
 \vspace{-0.5cm}
 
@@ -410,46 +265,138 @@ int feof(FILE *stream);
 
 \vspace{0.5cm}
 
-\mybox{从通讯录文件中查找指定人名}
+\mybox{源代码统计}
 
-\begin{lstlisting}[title=data.txt]
-极夜酱	17
-小灰	22
-小白	19
-\end{lstlisting}
-
-\begin{lstlisting}[language=C, title=feof.c]
+\begin{lstlisting}[language=C]
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
 
 int main() {
-    FILE *fp = fopen("data.txt", "r");
-    if(!fp) {
-        fprintf(stderr, "File Open Failed\n");
+    FILE *fp = fopen("fgetc.c", "r");
+    if (!fp) {
+        fprintf(stderr, "File open failed.\n");
         exit(1);
     }
 
-    char key[32];       // 需查找数据
-    char name[32];
-    int age;
-    bool found = false; // 是否找到
+    int chars = 0;
+    int lines = 0;
 
-    printf("查找姓名：");
-    gets(key);
-
-    while(!feof(fp)) {
-        fscanf(fp, "%s\t%d", name, &age);
-        if(strcmp(name, key) == 0) {
-            printf("%s\t%d\n", name, age);
-            found = true;
-            break;
+    while (!feof(fp)) {
+        char c = fgetc(fp);
+        if (c == '\n') {
+            lines++;
+        } else {
+            chars++;
         }
     }
 
-    if(!found) {
-        printf("未找到【%s】的信息\n", key);
+    printf("Characters: %d\n", chars);
+    printf("Lines: %d\n", lines);
+
+    fclose(fp);
+    return 0;
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+    \mybox{运行结果}
+    \begin{verbatim}
+Characters: 467
+Lines: 28
+	\end{verbatim}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\subsection{fputs()}
+
+fputs()函数用于将一个字符串写入文件，其函数原型为：
+
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=C]
+int fputs(const char *str, FILE *stream);
+\end{lstlisting}
+
+当向屏幕输出一个字符串时，fputs(stdout)等价于puts()。\\
+
+\mybox{Computer Science Quotes}
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main() {
+    const char *quotes[] = {
+        "Talk is cheap. Show me the code.",
+        "Code never lies, comments sometimes do.",
+        "Stay Hungry Stay Foolish",
+    };
+    int n = sizeof(quotes) / sizeof(quotes[0]);
+
+    FILE *fp = fopen("data3.txt", "w");
+
+    for (int i = 0; i < n; i++) {
+        fputs(quotes[i], fp);
+        fputc('\n', fp);
+    }
+
+    fclose(fp);
+    return 0;
+}
+\end{lstlisting}
+
+\begin{tcolorbox}
+    \mybox{运行结果}
+    \textbf{data3.txt}
+    \begin{verbatim}
+Talk is cheap. Show me the code.
+Code never lies, comments sometimes do.
+Stay Hungry Stay Foolish
+	\end{verbatim}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\subsection{fgets()}
+
+fgets()函数用于从文件读取一行数据，读取成功返回指向字符串的指针，失败则返回NULL。fgets()的函数原型为：
+
+\vspace{-0.5cm}
+
+\begin{lstlisting}[language=C]
+char *fgets(char *str, int n, FILE *stream);
+\end{lstlisting}
+
+fgets()接受三个参数，第一个参数用于保存读取到的字符串，第二个参数用于指定读取的最大字符数（包括结尾的$ \backslash $0），第三个参数为文件指针。\\
+
+\mybox{解析单词}
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    FILE *fp = fopen("data3.txt", "r");
+    if (!fp) {
+        fprintf(stderr, "File open failed.\n");
+    }
+
+    char line[128];
+    while (fgets(line, sizeof(line), fp) != NULL) {
+        char *token = strtok(line, " \t\n");
+        while (token != NULL) {
+            // remove punctuations
+            int i = strlen(token) - 1;
+            while (!isalpha(token[i])) {
+                i--;
+            }
+            token[i + 1] = '\0';
+
+            printf("%s\n", token);
+            token = strtok(NULL, " \t\n");
+        }
     }
 
     fclose(fp);
@@ -460,8 +407,23 @@ int main() {
 \begin{tcolorbox}
     \mybox{运行结果}
     \begin{verbatim}
-查找姓名：小灰
-小灰	22
+Talk
+is
+cheap
+Show
+me
+the
+code
+Code
+never
+lies
+comments
+sometimes
+do
+Stay
+Hungry
+Stay
+Foolish
 	\end{verbatim}
 \end{tcolorbox}
 
