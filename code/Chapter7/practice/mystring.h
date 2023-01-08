@@ -1,5 +1,5 @@
-#ifndef __MY_STRING_H__
-#define __MY_STRING_H__
+#ifndef _MY_STRING_H_
+#define _MY_STRING_H_
 
 #include <stdio.h>
 

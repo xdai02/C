@@ -21,7 +21,7 @@ fopen()接受两个参数，第一个参数是要打开的文件名，第二个�
     \setlength{\tabcolsep}{5mm}{
         \begin{tabular}{|c|l|}
             \hline
-            \textbf{打开方式} & \textbf{描述}                                      \\
+            \textbf{打开方式} & \textbf{功能}                                      \\
             \hline
             r                 & 只读，文件必须存在，否则打开失败                   \\
             \hline
@@ -60,7 +60,7 @@ int fclose(FILE *stream);
 This is a test.
 \end{lstlisting}
 
-\begin{lstlisting}[language=C, title=file.c]
+\begin{lstlisting}[language=C]
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -97,7 +97,6 @@ int fprintf(FILE *stream, const char *format, ...);
 
 int main() {
     FILE *fp = fopen("data1.txt", "w");
-
     int n;
     printf("Enter number of students: ");
     scanf("%d", &n);

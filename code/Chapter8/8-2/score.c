@@ -2,7 +2,6 @@
 
 int main() {
     FILE *fp = fopen("data1.txt", "w");
-
     int n;
     printf("Enter number of students: ");
     scanf("%d", &n);

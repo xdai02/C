@@ -1,5 +1,5 @@
-#ifndef __GEOMETRY_H__
-#define __GEOMETRY_H__
+#ifndef _GEOMETRY_H_
+#define _GEOMETRY_H_
 
 double circle_area(double radius);
 
