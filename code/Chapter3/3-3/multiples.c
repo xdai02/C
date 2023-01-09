@@ -3,7 +3,7 @@
 int main()
 {
     int n = 10;
-    printf("Enter 10 integers: ");
+    printf("Enter %d integers: ", n);
 
     int sum_square = 0;
     for(int i = 0; i < n; i++)
