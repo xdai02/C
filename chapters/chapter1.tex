@@ -348,9 +348,7 @@ int main()
 {
 	int length = 10;
 	int width = 5;
-	double area;
-
-	area = length * width;
+	double area = length * width;
 	printf("Area = %d * %d = %.2f\n", length, width, area);
 	return 0;
 }
@@ -371,7 +369,7 @@ Area = 10 * 5 = 50.00
 
 在被赋值的变量前需要使用取地址符\&，因为scanf()需要将读取到的数据保存到该变量的内存地址中。\\
 
-在使用scanf()，通常会使用printf()先输出一句提示信息，告诉用户需要输入什么数据。\\
+在使用scanf()前，通常会使用printf()先输出一句提示信息，告诉用户需要输入什么数据。\\
 
 \mybox{圆面积}
 
