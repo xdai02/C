@@ -170,21 +170,21 @@ int main()
 	\setlength{\tabcolsep}{5mm}{
 		\begin{tabular}{|c|c|c|}
 			\hline
-			\textbf{数据类型} & \textbf{大小} & \textbf{取值范围}                                 \\
+			\textbf{数据类型} & \textbf{大小} & \textbf{取值范围}           \\
 			\hline
-			short             & 2字节         & $ -2^{15} \sim 2^{15} - 1 $                       \\
+			short             & 2字节         & $ -2^{15} \sim 2^{15} - 1 $ \\
 			\hline
-			int               & 4字节         & $ -2^{31} \sim 2^{31} - 1 $                       \\
+			int               & 4字节         & $ -2^{31} \sim 2^{31} - 1 $ \\
 			\hline
-			long              & 4字节         & $ -2^{31} \sim 2^{31} - 1 $                       \\
+			long              & 4字节         & $ -2^{31} \sim 2^{31} - 1 $ \\
 			\hline
-			long long         & 8字节         & $ -2^{63} \sim 2^{63} - 1 $                       \\
+			long long         & 8字节         & $ -2^{63} \sim 2^{63} - 1 $ \\
 			\hline
-			float             & 4字节         & $ 1.2 \times 10^{-38} \sim 3.4 \times 10^{38} $   \\
+			float             & 4字节         & 7位有效数字                 \\
 			\hline
-			double            & 8字节         & $ 2.3 \times 10^{-308} \sim 1.7 \times 10^{308} $ \\
+			double            & 8字节         & 15位有效数字                \\
 			\hline
-			char              & 1字节         & $ -128 \sim 127 $                                 \\
+			char              & 1字节         & $ -128 \sim 127 $           \\
 			\hline
 		\end{tabular}
 	}
@@ -200,7 +200,7 @@ int main()
 
 \begin{lstlisting}[language=C]
 int num = 10;
-double wage = 8232.56;
+double salary = 8232.56;
 \end{lstlisting}
 
 \vspace{0.5cm}
