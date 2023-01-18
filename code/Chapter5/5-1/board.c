@@ -1,19 +1,19 @@
 #include <stdio.h>
 
-void print_board(int row, int col) {
-    for (int i = 0; i < row; i++) {
-        for (int j = 0; j < col - 1; j++) {
+void print_board() {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 2; j++) {
             printf("   |");
         }
         printf("\n");
 
-        if (i < row - 1) {
+        if (i < 2) {
             printf("---+---+---\n");
         }
     }
 }
 
 int main() {
-    print_board(3, 3);
+    print_board();
     return 0;
 }
