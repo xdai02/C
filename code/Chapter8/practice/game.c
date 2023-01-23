@@ -3,26 +3,24 @@
 #include "tic_tac_toe.h"
 
 int main() {
-    char board[ROW][COL];
+    init_board();
+    print_board();
 
-    init_board(board);
-    print_board(board);
-
-    while (winner(board) == IN_PROGRESS) {
+    while (winner() == IN_PROGRESS) {
         if (get_current_player() == PLAYER) {
             int pos;
             printf("Your turn. Enter a position: ");
             scanf("%d", &pos);
-            if (!place(board, pos)) {
+            if (!place(pos)) {
                 fprintf(stderr, "Invalid position.\n");
                 continue;
             }
         } else {
             printf("Computer's turn.\n");
-            computer_action(board);
+            computer_action();
         }
 
-        print_board(board);
+        print_board();
         switch_player();
     }
 
@@ -34,7 +32,7 @@ int main() {
     }
     round++;
 
-    switch (winner(board)) {
+    switch (winner()) {
     case PLAYER:
         printf("Player wins!\n");
         fprintf(fp, "Round %d: Win\n", round);

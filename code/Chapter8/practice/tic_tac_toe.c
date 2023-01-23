@@ -3,9 +3,11 @@
 #include <stdlib.h>
 #include <time.h>
 
+char board[ROW][COL];
+
 bool is_player_turn = true;
 
-void init_board(char board[ROW][COL]) {
+void init_board() {
     srand(time(NULL));
 
     for (int i = 0; i < ROW; i++) {
@@ -15,7 +17,7 @@ void init_board(char board[ROW][COL]) {
     }
 }
 
-void print_board(char board[ROW][COL]) {
+void print_board() {
     for (int i = 0; i < ROW; i++) {
         for (int j = 0; j < COL; j++) {
             printf(" %c ", board[i][j]);
@@ -31,7 +33,7 @@ void print_board(char board[ROW][COL]) {
     printf("\n");
 }
 
-bool is_board_full(char board[ROW][COL]) {
+bool is_board_full() {
     for (int i = 0; i < ROW; i++) {
         for (int j = 0; j < COL; j++) {
             if (board[i][j] != CROSS && board[i][j] != NOUGHT) {
@@ -42,7 +44,7 @@ bool is_board_full(char board[ROW][COL]) {
     return true;
 }
 
-bool place(char board[ROW][COL], int pos) {
+bool place(int pos) {
     if (pos < 1 || pos > 9) {
         return false;
     }
@@ -62,7 +64,7 @@ bool place(char board[ROW][COL], int pos) {
     return true;
 }
 
-int winner(char board[ROW][COL]) {
+int winner() {
     for (int i = 0; i < ROW; i++) {
         if (board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
             if (board[i][0] == CROSS) {
@@ -114,9 +116,9 @@ void switch_player() {
     is_player_turn = !is_player_turn;
 }
 
-void computer_action(char board[ROW][COL]) {
+void computer_action() {
     int pos;
     do {
         pos = rand() % 9 + 1;
-    } while (!place(board, pos));
+    } while (!place(pos));
 }

@@ -14,20 +14,20 @@
 #define IN_PROGRESS 3
 #define DRAW 4
 
-void init_board(char board[ROW][COL]);
+void init_board();
 
-void print_board(char board[ROW][COL]);
+void print_board();
 
-bool is_board_full(char board[ROW][COL]);
+bool is_board_full();
 
-bool place(char board[ROW][COL], int pos);
+bool place(int pos);
 
-int winner(char board[ROW][COL]);
+int winner();
 
 int get_current_player();
 
 void switch_player();
 
-void computer_action(char board[ROW][COL]);
+void computer_action();
 
 #endif
