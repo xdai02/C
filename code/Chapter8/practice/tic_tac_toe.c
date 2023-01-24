@@ -3,30 +3,30 @@
 #include <stdlib.h>
 #include <time.h>
 
-char board[ROW][COL];
+char board[N][N];
 
 bool is_player_turn = true;
 
 void init_board() {
     srand(time(NULL));
 
-    for (int i = 0; i < ROW; i++) {
-        for (int j = 0; j < COL; j++) {
-            board[i][j] = '0' + i * COL + j + 1;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            board[i][j] = '0' + i * N + j + 1;
         }
     }
 }
 
 void print_board() {
-    for (int i = 0; i < ROW; i++) {
-        for (int j = 0; j < COL; j++) {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
             printf(" %c ", board[i][j]);
-            if (j < COL - 1) {
+            if (j < N - 1) {
                 printf("|");
             }
         }
         printf("\n");
-        if (i < ROW - 1) {
+        if (i < N - 1) {
             printf("---+---+---\n");
         }
     }
@@ -34,8 +34,8 @@ void print_board() {
 }
 
 bool is_board_full() {
-    for (int i = 0; i < ROW; i++) {
-        for (int j = 0; j < COL; j++) {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
             if (board[i][j] != CROSS && board[i][j] != NOUGHT) {
                 return false;
             }
@@ -45,12 +45,12 @@ bool is_board_full() {
 }
 
 bool place(int pos) {
-    if (pos < 1 || pos > 9) {
+    if (pos < 1 || pos > N * N) {
         return false;
     }
 
-    int row = (pos - 1) / COL;
-    int col = (pos - 1) % COL;
+    int row = (pos - 1) / N;
+    int col = (pos - 1) % N;
 
     if (board[row][col] == CROSS || board[row][col] == NOUGHT) {
         return false;
@@ -65,8 +65,17 @@ bool place(int pos) {
 }
 
 int winner() {
-    for (int i = 0; i < ROW; i++) {
-        if (board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
+    bool is_all_same = true;
+
+    for (int i = 0; i < N; i++) {
+        is_all_same = true;
+        for (int j = 0; j < N - 1; j++) {
+            if (board[i][j] != board[i][j + 1]) {
+                is_all_same = false;
+                break;
+            }
+        }
+        if (is_all_same) {
             if (board[i][0] == CROSS) {
                 return PLAYER;
             } else {
@@ -75,9 +84,16 @@ int winner() {
         }
     }
 
-    for (int i = 0; i < COL; i++) {
-        if (board[0][i] == board[1][i] && board[1][i] == board[2][i]) {
-            if (board[0][i] == CROSS) {
+    for (int j = 0; j < N; j++) {
+        is_all_same = true;
+        for (int i = 0; i < N - 1; i++) {
+            if (board[i][j] != board[i + 1][j]) {
+                is_all_same = false;
+                break;
+            }
+        }
+        if (is_all_same) {
+            if (board[0][j] == CROSS) {
                 return PLAYER;
             } else {
                 return COMPUTER;
@@ -85,7 +101,14 @@ int winner() {
         }
     }
 
-    if (board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
+    is_all_same = true;
+    for (int i = 0; i < N - 1; i++) {
+        if (board[i][i] != board[i + 1][i + 1]) {
+            is_all_same = false;
+            break;
+        }
+    }
+    if (is_all_same) {
         if (board[0][0] == CROSS) {
             return PLAYER;
         } else {
@@ -93,8 +116,15 @@ int winner() {
         }
     }
 
-    if (board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
-        if (board[0][2] == CROSS) {
+    is_all_same = true;
+    for (int i = 0; i < N - 1; i++) {
+        if (board[i][N - 1 - i] != board[i + 1][N - 2 - i]) {
+            is_all_same = false;
+            break;
+        }
+    }
+    if (is_all_same) {
+        if (board[0][N - 1] == CROSS) {
             return PLAYER;
         } else {
             return COMPUTER;
@@ -119,6 +149,6 @@ void switch_player() {
 void computer_action() {
     int pos;
     do {
-        pos = rand() % 9 + 1;
+        pos = rand() % (N * N) + 1;
     } while (!place(pos));
 }

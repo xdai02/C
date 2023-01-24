@@ -3,8 +3,7 @@
 
 #include <stdbool.h>
 
-#define ROW 3
-#define COL 3
+#define N 3
 
 #define CROSS 'X'
 #define NOUGHT 'O'
