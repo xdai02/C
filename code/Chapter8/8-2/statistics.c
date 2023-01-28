@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int main() {
-    FILE *fp = fopen("fgetc.c", "r");
+    FILE *fp = fopen("statistics.c", "r");
     if (!fp) {
         fprintf(stderr, "File open failed.\n");
         exit(1);
