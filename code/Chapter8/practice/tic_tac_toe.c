@@ -131,7 +131,7 @@ int winner() {
         }
     }
 
-    if (is_board_full(board)) {
+    if (is_board_full()) {
         return DRAW;
     } else {
         return IN_PROGRESS;
