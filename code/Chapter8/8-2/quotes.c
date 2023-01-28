@@ -4,7 +4,7 @@ int main() {
     const char *quotes[] = {
         "Talk is cheap. Show me the code.",
         "Code never lies, comments sometimes do.",
-        "Stay Hungry Stay Foolish",
+        "Stay Hungry Stay Foolish.",
     };
     int n = sizeof(quotes) / sizeof(quotes[0]);
 
