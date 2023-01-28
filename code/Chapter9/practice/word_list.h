@@ -21,4 +21,6 @@ WordList *create_word_list();
 
 void add_word(WordList *word_list, const char *word);
 
+void destroy_word_list(WordList *word_list);
+
 #endif

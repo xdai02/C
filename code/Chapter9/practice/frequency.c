@@ -66,5 +66,8 @@ int main() {
     }
 
     fclose(fp);
+
+    destroy_word_list(word_list);
+
     return 0;
 }

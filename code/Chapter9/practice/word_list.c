@@ -27,3 +27,12 @@ void add_word(WordList *word_list, const char *word) {
     word_list->words[word_list->word_count] = create_word(word);
     word_list->word_count++;
 }
+
+void destroy_word_list(WordList *word_list) {
+    for (int i = 0; i < word_list->word_count; i++) {
+        free(word_list->words[i]->word);
+        free(word_list->words[i]);
+    }
+    free(word_list->words);
+    free(word_list);
+}
