@@ -50,7 +50,7 @@ Area: 78.54
 \vspace{-0.5cm}
 
 \begin{lstlisting}[language=C]
-#define SQUARE x * x
+#define SQUARE(x) x * x
 \end{lstlisting}
 
 例如SQUARE(2 + 3)会被展开为2 + 3 * 2 + 3，而不是(2 + 3) * (2 + 3)。因此，最好在宏中使用括号来避免这种情况。
@@ -58,7 +58,7 @@ Area: 78.54
 \vspace{-0.5cm}
 
 \begin{lstlisting}[language=C]
-#define SQUARE (x * x)
+#define SQUARE(x) (x) * (x)
 \end{lstlisting}
 
 \vspace{0.5cm}
